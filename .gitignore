@@ -1,0 +1,10 @@
+.netrwhist
+link/vim/pack/**/*
+link/vim/autoload/**/*
+link/vim/plugged/**/*
+link/zsh/cache/**/*
+*.swp
+*.orig
+config/nvim/plugged/**/*
+config/nvim/autoload/**/*
+config/nvim/.netrwhist

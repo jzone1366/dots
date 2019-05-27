@@ -1,0 +1,4 @@
+### HISTORY
+export HISTSIZE=100000
+export SAVEHIST=9000
+export HISTFILE="$HOME/.history"
