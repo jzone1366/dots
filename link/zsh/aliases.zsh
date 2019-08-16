@@ -1,11 +1,6 @@
 ### Aliases
-## DIRECTORY MOVEMENT
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
 
-# directory shortcuts
+## DIRECTORY SHORTCUTS
 alias dotfiles='~/.dotfiles'
 alias dev='~/dev'
 
@@ -65,8 +60,8 @@ alias gf='git reflog'
 alias gv='git log --pretty=format:'%s' | cut -d " " -f 1 | sort | uniq -c | sort -nr'
 alias gdb='git diff master..`git rev-parse --abbrev-ref HEAD`'
 alias gr='git diff master..'
-alias vi='nvim'
 
 # MISC
 alias sz='source ~/.zshrc'
 alias py='python3'
+alias vi='nvim'

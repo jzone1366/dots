@@ -1,0 +1,151 @@
+" zonejm init.vim
+
+" vim-plug {{{
+" Install vim-plug if not installed.
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+			  \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin('~/.config/nvim/plugged')
+
+" Completion {{{
+Plug 'autozimu/LanguageClient-neovim', {
+			\ 'branch': 'next',
+			\ 'do': 'bash install.sh',
+			\ }
+
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['pyls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio'],
+    \ 'typescript.tsx': ['javascript-typescript-stdio'],
+    \ 'html': ['html-languageserver'],
+    \ 'css': ['css-languageserver'],
+    \ 'less': ['css-languageserver'],
+    \ 'json': ['json-languageserver'],
+    \ 'go': ['gopls']
+    \ }
+
+
+" Run gofmt and goimports on save
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
+
+let g:LanguageClient_autoStart = 1
+
+Plug 'ncm2/ncm2'	"completion engine
+Plug 'roxma/nvim-yarp' "ncm2 dependency
+Plug 'ncm2/ncm2-tmux'	"Find completions from tmux panes
+Plug 'ncm2/ncm2-path'	"complete filesystem paths
+" }}}
+
+" NCM2 config
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=menuone,noinsert,noselect
+
+" UI {{{
+Plug 'itchyny/lightline.vim'
+Plug 'joshdick/onedark.vim'
+" }}}
+
+" GENERAL {{{
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+" }}}
+
+" Go {{{
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" vim-go syntax settings
+let g:go_highlight_format_strings = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_types = 1
+
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_variable_declarations = 1
+" }}}
+
+" CSS {{{
+Plug 'ap/vim-css-color'
+" }}}
+
+" Typescript {{{
+Plug 'HerringtonDarkholme/yats.vim'
+" }}}
+
+call plug#end()
+" }}}
+
+" UI Layout {{{
+set number					" Show line numbers
+set showcmd					" Show command in bottom bar
+set cursorline	            " Highlight current line
+set showmatch		        " Highlight matching parenthesis
+filetype plugin indent on   " Set filetype indentation detection
+set wildmenu		        " visual autocomplete for command menu
+set lazyredraw					" redraw only when we need to
+set laststatus=2
+set autoindent						" Turn on auto indentation
+set backspace=indent,eol,start		" Proper backspace behavior.
+set noswapfile						" Don't use swapfile
+set nobackup						" No Backups
+set noshowmode						" Turn off mode since it shows in lightline
+set cmdheight=2
+set scrolloff=4						" Start scolling 4 lines from the bottom
+
+syntax enable					" enable syntax processing
+set termguicolors
+let g:onedark_termcolors=256
+let g:onedark_terminal_italics=1
+colorscheme onedark
+" }}}
+
+" Tabs {{{
+set tabstop=4       " The width of a TAB is set to 4.
+set shiftwidth=4    " Indents will have a width of 4
+set softtabstop=4   " Sets the number of columns for a TAB
+set expandtab       " Expand TABs to spaces
+" }}}
+
+" Searching {{{
+set ignorecase		          " ignore case when searching
+set incsearch		          " search as characters are entered
+set hlsearch		          " highligh all matches
+" }}}
+
+" Finding Files {{{
+set path+=**                      " Search down into sub folders
+set wildignore+=*/node_modules/*  " Ignore node_modules
+"set rtp+=~/.fzf
+" }}}
+
+" LIGHTLINE {{{
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \ 'cocstatus': 'coc#status'
+      \ },
+\ }
+" }}}
+
+" Globals {{{
+let g:typescript_indent_disable = 1
+let g:netrw_altv = 1
+" }}}
+
+" StatusLine {{
+hi StatusLine cterm=none term=none ctermfg=13 ctermbg=none
+hi StatusLineNC term=none cterm=none ctermfg=0 ctermbg=none
+" }}

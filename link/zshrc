@@ -1,18 +1,23 @@
-source ~/.zsh/checks.zsh
-source ~/.zsh/colors.zsh
-source ~/.zsh/setopt.zsh
-source ~/.zsh/exports.zsh
-source ~/.zsh/prompt.zsh
-source ~/.zsh/completion.zsh
+source ~/.zsh/antigen.zsh
+source ~/.zsh/powerlvl9k.zsh
 source ~/.zsh/aliases.zsh
-source ~/.zsh/bindkeys.zsh
-source ~/.zsh/functions.zsh
-source ~/.zsh/history.zsh
-source ~/.zsh/zsh_hooks.zsh
+source ~/.zsh/exports.zsh
 source ~/.zsh/nvm.zsh
 
-#Python3 virtualenv
-[ -s "/usr/local/bin/virtualenvwrapper.sh" ] && source /usr/local/bin/virtualenvwrapper.sh
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
-#FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+#antigen bundle git
+#antigen bundle heroku
+antigen bundle pip
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the Theme
+antigen theme romkatv/powerlevel10k
+
+# Tell Antigen that you're done.
+antigen apply

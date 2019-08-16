@@ -1,1 +1,2 @@
-autoload colors; colors
+autoload -U colors
+colors
