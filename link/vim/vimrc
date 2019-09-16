@@ -10,7 +10,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 " Completion {{{
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*'}
 " }}}
 
 " UI {{{
