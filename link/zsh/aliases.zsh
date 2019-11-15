@@ -63,5 +63,6 @@ alias gr='git diff master..'
 
 # MISC
 alias sz='source ~/.zshrc'
-alias py='python3'
+alias py3='python3'
+alias py2='python2'
 alias vi='nvim'

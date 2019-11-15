@@ -1,4 +1,9 @@
-" zonejm init.vim
+" ______                  _       _ _         _           
+"|___  /                 (_)     (_) |       (_)          
+"   / / ___  _ __   ___   _ _ __  _| |___   ___ _ __ ___  
+"  / / / _ \| '_ \ / _ \ | | '_ \| | __\ \ / / | '_ ` _ \ 
+" / /_| (_) | | | |  __/ | | | | | | |_ \ V /| | | | | | |
+"/_____\___/|_| |_|\___| |_|_| |_|_|\__(_)_/ |_|_| |_| |_|
 
 " vim-plug {{{
 " Install vim-plug if not installed.
@@ -16,6 +21,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*'}
 " UI {{{
 Plug 'itchyny/lightline.vim'
 Plug 'srcery-colors/srcery-vim'
+Plug 'ajmwagar/vim-deus'
 " }}}
 
 " GENERAL {{{
@@ -99,8 +105,10 @@ endif
 
 " COLOR SCHEME CONFIG
 set background=dark
-let g:srcery_italic = 1
-colorscheme srcery
+"let g:srcery_italic = 1
+"colorscheme srcery
+colorscheme deus
+let g:deus_termcolors=256
 " }}}
 
 " Tabs {{{
@@ -122,7 +130,7 @@ set wildignore+=*/node_modules/*  		" Ignore node_modules
 
 " LIGHTLINE {{{
 let g:lightline = {
-      \ 'colorscheme': 'srcery',
+      \ 'colorscheme': 'deus',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
