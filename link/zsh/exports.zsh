@@ -24,3 +24,6 @@ export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
 
 # Add /usr/local/sbin to path
 export PATH="/usr/local/sbin:$PATH"
+
+# Add home/.dotnet/tools
+export PATH="$HOME/.dotnet/tools:$PATH"
