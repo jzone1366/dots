@@ -15,9 +15,21 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 " Completion {{{
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*'}
+if has("nvim")
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'Shougo/deoplete-lsp'
+Plug 'neovim/nvim-lsp'
+lua require'nvim_lsp'.gopls.setup{}
+let g:deoplete#enable_at_startup = 1
 " }}}
 
+"}}}
 " UI {{{
 Plug 'itchyny/lightline.vim'
 Plug 'gruvbox-community/gruvbox'
@@ -29,6 +41,10 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+" }}}
+
+" SYNTAX {{{
+" Plug 'sheerun/vim-polyglot'
 " }}}
 
 " C# {{{
