@@ -16,12 +16,12 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 " Completion {{{
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
 " }}}
 
 " LSP {{{
 Plug 'Shougo/deoplete-lsp'
 Plug 'neovim/nvim-lsp'
+Plug 'deoplete-plugins/deoplete-jedi'
 " }}}
 
 " UI {{{
@@ -51,6 +51,8 @@ let g:OmniSharp_timeout = 5
 " Go {{{
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " vim-go syntax settings
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 let g:go_highlight_format_strings = 1
 let g:go_highlight_function_arguments = 1
 let g:go_highlight_function_calls = 1

@@ -1,5 +1,6 @@
 local nvim_lsp = require('nvim_lsp')
 
+
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     require'diagnostic'.on_attach()
@@ -23,7 +24,8 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']D', ':NextDiagnosticCycle<CR>', opts)
 end
 
-local servers = { 'gopls', 'tsserver', 'html', 'jsonls', 'cssls', 'dockerls', 'pyls_ms', 'vuels' }
+
+local servers = { 'gopls', 'tsserver', 'html', 'jsonls', 'cssls', 'dockerls', 'pyls', 'vuels' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {}
 end
