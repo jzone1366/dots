@@ -1,8 +1,9 @@
 source ~/.zsh/antigen.zsh
-source ~/.zsh/powerlvl9k.zsh
+#source ~/.zsh/powerlvl9k.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/exports.zsh
 source ~/.zsh/nvm.zsh
+source ~/.zsh/p10k.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -21,3 +22,4 @@ antigen theme romkatv/powerlevel10k
 
 # Tell Antigen that you're done.
 antigen apply
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true

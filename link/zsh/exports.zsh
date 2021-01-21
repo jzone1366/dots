@@ -17,15 +17,13 @@ export PATH="${GOPATH}/bin:${PATH}"
 
 
 # Python Stuff
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
+#export WORKON_HOME=$HOME/.virtualenvs
+#export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+#export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
 
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
-# Add /usr/local/sbin to path
-#export PATH="/usr/local/sbin:$PATH"
-
-export PATH="/usr/local/lib/nvim-osx64/bin:$PATH"
+#export PATH="/usr/local/lib/nvim-osx64/bin:$PATH"
 
 # Add home/.dotnet/tools
 export PATH="$HOME/.dotnet/tools:$PATH"

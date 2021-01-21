@@ -20,13 +20,16 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " LSP {{{
 Plug 'Shougo/deoplete-lsp'
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 Plug 'deoplete-plugins/deoplete-jedi'
 " }}}
 
 " UI {{{
 Plug 'itchyny/lightline.vim'
 Plug 'gruvbox-community/gruvbox'
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'tjdevries/colorbuddy.nvim'
+"Plug 'npxbr/gruvbox.nvim'
 " }}}
 
 " GENERAL {{{
