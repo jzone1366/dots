@@ -3,6 +3,7 @@ link/vim/pack/**/*
 link/vim/autoload/**/*
 link/vim/plugged/**/*
 link/zsh/cache/**/*
+link/zsh/nj.zsh
 *.swp
 *.orig
 config/nvim/plugged/**/*

@@ -1,55 +1,50 @@
-# Status update interval
-set -g status-interval 1
+## COLORSCHEME: gruvbox dark (medium)
+set-option -g status "on"
 
-# Basic status bar colors
-set -g status-bg default
-set -g status-fg cyan
+# default statusbar color
+set-option -g status-style bg=colour237,fg=colour223 # bg=bg1, fg=fg1
 
-# Left side of status bar
-set -g status-left-style fg=green,bg=default
-set -g status-left-length 40
-set -g status-left "#S #[fg=white]» #[fg=yellow]#I #[fg=cyan]#P"
+# default window title colors
+set-window-option -g window-status-style bg=colour214,fg=colour237 # bg=yellow, fg=bg1
 
-# Right side of status bar
-set -g status-right-style fg=cyan,bg=default
-set -g status-right-length 40
-set -g status-right "#H #[fg=white]« #[fg=yellow]%H:%M #[fg=green]%d-%b-%y"
+# default window with an activity alert
+set-window-option -g window-status-activity-style bg=colour237,fg=colour248 # bg=bg1, fg=fg3
 
-# Window status
-set -g window-status-format " #I:#W#F "
-set -g window-status-current-format " #I:#W#F "
+# active window title colors
+set-window-option -g window-status-current-style bg=red,fg=colour237 # fg=bg1
 
-# Current window status
-set -g window-status-current-style fg=colour0,bg=red
+# pane border
+set-option -g pane-active-border-style fg=colour250 #fg2
+set-option -g pane-border-style fg=colour237 #bg1
 
-# Window with activity status
-set -g window-status-activity-style fg=yellow,bg=colour0
+# message infos
+set-option -g message-style bg=colour239,fg=colour223 # bg=bg2, fg=fg1
 
-# Window separator
-set -g window-status-separator ""
+# writing commands inactive
+set-option -g message-command-style bg=colour239,fg=colour223 # bg=fg3, fg=bg1
 
-# Window status alignment
-set -g status-justify centre
+# pane number display
+set-option -g display-panes-active-colour colour250 #fg2
+set-option -g display-panes-colour colour237 #bg1
 
-# Pane border
-set -g pane-border-style fg=default,bg=default
+# clock
+set-window-option -g clock-mode-colour colour109 #blue
 
-# Active pane border
-set -g pane-active-border-style fg=colour13,bg=default
+# bell
+set-window-option -g window-status-bell-style bg=colour167,fg=colour235 # bg=red, fg=bg
 
-# Pane number indicator
-set -g display-panes-colour default
-set -g display-panes-active-colour default
+## Theme settings mixed with colors (unfortunately, but there is no cleaner way)
+set-option -g status-justify "left"
+set-option -g status-left-style none
+set-option -g status-left-length "80"
+set-option -g status-right-style none
+set-option -g status-right-length "80"
+set-window-option -g window-status-separator ""
 
-# Clock mode
-set -g clock-mode-colour red
-set -g clock-mode-style 24
+set-option -g status-left "#[bg=colour241,fg=colour248] #S #[bg=colour237,fg=colour241,nobold,noitalics,nounderscore]"
+set-option -g status-right "#[bg=colour237,fg=colour239 nobold, nounderscore, noitalics]#[bg=colour239,fg=colour246] %Y-%m-%d  %H:%M #[bg=colour239,fg=colour248,nobold,noitalics,nounderscore]#[bg=colour248,fg=colour237] #h "
 
-# Message
-set -g message-style fg=default,bg=default
+set-window-option -g window-status-current-format "#[bg=colour214,fg=colour237,nobold,noitalics,nounderscore]#[bg=colour214,fg=colour239] #I #[bg=colour214,fg=colour239,bold] #W#{?window_zoomed_flag,*Z,} #[bg=colour237,fg=colour214,nobold,noitalics,nounderscore]"
+set-window-option -g window-status-format "#[bg=colour239,fg=colour237,noitalics]#[bg=colour239,fg=colour223] #I #[bg=colour239,fg=colour223] #W #[bg=colour237,fg=colour239,noitalics]"
 
-# Command message
-set -g message-command-style fg=default,bg=default
-
-# Mode
-set -g mode-style fg=default,bg=red
+# vim: set ft=tmux tw=0 nowrap:

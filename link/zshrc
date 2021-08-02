@@ -4,6 +4,7 @@ source ~/.zsh/aliases.zsh
 source ~/.zsh/exports.zsh
 source ~/.zsh/nvm.zsh
 source ~/.zsh/p10k.zsh
+source ~/.zsh/nj.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh

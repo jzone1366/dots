@@ -24,7 +24,6 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']D', ':NextDiagnosticCycle<CR>', opts)
 end
 
-
 local servers = { 'gopls', 'tsserver', 'html', 'jsonls', 'cssls', 'dockerls', 'pyls', 'vuels' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {}
