@@ -56,9 +56,10 @@ set background=dark
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
+"colorscheme base16-papercolor-dark
 " }}}
 
 " StatusLine {{{
-hi StatusLine cterm=none term=none ctermfg=13 ctermbg=none
-hi StatusLineNC term=none cterm=none ctermfg=0 ctermbg=none
+"hi StatusLine cterm=none term=none ctermfg=13 ctermbg=none
+"hi StatusLineNC term=none cterm=none ctermfg=0 ctermbg=none
 " }}}

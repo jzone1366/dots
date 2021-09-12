@@ -1,5 +1,5 @@
 " ______                  _       _ _         _           
-"|___  /                 (_)     (_) |       (_)          
+"|___ /                 (_)     (_) |       (_)          
 "   / / ___  _ __   ___   _ _ __  _| |___   ___ _ __ ___  
 "  / / / _ \| '_ \ / _ \ | | '_ \| | __\ \ / / | '_ ` _ \ 
 " / /_| (_) | | | |  __/ | | | | | | |_ \ V /| | | | | | |
@@ -29,6 +29,9 @@ Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'itchyny/lightline.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'RRethy/nvim-base16'
+"Plug 'mike-hearn/base16-vim-lightline'
 " }}}
 
 " GENERAL {{{
@@ -40,14 +43,14 @@ Plug 'junegunn/fzf.vim'
 " }}}
 
 " C# {{{
-Plug 'OmniSharp/omnisharp-vim'
-
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_selector_ui = 'fzf'
-
-" Timeout in seconds to wait for the server to respond.
-let g:OmniSharp_timeout = 5
+" Plug 'OmniSharp/omnisharp-vim'
+" 
+" let g:OmniSharp_server_stdio = 1
+" let g:OmniSharp_server_use_mono = 1
+" let g:OmniSharp_selector_ui = 'fzf'
+" 
+" " Timeout in seconds to wait for the server to respond.
+" let g:OmniSharp_timeout = 5
 " }}}
 
 " Go {{{

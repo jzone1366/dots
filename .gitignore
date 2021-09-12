@@ -9,3 +9,4 @@ link/zsh/nj.zsh
 config/nvim/plugged/**/*
 config/nvim/autoload/**/*
 config/nvim/.netrwhist
+config/**/plugged/**/*
