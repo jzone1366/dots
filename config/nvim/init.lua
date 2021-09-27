@@ -76,6 +76,21 @@ vim.opt.undofile = true
 -- Disable Swapfile
 vim.opt.swapfile = false
 
+-- Turn on Autoindent
+vim.opt.autoindent = true
+
+-- The width of tab
+vim.opt.tabstop = 4
+
+-- Indent width
+vim.opt.shiftwidth = 4
+
+-- Expand TABs to SPACES
+vim.opt.expandtab = true
+
+-- Start scolling 4 lines from the bottom
+vim.opt.scrolloff = 8
+
 --Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
