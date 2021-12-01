@@ -17,16 +17,9 @@ lsp_installer.settings({
   },
 })
 
--- initial default serverse
-local requested_servers = {
-  'eslint',
-  'efm',
-  'tsserver',
-  'sumneko_lua',
-  'jsonls',
-  'cssls',
-  'html',
-}
+-- initial default servers
+-- by default tsserver/ts_utils and null_ls are enabled
+local requested_servers = {}
 
 -- get disabled servers from config
 local disabled_servers = {}
@@ -35,7 +28,6 @@ for config_server, config_opt in pairs(config.lsp.servers) do
     table.insert(disabled_servers, config_server)
   elseif not vim.tbl_contains(requested_servers, config_server) then
     -- add additonally defined servers to be installed
-    -- todo: how to handle non-default server opts?
     table.insert(requested_servers, config_server)
   end
 end
@@ -60,17 +52,12 @@ lsp_installer.on_server_ready(function(server)
     opts.autostart = false
   end
 
-  -- set up default ZoneNvim options
   if server.name == 'tsserver' then
     opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.tsserver'))
-  elseif server.name == 'efm' then
-    opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.efm'))
   elseif server.name == 'jsonls' then
     opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.jsonls'))
   elseif server.name == 'sumneko_lua' then
     opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.lua'))
-  elseif server.name == 'eslint' then
-    opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.eslint'))
   end
 
   -- override options if user definds them

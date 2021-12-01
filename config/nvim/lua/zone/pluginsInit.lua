@@ -116,7 +116,16 @@ return packer.startup(function()
   })
 
   use({
-    'L3MON4D3/LuaSnip',
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require('zone.lsp.providers.null_ls')
+    end,
+    requires = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    disable = vim.tbl_contains(user_plugins.disable, 'null-ls'),
+  })
+
+  use({
+    'onsails/lspkind-nvim',
     event = 'InsertEnter',
     disable = vim.tbl_contains(user_plugins.disable, 'autocomplete'),
   })
@@ -128,20 +137,27 @@ return packer.startup(function()
       require('zone.lsp.autocomplete').init()
     end,
     requires = {
-      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+      { 'saadparwaiz1/cmp_luasnip', after = 'cmp-nvim-lsp' },
       { 'hrsh7th/cmp-buffer', after = 'cmp_luasnip' },
       { 'hrsh7th/cmp-nvim-lua', after = 'cmp-buffer' },
       { 'hrsh7th/cmp-path', after = 'cmp-nvim-lua' },
+      {
+        'windwp/nvim-autopairs',
+        config = function()
+          require('zone.lsp.autocomplete').autopairs()
+        end,
+        after = 'cmp-path',
+      },
     },
-    after = 'LuaSnip',
+    after = 'lspkind-nvim',
+    disable = vim.tbl_contains(user_plugins.disable, 'autocomplete'),
   })
 
   use({
-    'windwp/nvim-autopairs',
-    config = function()
-      require('zone.lsp.autocomplete').autopairs()
-    end,
-    after = 'nvim-cmp',
+    'L3MON4D3/LuaSnip',
+    event = 'InsertEnter',
+    disable = vim.tbl_contains(user_plugins.disable, 'autocomplete'),
   })
 
   -- git commands

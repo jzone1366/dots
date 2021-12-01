@@ -30,7 +30,7 @@ M.init = function()
       -- disabled for autopairs mapping
       ['<CR>'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
+       select = true,
       }),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -92,14 +92,6 @@ M.init = function()
       { name = 'buffer' },
     },
   })
-
-  --[[ cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' },
-    }, {
-      { name = 'cmdline' },
-    }),
-  }) ]]
 end
 
 M.autopairs = function()

@@ -10,26 +10,11 @@ local default_config = {
   lsp = {
     format_on_save = true, -- true/false or table of filetypes {'.ts', '.js',}
     rename_notification = true,
-    -- vim.diagnostic.config settiings
     servers = {
-      -- enable/disable server + formatting
-      -- rust_analyzer = true, -- enable non-default servers
-
-      -- or override lsp server options
-      --[[
-      rust_analyzer = {
-        opts = {}
+      sumneko_lua = {
+        format = false, -- disable formatting all together
       },
-      ]]
-
-      -- enable, but disable formatting
-      eslint = {
-        format = false,
-      },
-      efm = {
-        format = true,
-        disable_formatters = { 'eslint' }, -- e.g. 'eslint', 'prettier', 'stylua'
-      },
+      html = true,
       tsserver = {
         format = false, -- disable formatting all together
       },
@@ -48,7 +33,7 @@ function config.lsp.can_client_format(client_name)
     return (config.lsp.servers[client_name].format == true)
   end
 
-  return false
+  return true
 end
 
 return config
