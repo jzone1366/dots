@@ -1,8 +1,4 @@
-local ok, theme = pcall(require, 'tokyonight.colors')
-if not ok then
-  return false
-end
-
+local theme = require('tokyonight.colors')
 local themeColors = theme.setup()
 
 local colors = {

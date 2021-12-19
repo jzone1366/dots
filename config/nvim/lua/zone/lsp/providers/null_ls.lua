@@ -1,26 +1,34 @@
+local defaults = require('zone.lsp.providers.defaults')
 local config = require('zone.config')
-local on_attach = require('zone.lsp.providers.defaults').on_attach
 local null_ls = require('null-ls')
 
-null_ls.config(vim.tbl_deep_extend('force', {
+local has_eslint_config = function(utils)
+  return utils.root_has_file('.eslintrc')
+    or utils.root_has_file('.eslintrc.json')
+    or utils.root_has_file('.eslintrc.js')
+    or utils.root_has_file('package.json')
+    or utils.root_has_file('.eslintrc.cjs')
+    or utils.root_has_file('.eslintrc.yaml')
+    or utils.root_has_file('.eslintrc.yml')
+end
+
+local config_opts = config.lsp.servers.null_ls or {}
+
+require('null-ls').setup(vim.tbl_deep_extend('force', {
   -- you must define at least one source for the plugin to work
   sources = {
-    null_ls.builtins.formatting.stylua.with({
-      args = {
-        '-s',
-        '--quote-style',
-        'AutoPreferSingle',
-        '--indent-type',
-        'Spaces',
-        '--indent-width',
-        '2',
-        '-',
-      },
+    null_ls.builtins.code_actions.eslint_d.with({
+      condition = has_eslint_config,
+    }),
+    null_ls.builtins.diagnostics.eslint_d.with({
+      condition = has_eslint_config,
+    }),
+    null_ls.builtins.formatting.eslint_d.with({
+      condition = has_eslint_config,
     }),
     null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.stylua,
   },
-}, config.lsp.servers.null_ls or {}))
 
-require('lspconfig')['null-ls'].setup({
-  on_attach = on_attach,
-})
+}, defaults, config_opts or {}))
