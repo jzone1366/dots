@@ -2,9 +2,6 @@
 -- To view maps set, use `:Telescope keymaps`
 -- or `:map`, `:map <leader>`
 
---[[
-
-local cmd = vim.cmd
 local map = require('zone.utils').map
 
 -- Example: Additional insert mapping:
@@ -17,6 +14,4 @@ map('i', 'jj', '<esc>', { noremap = true, silent = true })
 -- map('t', ...)
 
 -- Example: Disable find files keymap
-cmd('unmap <leader>f')
-
---]]
+-- cmd('unmap <leader>f')

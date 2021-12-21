@@ -52,10 +52,9 @@ lsp_installer.on_server_ready(function(server)
     opts.autostart = false
   end
 
+  -- set up default zone options
   if server.name == 'tsserver' then
     opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.tsserver'))
-  elseif server.name == 'jsonls' then
-    opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.jsonls'))
   elseif server.name == 'sumneko_lua' then
     opts = vim.tbl_deep_extend('force', opts, require('zone.lsp.providers.lua'))
   end
@@ -63,7 +62,7 @@ lsp_installer.on_server_ready(function(server)
   -- override options if user definds them
   if type(config.lsp.servers[server.name]) == 'table' then
     if config.lsp.servers[server.name].opts ~= nil then
-      opts = config.lsp.servers[server.name].opts
+      opts = vim.tbl_deep_extend('force', opts, config.lsp.servers[server.name].opts)
     end
   end
 

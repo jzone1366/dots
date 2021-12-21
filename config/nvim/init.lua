@@ -1,5 +1,5 @@
-if not vim.fn.has('nvim-0.6') then
-  error('Need NVIM 0.6 to run ZoneNvim!!')
+if vim.fn.has('nvim-0.6') == 0 then
+  error('Need NVIM 0.6 in order to run.')
 end
 
 do
