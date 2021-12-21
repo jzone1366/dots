@@ -1,25 +1,16 @@
-local zone_modules = {
-  'zone.disabled',
-  'zone.pluginsInit',
+local mods = {
   'zone.compiled',
-  'zone.commands',
-  'zone.editor',
-  'zone.mappings',
-  'zone.core.theme.highlights',
+  'zone.core',
+  'zone.theme',
 }
 
-for _, mod in ipairs(zone_modules) do
+for _, mod in ipairs(mods) do
   local ok, err = pcall(require, mod)
-  if not ok then
+  if mod == 'zone.compiled' and not ok then
+    vim.notify('Run :PackerCompile!', vim.log.levels.WARN, {
+      title = 'ZoneNvim',
+    })
+  elseif not ok and not mod:find('zone.config') then
     error(('Error loading %s...\n\n%s'):format(mod, err))
   end
-end
-
-local user_config_modules = {
-  'zone.config.editor',
-  'zone.config.mappings',
-}
-
-for _, mod in ipairs(user_config_modules) do
-  pcall(require, mod)
 end

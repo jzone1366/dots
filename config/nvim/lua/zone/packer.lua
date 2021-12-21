@@ -5,7 +5,7 @@ local present, packer = pcall(require, 'packer')
 local first_install = false
 
 if not present then
-  local packer_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+  local packer_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
   print('Cloning packer..')
   -- remove the dir before cloning
@@ -33,9 +33,9 @@ end
 packer.init({
   display = {
     open_fn = function()
-      return require('packer.util').float({ border = 'single' })
+      return require('packer.util').float({ border = 'rounded' })
     end,
-    prompt_border = 'single',
+    prompt_border = 'rounded',
   },
   git = {
     clone_timeout = 800, -- Timeout, in seconds, for git clones

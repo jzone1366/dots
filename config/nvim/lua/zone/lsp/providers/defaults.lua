@@ -26,7 +26,7 @@ function M.on_attach(client, bufnr)
         format_filetypes = '*'
       end
       vim.cmd(([[
-          augroup ZoneNvimFormat
+          augroup ZoneFormat
           autocmd!
           autocmd BufWritePre %s lua vim.lsp.buf.formatting_sync(nil, 800)
           augroup end
@@ -54,5 +54,7 @@ M.root_dir = function(fname)
 end
 
 M.autostart = true
+
+M.single_file_mode = true
 
 return M

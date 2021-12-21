@@ -1,4 +1,3 @@
--- DO NOT TOUCH :)
 local ok, user_config = pcall(require, 'zone.config.config')
 
 if not ok then
@@ -7,10 +6,22 @@ end
 
 -- these settings will be merged with any settings definined in config.lua
 local default_config = {
+  border = 'rounded',
+  theme = 'tokyonight',
   lsp = {
     format_on_save = true, -- true/false or table of filetypes {'.ts', '.js',}
     rename_notification = true,
+    -- vim.diagnostic.config settiings
     servers = {
+      -- enable/disable server + formatting
+      -- enable non-default servers
+      -- rust_analyzer = true,
+
+      -- or override lsp server options
+      --[[ rust_analyzer = {
+        opts = {}
+      }, ]]
+
       sumneko_lua = {
         format = false, -- disable formatting all together
       },
