@@ -1,5 +1,6 @@
-local icons = require('zone.theme.icons')
 local config = require('zone.config')
+local icons = require('zone.theme.icons')
+local utils = require('zone.utils')
 
 -- set up LSP signs
 local signs = {
@@ -16,7 +17,7 @@ end
 
 -- set up vim.diagnostics
 -- vim.diagnostic.config opts
-vim.diagnostic.config(vim.tbl_deep_extend('force', {
+vim.diagnostic.config(utils.merge({
   underline = true,
   signs = true,
   update_in_insert = false,

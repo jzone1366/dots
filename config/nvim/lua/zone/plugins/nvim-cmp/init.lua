@@ -1,5 +1,5 @@
 local cmp = require('cmp')
-local utils = require('zone.ui.utils')
+local utils = require('zone.utils')
 local luasnip = require('luasnip')
 local config = require('zone.config')
 local icons = require('zone.theme.icons')

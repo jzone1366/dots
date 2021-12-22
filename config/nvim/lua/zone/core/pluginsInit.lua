@@ -61,6 +61,7 @@ return packer.startup(function()
     'kyazdani42/nvim-tree.lua',
     config = function()
       require('zone.plugins.nvim-tree')
+      require('zone.plugins.nvim-tree.mappings')
     end,
     opt = true,
     cmd = {
@@ -73,16 +74,6 @@ return packer.startup(function()
     },
     disable = vim.tbl_contains(user_plugins.disable, 'nvim-tree'),
   })
-
-  -- use({
-  --   'CosmicNvim/cosmic-ui',
-  --   requires = {
-  --     'MunifTanjim/nui.nvim',
-  --   },
-  --   config = function()
-  --     require('zone.plugins.cosmic-ui')
-  --   end,
-  -- })
 
   use({
     'MunifTanjim/nui.nvim',
@@ -163,7 +154,7 @@ return packer.startup(function()
     opt = true,
     event = 'BufRead',
     config = function()
-      require('gitsigns').setup()
+      require('zone.plugins.gitsigns')
     end,
     disable = vim.tbl_contains(user_plugins.disable, 'gitsigns'),
   })
@@ -172,9 +163,10 @@ return packer.startup(function()
   use({
     'voldikss/vim-floaterm',
     opt = true,
-    cmd = { 'FloatermToggle', 'FloatermNew', 'FloatermSend' },
+    event = 'BufWinEnter',
     config = function()
       require('zone.plugins.terminal')
+      require('zone.plugins.terminal.mappings')
     end,
     disable = vim.tbl_contains(user_plugins.disable, 'terminal'),
   })
@@ -191,6 +183,7 @@ return packer.startup(function()
       },
     },
     config = function()
+      require('zone.plugins.telescope.mappings').init()
       require('zone.plugins.telescope')
     end,
     event = 'BufWinEnter',
@@ -210,6 +203,7 @@ return packer.startup(function()
     'rmagatti/auto-session',
     config = function()
       require('zone.plugins.auto-session')
+      require('zone.plugins.auto-session.mappings')
     end,
     disable = vim.tbl_contains(user_plugins.disable, 'auto-session'),
   })

@@ -1,7 +1,8 @@
-local icons = require('zone.theme.icons')
 local config = require('zone.config')
+local icons = require('zone.theme.icons')
+local utils = require('zone.utils')
 
-require('todo-comments').setup(vim.tbl_deep_extend('force', {
+require('todo-comments').setup(utils.merge({
   keywords = {
     FIX = {
       icon = icons.debug, -- icon used for the sign, and in search results

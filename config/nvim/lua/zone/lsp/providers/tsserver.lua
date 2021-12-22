@@ -1,5 +1,6 @@
-local default_on_attach = require('zone.lsp.providers.defaults').on_attach
 local config = require('zone.config')
+local default_on_attach = require('zone.lsp.providers.defaults').on_attach
+local utils = require('zone.utils')
 local M = {}
 
 function M.on_attach(client, bufnr)
@@ -8,7 +9,7 @@ function M.on_attach(client, bufnr)
   local ts_utils = require('nvim-lsp-ts-utils')
 
   -- defaults
-  ts_utils.setup(vim.tbl_deep_extend('force', {
+  ts_utils.setup(utils.merge({
     debug = false,
     disable_commands = false,
     enable_import_on_completion = true,

@@ -1,7 +1,9 @@
-local icons = require('zone.theme.icons')
 local config = require('zone.config')
+local icons = require('zone.theme.icons')
+local utils = require('zone.utils')
 
-require('notify').setup(vim.tbl_deep_extend('force', {
+local notify = require('notify')
+notify.setup(utils.merge({
   icons = {
     ERROR = icons.error,
     WARN = icons.warn,
@@ -11,4 +13,4 @@ require('notify').setup(vim.tbl_deep_extend('force', {
   },
   background_colour = require('zone.theme.colors').notify_bg,
 }, config.notify or {}))
-vim.notify = require('notify')
+vim.notify = notify
