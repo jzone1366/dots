@@ -19,6 +19,9 @@ dashboard.section.header.val = {
   '',
   '',
   '',
+  '',
+  '',
+  '',
 }
 
 dashboard.section.buttons.val = {

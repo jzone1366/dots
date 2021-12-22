@@ -60,16 +60,16 @@ local function unload(module_pattern, reload)
 end
 
 local function clear_cache()
-  if 0 == vim.fn.delete(vim.fn.stdpath('config') .. '/lua/cosmic/compiled.lua') then
+  if 0 == vim.fn.delete(vim.fn.stdpath('config') .. '/lua/zone/compiled.lua') then
     vim.cmd(':LuaCacheClear')
   end
 end
 
 function M.post_reload(msg)
-  local Logger = require('cosmic.utils.logger')
-  unload('cosmic.utils', true)
-  unload('cosmic.theme', true)
-  unload('cosmic.plugins.statusline', true)
+  local Logger = require('zone.utils.logger')
+  unload('zone.utils', true)
+  unload('zone.theme', true)
+  unload('zone.plugins.statusline', true)
   msg = msg or 'User config reloaded!'
   Logger:log(msg)
 end
@@ -77,32 +77,32 @@ end
 function M.reload_user_config_sync()
   M.reload_user_config()
   clear_cache()
-  unload('cosmic.config', true)
-  unload('cosmic.core.pluginsInit', true)
-  vim.cmd([[autocmd User PackerCompileDone ++once lua require('cosmic.utils').post_reload()]])
+  unload('zone.config', true)
+  unload('zone.core.pluginsInit', true)
+  vim.cmd([[autocmd User PackerCompileDone ++once lua require('zone.utils').post_reload()]])
   vim.cmd(':PackerSync')
 end
 
 function M.reload_user_config(compile)
   compile = compile or false
-  unload('cosmic.config', true)
+  unload('zone.config', true)
   if compile then
-    vim.cmd([[autocmd User PackerCompileDone ++once lua require('cosmic.utils').post_reload()]])
+    vim.cmd([[autocmd User PackerCompileDone ++once lua require('zone.utils').post_reload()]])
     vim.cmd(':PackerCompile')
   end
 end
 
 function M.get_install_dir()
-  local config_dir = os.getenv('COSMICNVIM_INSTALL_DIR')
+  local config_dir = os.getenv('ZONENVIM_INSTALL_DIR')
   if not config_dir then
     return vim.fn.stdpath('config')
   end
   return config_dir
 end
 
--- update instance of CosmicNvim
+-- update instance of ZoneNvim
 function M.update()
-  local Logger = require('cosmic.utils.logger')
+  local Logger = require('zone.utils.logger')
   local Job = require('plenary.job')
   local path = M.get_install_dir()
   local errors = {}
@@ -117,7 +117,7 @@ function M.update()
       end,
       on_exit = function()
         if vim.tbl_isempty(errors) then
-          Logger:log('Updated! Running CosmicReloadSync...')
+          Logger:log('Updated! Running ZoneReloadSync...')
           M.reload_user_config_sync()
         else
           table.insert(errors, 1, 'Something went wrong! Please pull changes manually.')

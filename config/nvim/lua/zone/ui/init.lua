@@ -1,4 +1,4 @@
-local utils = require('zone.ui.utils')
+local utils = require('zone.utils')
 local M = {}
 
 local default_user_opts = {
