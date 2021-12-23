@@ -1,15 +1,11 @@
 local M = {}
 
 M.supported_themes = {
-  'catppuccin',
-  'dracula',
-  'enfocado',
-  'gruvbox',
-  'nightfox',
-  'nord',
-  'onedark',
-  'rose-pine',
   'tokyonight',
+  'gruvbox',
+  'rose-pine',
+  'nightfox',
+  'onedark',
 }
 
 function M.init(use, config)
@@ -22,37 +18,6 @@ function M.init(use, config)
       vim.cmd('color tokyonight')
     end,
     disable = config.theme ~= 'tokyonight',
-  })
-
-  use({
-    'catppuccin/nvim',
-    as = 'catppuccin',
-    config = function()
-      local catppuccin = require('catppuccin')
-      catppuccin.setup({
-        integrations = {
-          gitsigns = true,
-          telescope = true,
-          dashboard = true,
-          nvimtree = {
-            enabled = true,
-          },
-        },
-      })
-      vim.cmd('colorscheme catppuccin')
-    end,
-    disable = config.theme ~= 'catppuccin',
-  })
-
-  use({
-    'shaunsingh/nord.nvim',
-    as = 'nord',
-    config = function()
-      vim.g.nord_contrast = true
-      vim.g.nord_borders = true
-      require('nord').set()
-    end,
-    disable = config.theme ~= 'nord',
   })
 
   use({
@@ -92,25 +57,6 @@ function M.init(use, config)
       vim.cmd('color onedark')
     end,
     disable = config.theme ~= 'onedark',
-  })
-
-  use({
-    'Mofiqul/dracula.nvim',
-    as = 'dracula',
-    config = function()
-      vim.cmd('color dracula')
-    end,
-    disable = config.theme ~= 'dracula',
-  })
-
-  use({
-    'wuelnerdotexe/vim-enfocado',
-    as = 'enfocado',
-    config = function()
-      vim.g.enfocado_style = 'nature'
-      vim.cmd('autocmd VimEnter * ++nested colorscheme enfocado')
-    end,
-    disable = config.theme ~= 'enfocado',
   })
 end
 
