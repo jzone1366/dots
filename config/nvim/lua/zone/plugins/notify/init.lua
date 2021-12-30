@@ -11,6 +11,6 @@ notify.setup(utils.merge({
     DEBUG = icons.debug,
     TRACE = icons.trace,
   },
-  background_colour = require('zone.theme.colors').notify_bg,
+  background_colour = require('zone.theme.colors').bg,
 }, config.notify or {}))
 vim.notify = notify

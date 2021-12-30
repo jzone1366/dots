@@ -85,6 +85,7 @@ return packer.startup(function()
       require('zone.lsp')
     end,
     requires = {
+      { 'b0o/SchemaStore.nvim' },
       { 'williamboman/nvim-lsp-installer' },
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
       {
