@@ -1,25 +1,15 @@
 local M = {}
 
 M.supported_themes = {
-  'tokyonight',
   'gruvbox',
-  'rose-pine',
+  'kanagawa',
   'nightfox',
   'onedark',
+  'rose-pine',
+  'tokyonight',
 }
 
 function M.init(use, config)
-  use({ -- color scheme
-    'folke/tokyonight.nvim',
-    as = 'tokyonight',
-    config = function()
-      vim.g.tokyonight_style = 'night'
-      vim.g.tokyonight_sidebars = { 'qf' }
-      vim.cmd('color tokyonight')
-    end,
-    disable = config.theme ~= 'tokyonight',
-  })
-
   use({
     'ellisonleao/gruvbox.nvim',
     as = 'gruvbox',
@@ -32,13 +22,12 @@ function M.init(use, config)
   })
 
   use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
+    'rebelot/kanagawa.nvim',
+    as = 'kanagawa',
     config = function()
-      vim.g.rose_pine_variant = 'moon'
-      vim.cmd('colorscheme rose-pine')
+      vim.cmd('colorscheme kanagawa')
     end,
-    disable = config.theme ~= 'rose-pine',
+    disable = config.theme ~= 'kanagawa',
   })
 
   use({
@@ -57,6 +46,27 @@ function M.init(use, config)
       vim.cmd('color onedark')
     end,
     disable = config.theme ~= 'onedark',
+  })
+
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    config = function()
+      vim.g.rose_pine_variant = 'moon'
+      vim.cmd('colorscheme rose-pine')
+    end,
+    disable = config.theme ~= 'rose-pine',
+  })
+
+  use({ -- color scheme
+    'folke/tokyonight.nvim',
+    as = 'tokyonight',
+    config = function()
+      vim.g.tokyonight_style = 'night'
+      vim.g.tokyonight_sidebars = { 'qf' }
+      vim.cmd('color tokyonight')
+    end,
+    disable = config.theme ~= 'tokyonight',
   })
 end
 
