@@ -1,6 +1,6 @@
 local zone_modules = {
   'zone.core.disabled',
-  'zone.core.pluginsInit',
+  'zone.plugins.init',
   'zone.core.commands',
   'zone.core.editor',
   'zone.config.editor',
