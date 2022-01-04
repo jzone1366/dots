@@ -1,6 +1,5 @@
 # Dotfiles
 My dotfiles to start version controlling my setups for vim and other programs.
-Inspiration for the structure came from https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles
 
 ## Installation
 You need to clone this repository by running
@@ -14,7 +13,7 @@ Inside the `setup/` directory is all the scripts that run.
 1. `postinstall.sh` will run commands that are inside the `postinstall/` directory after all the other commands have run. (this installs a package loader for vim after the directories have been linked and initialized)
 
 ## Disclaimer
-This is a work in progress. This is also set to defaults that I use and may not work correctly on your machine. 
+This is a work in progress. This is also set to defaults that I use and may not work correctly on your machine.
 I currently use these settings on my Macbook at work and on my Linux Mint Machine at home.
 
 
@@ -22,3 +21,9 @@ I currently use these settings on my Macbook at work and on my Linux Mint Machin
 * Add Linux script to install dependencies for Linux Mint.
 * Add MacOSX script to install dependencies for Mac.
 * Change command line flags to Multi Select Menu for easier option selection.
+
+## REFERENCES:
+
+* Inspiration for the structure came from https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles
+* NVim Inspiration from https://github.com/CosmicNvim/CosmicNvim
+
