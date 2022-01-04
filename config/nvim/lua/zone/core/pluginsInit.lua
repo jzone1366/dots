@@ -167,7 +167,6 @@ return packer.startup(function()
     event = 'BufWinEnter',
     config = function()
       require('zone.plugins.terminal')
-      require('zone.plugins.terminal.mappings')
     end,
     disable = vim.tbl_contains(user_plugins.disable, 'terminal'),
   })
@@ -249,7 +248,7 @@ return packer.startup(function()
     opt = true,
     cmd = { 'ColorizerToggle' },
     config = function()
-      require('colorizer').setup()
+      require('zone.plugins.colorizer')
     end,
     disable = vim.tbl_contains(user_plugins.disable, 'colorizer'),
   })
