@@ -61,7 +61,6 @@ return packer.startup(function()
     'kyazdani42/nvim-tree.lua',
     config = function()
       require('zone.plugins.nvim-tree')
-      require('zone.plugins.nvim-tree.mappings')
     end,
     opt = true,
     cmd = {
@@ -203,7 +202,6 @@ return packer.startup(function()
     'rmagatti/auto-session',
     config = function()
       require('zone.plugins.auto-session')
-      require('zone.plugins.auto-session.mappings')
     end,
     disable = vim.tbl_contains(user_plugins.disable, 'auto-session'),
   })

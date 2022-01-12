@@ -1,5 +1,9 @@
 local map = require('zone.utils').map
 
+require('zone.plugins.nvim-tree.mappings')
+require('zone.plugins.auto-session.mappings')
+
+
 -- Quickfix mappings
 map('n', '<leader>ck', ':cexpr []<cr>')
 map('n', '<leader>cc', ':cclose <cr>')
