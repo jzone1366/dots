@@ -1,37 +1,42 @@
 local lsp = vim.lsp
 local utils = require('zone.ui.utils')
 local rename_handler = require('zone.ui.rename.handler')
+local Text = require('nui.text')
 
 local function rename(opts)
   local Input = require('nui.input')
   local event = require('nui.utils.autocmd').event
   local curr_name = vim.fn.expand('<cword>')
 
-  local popup_opts = utils.merge({
+  local user_border = opts.rename.border
+  local width = 25
+
+  if #curr_name > width then
+    width = #curr_name
+  end
+
+  local popup_opts = {
     position = {
       row = 1,
       col = 0,
     },
     size = {
-      width = 25,
+      width = width,
       height = 2,
     },
     relative = 'cursor',
     border = {
-      highlight = 'FloatBorder',
-      style = opts.border,
+      highlight = user_border.highlight,
+      style = user_border.style or opts.border_style,
       text = {
-        top = ' Rename ',
-        top_align = 'left',
+        top = Text(user_border.title, user_border.title_hl),
+        top_align = user_border.title_align,
       },
     },
-    win_options = {
-      winhighlight = 'Normal:Normal',
-    },
-  }, {})
+  }
 
   opts = utils.merge({
-    prompt = opts.rename.prompt,
+    prompt = Text(opts.rename.prompt, opts.rename.prompt_hl),
     default_value = curr_name,
     on_submit = function(new_name)
       if not (new_name and #new_name > 0) or new_name == curr_name then
@@ -47,10 +52,6 @@ local function rename(opts)
 
   -- mount/open the component
   input:mount()
-
-  -- las value is length of highlight
-  vim.api.nvim_buf_add_highlight(input.bufnr, -1, 'LspRenamePrompt', 0, 0, #opts.prompt)
-  vim.cmd('hi link LspRenamePrompt Comment')
 
   utils.default_mappings(input)
 

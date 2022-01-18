@@ -2,12 +2,30 @@ local utils = require('zone.utils')
 local M = {}
 
 local default_user_opts = {
-  border = 'rounded',
+  highlight = 'FloatBorder',
+  border_style = 'rounded',
   rename = {
+    border = {
+      highlight = 'FloatBorder',
+      style = nil,
+      title = 'Rename',
+      title_align = 'left',
+      title_hl = 'FloatBorder',
+    },
     prompt = '> ',
+    prompt_hl = 'Comment',
     popup_opts = {},
   },
   code_actions = {
+    min_width = nil,
+    border = {
+      bottom_hl = 'FloatBorder',
+      highlight = 'FloatBorder',
+      style = nil,
+      title = 'Code Actions',
+      title_align = 'center',
+      title_hl = 'FloatBorder',
+    },
     popup_opts = {},
   },
 }
