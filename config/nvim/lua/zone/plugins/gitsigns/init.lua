@@ -28,7 +28,7 @@ local default_config = {
       ['n <leader>ghp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
       ['n <leader>gm']  = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
     },
-    watch_index = {
+    watch_gitdir = {
       interval = 700,
       follow_files = true
     },
@@ -38,6 +38,7 @@ local default_config = {
       virt_text = true,
       virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
       delay = 700,
+      ignore_whitespace = false,
     },
     current_line_blame_formatter_opts = {
       relative_time = false
@@ -54,7 +55,6 @@ local default_config = {
       row = 0,
       col = 1
     },
-    use_internal_diff = true,  -- If vim.diff or luajit is present
     yadm = {
       enable = false
     },
