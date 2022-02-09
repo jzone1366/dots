@@ -1,6 +1,3 @@
-local config = require('zone.config')
-local utils = require('zone.utils')
-
 local defaults = {
   ensure_installed = {
     'css',
@@ -35,4 +32,4 @@ local defaults = {
   },
 }
 
-require('nvim-treesitter.configs').setup(utils.merge(defaults, config.treesitter or {}))
+require('nvim-treesitter.configs').setup(defaults)

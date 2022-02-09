@@ -59,7 +59,7 @@ M.code_actions = function(opts)
   local results_lsp, _ = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', opts.params, opts.timeout)
 
   if not results_lsp or vim.tbl_isempty(results_lsp) then
-    Logger.warn('No results from textDocument/codeAction')
+    Logger:warn('No results from textDocument/codeAction')
     return
   end
 
@@ -94,7 +94,7 @@ M.code_actions = function(opts)
   end
 
   if #menu_items == 0 then
-    Logger.log('No code actions available')
+    Logger:log('No code actions available')
     return
   end
 
@@ -146,7 +146,7 @@ M.code_actions = function(opts)
       then
         client.request('codeAction/resolve', action, function(resolved_err, resolved_action)
           if resolved_err then
-            vim.notify(resolved_err.code .. ': ' .. resolved_err.message, vim.log.levels.ERROR)
+            Logger:error(resolved_err.code .. ': ' .. resolved_err.message)
             return
           end
           if resolved_action then

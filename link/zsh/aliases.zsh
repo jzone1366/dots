@@ -70,3 +70,6 @@ alias v='nvim'
 
 # SSH
 alias ssh='TERM=xterm ssh'
+
+# YARN
+alias yw='yarn workspace'

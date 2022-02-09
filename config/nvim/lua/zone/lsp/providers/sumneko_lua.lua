@@ -1,6 +1,14 @@
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 return {
   settings = {
     Lua = {
+      runtime = {
+        version = 'LuaJIT',
+        path = runtime_path,
+      },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
         globals = { 'vim' },
@@ -14,6 +22,9 @@ return {
         },
         maxPreload = 10000,
       },
+      telemetry = {
+        enable = false,
+      }
     },
   },
 }
