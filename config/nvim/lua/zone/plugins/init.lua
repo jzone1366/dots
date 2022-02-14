@@ -7,21 +7,6 @@ end
 local packer = zone_packer.packer
 local use = packer.use
 
-local ok, user_plugins = pcall(require, 'zone.config.plugins')
-if not ok then
-  user_plugins = {
-    add = {},
-    disable = {},
-  }
-end
-
-if not vim.tbl_islist(user_plugins.add) then
-  user_plugins.add = {}
-end
-if not vim.tbl_islist(user_plugins.disable) then
-  user_plugins.disable = {}
-end
-
 local config = require('zone.config')
 
 return packer.startup(function()
@@ -41,7 +26,6 @@ return packer.startup(function()
       require('zone.plugins.notify')
     end,
     after = config.theme,
-    disable = vim.tbl_contains(user_plugins.disable, 'notify'),
   })
 
   -- theme stuff
@@ -53,7 +37,6 @@ return packer.startup(function()
       require('zone.plugins.galaxyline')
     end,
     after = config.theme,
-    disable = vim.tbl_contains(user_plugins.disable, 'statusline'),
   })
 
   -- file explorer
@@ -62,7 +45,6 @@ return packer.startup(function()
     config = function()
       require('zone.plugins.nvim-tree')
     end,
-    opt = true,
     cmd = {
       'NvimTreeClipboard',
       'NvimTreeClose',
@@ -71,7 +53,6 @@ return packer.startup(function()
       'NvimTreeRefresh',
       'NvimTreeToggle',
     },
-    disable = vim.tbl_contains(user_plugins.disable, 'nvim-tree'),
   })
 
   use({
@@ -92,7 +73,6 @@ return packer.startup(function()
         config = function()
           require('zone.lsp.providers.null_ls')
         end,
-        disable = vim.tbl_contains(user_plugins.disable, 'null-ls'),
         after = 'nvim-lspconfig',
       },
       {
@@ -101,7 +81,6 @@ return packer.startup(function()
           require('zone.plugins.lsp-signature')
         end,
         after = 'nvim-lspconfig',
-        disable = vim.tbl_contains(user_plugins.disable, 'lsp_signature'),
       },
     },
   })
@@ -136,7 +115,6 @@ return packer.startup(function()
       },
     },
     event = 'InsertEnter',
-    disable = vim.tbl_contains(user_plugins.disable, 'autocomplete'),
   })
 
   -- git commands
@@ -144,7 +122,6 @@ return packer.startup(function()
     'tpope/vim-fugitive',
     opt = true,
     cmd = 'Git',
-    disable = vim.tbl_contains(user_plugins.disable, 'fugitive'),
   })
 
   -- git column signs
@@ -156,7 +133,6 @@ return packer.startup(function()
     config = function()
       require('zone.plugins.gitsigns')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'gitsigns'),
   })
 
   -- floating terminal
@@ -167,7 +143,6 @@ return packer.startup(function()
     config = function()
       require('zone.plugins.terminal')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'terminal'),
   })
 
   -- file navigation
@@ -186,7 +161,6 @@ return packer.startup(function()
       require('zone.plugins.telescope')
     end,
     event = 'BufWinEnter',
-    disable = vim.tbl_contains(user_plugins.disable, 'telescope'),
   })
 
   -- session/project management
@@ -203,7 +177,6 @@ return packer.startup(function()
     config = function()
       require('zone.plugins.auto-session')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'auto-session'),
   })
 
   -- lang/syntax stuff
@@ -218,7 +191,6 @@ return packer.startup(function()
     config = function()
       require('zone.plugins.treesitter')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'treesitter'),
   })
 
   -- comments and stuff
@@ -238,7 +210,6 @@ return packer.startup(function()
       require('zone.plugins.todo-comments')
     end,
     event = 'BufWinEnter',
-    disable = vim.tbl_contains(user_plugins.disable, 'todo-comments'),
   })
   -- colorized hex codes
   use({
@@ -248,14 +219,7 @@ return packer.startup(function()
     config = function()
       require('zone.plugins.colorizer')
     end,
-    disable = vim.tbl_contains(user_plugins.disable, 'colorizer'),
   })
-
-  if user_plugins.add and not vim.tbl_isempty(user_plugins.add) then
-    for _, plugin in pairs(user_plugins.add) do
-      use(plugin)
-    end
-  end
 
   if zone_packer.first_install then
     packer.sync()

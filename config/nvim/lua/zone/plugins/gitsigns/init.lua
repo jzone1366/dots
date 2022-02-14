@@ -60,6 +60,6 @@ local default_config = {
     },
 }
 
-local opts = utils.merge(default_config, config.gitsigns or {})
+local opts = default_config
 
 require('gitsigns').setup(opts)

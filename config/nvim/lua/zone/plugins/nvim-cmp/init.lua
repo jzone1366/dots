@@ -9,7 +9,7 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
-local default_cmp_opts = {
+local opts = {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -88,8 +88,6 @@ local default_cmp_opts = {
 vim.cmd([[
   autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
 ]])
-
-local opts = utils.merge(default_cmp_opts, config.autocomplete or {})
 
 cmp.setup(opts)
 

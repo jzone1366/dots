@@ -1,5 +1,4 @@
 local actions = require('telescope.actions')
-local config = require('zone.config')
 local icons = require('zone.theme.icons')
 local utils = require('zone.utils')
 
@@ -48,7 +47,7 @@ local opts_flex = {
   },
 }
 
-require('telescope').setup(utils.merge({
+require('telescope').setup({
   defaults = {
     prompt_prefix = '🔍 ',
     selection_caret = icons.folder.arrow_closed,
@@ -133,6 +132,6 @@ require('telescope').setup(utils.merge({
       mappings = default_mappings,
     }),
   },
-}, config.telescope or {}))
+})
 
 require('telescope').load_extension('fzf')

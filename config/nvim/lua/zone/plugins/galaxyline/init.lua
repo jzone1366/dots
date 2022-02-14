@@ -1,6 +1,5 @@
 local colors = require('zone.theme.colors')
 local condition = require('galaxyline.condition')
-local config = require('zone.config')
 local diag = require('galaxyline.providers.diagnostic')
 local fileinfo = require('galaxyline.providers.fileinfo')
 local galaxy = require('galaxyline')
@@ -11,10 +10,7 @@ local set_highlight = require('zone.theme.utils').set_highlight
 local statusline_colors = get_highlight('StatusLine')
 local utils = require('zone.utils')
 
-local defaults = utils.merge({
-  main_icon = icons.ghost,
-}, config.statusline or {})
-local main_icon = defaults.main_icon
+local main_icon = icons.ghost
 
 local get_mode = function()
   local mode_colors = {

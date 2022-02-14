@@ -40,7 +40,7 @@ local args = {
     enable = true,
   },
   view = {
-    width = 35,
+    width = 50,
     number = true,
     relativenumber = true,
   },
