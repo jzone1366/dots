@@ -1,6 +1,7 @@
 local config = {
   border = 'rounded',
-  theme = 'tokyonight',
+  theme = 'rose-pine',
+  --theme = 'tokyonight',
   lsp = {
     format_on_save = true, -- true/false or table of filetypes {'.ts', '.js',}
     rename_notification = true,

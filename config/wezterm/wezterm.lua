@@ -4,7 +4,7 @@ return {
   font = wezterm.font('GoMono Nerd Font'),
   font_size = 13.3,
 
-  color_scheme = "TokyoNight",
+  color_scheme = "RosePine",
   hide_tab_bar_if_only_one_tab = true,
 
   default_cursor_style = "SteadyBar",
