@@ -9,7 +9,7 @@ M.supported_themes = {
   'tokyonight',
 }
 
-function M.init(use)
+function M.init(use, config)
   use({
     'ellisonleao/gruvbox.nvim',
     as = 'gruvbox',
@@ -18,6 +18,7 @@ function M.init(use)
       vim.o.background = 'dark'
       vim.cmd('color gruvbox')
     end,
+    disable = config.theme ~= 'gruvbox',
   })
 
   use({
@@ -26,6 +27,7 @@ function M.init(use)
     config = function()
       vim.cmd('colorscheme kanagawa')
     end,
+    disable = config.theme ~= 'kanagawa',
   })
 
   use({
@@ -34,6 +36,7 @@ function M.init(use)
     config = function()
       vim.cmd('color nightfox')
     end,
+    disable = config.theme ~= 'nightfox',
   })
 
   use({
@@ -42,6 +45,7 @@ function M.init(use)
     config = function()
       vim.cmd('color onedark')
     end,
+    disable = config.theme ~= 'onedark',
   })
 
   use({
@@ -51,6 +55,7 @@ function M.init(use)
       vim.g.rose_pine_variant = 'main'
       vim.cmd('colorscheme rose-pine')
     end,
+    disable = config.theme ~= 'rose-pine',
   })
 
   use({ -- color scheme
@@ -61,6 +66,7 @@ function M.init(use)
       vim.g.tokyonight_sidebars = { 'qf' }
       vim.cmd('color tokyonight')
     end,
+    disable = config.theme ~= 'tokyonight',
   })
 end
 

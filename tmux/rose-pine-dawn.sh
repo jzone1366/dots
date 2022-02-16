@@ -14,7 +14,7 @@ pine="#286983"
 foam="#56949f"
 iris="#907aa9"
 
-set -g mode-style "fg=$text,bg=$base"
+set -g mode-style "fg=$base,bg=$muted"
 
 set -g message-style "fg=$text,bg=$base"
 set -g message-command-style "fg=$text,bg=$base"
