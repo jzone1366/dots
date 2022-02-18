@@ -3,8 +3,8 @@
 [colors]
 foreground = "#e0def4"
 background = "#191724"
-cursor_bg = "#796268"
-cursor_border = "#796268"
+cursor_bg = "#f6c177"
+cursor_border = "#f6c177"
 cursor_fg = "#191724"
 selection_bg = "#2A2738"
 selection_fg = "#e0def4"
