@@ -1,18 +1,5 @@
 local defaults = {
-  ensure_installed = {
-    'css',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'lua',
-    'markdown',
-    'php',
-    'python',
-    'scss',
-    'tsx',
-    'typescript',
-  },
+  ensure_installed = 'maintained',
   highlight = {
     enable = true,
     use_languagetree = true,

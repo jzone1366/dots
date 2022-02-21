@@ -194,6 +194,11 @@ return packer.startup(function()
     end,
   })
 
+  use({
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter'
+  })
+
   -- comments and stuff
   use({
     'numToStr/Comment.nvim',
