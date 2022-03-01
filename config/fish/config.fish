@@ -22,5 +22,4 @@ end
 
 source "$HOME/.config/fish/colors/RosePine.fish"
 source "$HOME/.config/fish/abbreviations.fish"
-source "$HOME/.config/fish/nvm.fish"
 source "$HOME/.config/fish/rust.fish"

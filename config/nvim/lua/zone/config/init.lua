@@ -12,7 +12,12 @@ local config = {
       sumneko_lua = {
         format = false, -- disable formatting all together
       },
-      html = true,
+      html = {
+        format = false,
+      },
+      cssls = {
+        format = false,
+      },
       tsserver = {
         format = false, -- disable formatting all together
       },

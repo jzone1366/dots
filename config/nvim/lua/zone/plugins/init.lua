@@ -42,7 +42,7 @@ return packer.startup(function()
   -- file explorer
   use({
     'kyazdani42/nvim-tree.lua',
-    commit = '3f4ed9b6c2598ab8304186486a05ae7a328b8d49',
+    --commit = '3f4ed9b6c2598ab8304186486a05ae7a328b8d49',
     config = function()
       require('zone.plugins.nvim-tree')
     end,
@@ -168,9 +168,9 @@ return packer.startup(function()
   use({
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function ()
+    config = function()
       require('zone.plugins.alpha')
-    end
+    end,
   })
 
   use({
@@ -196,7 +196,7 @@ return packer.startup(function()
 
   use({
     'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter'
+    after = 'nvim-treesitter',
   })
 
   -- comments and stuff
@@ -224,6 +224,17 @@ return packer.startup(function()
     cmd = { 'ColorizerToggle' },
     config = function()
       require('zone.plugins.colorizer')
+    end,
+  })
+
+  -- incrementer/decrementer
+  use({
+    'zegervdv/nrpattern.nvim',
+    requires = {
+      'tpope/vim-repeat',
+    },
+    config = function()
+      require('zone.plugins.nrpattern')
     end,
   })
 

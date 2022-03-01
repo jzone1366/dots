@@ -10,3 +10,5 @@ config/nvim/plugged/**/*
 config/nvim/autoload/**/*
 config/nvim/.netrwhist
 config/**/plugged/**/*
+config/fish/fish_variables
+config/fish/*.tmp.*

@@ -9,5 +9,5 @@ cursor_fg = "#191724"
 selection_bg = "#2A2738"
 selection_fg = "#e0def4"
 
-ansi = ["#6e6a86", "#eb6f92", "#9ccfd8", "#f6c177", "#31748f", "#c4a7e7", "#ebbcba", "#e0def4"]
+ansi = ["#26233a", "#eb6f92", "#9ccfd8", "#f6c177", "#31748f", "#c4a7e7", "#ebbcba", "#e0def4"]
 brights = ["#6e6a86", "#eb6f92", "#9ccfd8", "#f6c177", "#31748f", "#c4a7e7", "#ebbcba", "#e0def4"]
