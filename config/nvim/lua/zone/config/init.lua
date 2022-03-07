@@ -1,7 +1,10 @@
 local config = {
   border = 'rounded',
-  theme = 'rose-pine',
-  --theme = 'tokyonight',
+  --theme = 'kanagawa',
+  --theme = 'rose-pine',
+  theme = 'tokyonight',
+  --theme = 'nightfox',
+  --theme = 'ayu',
   lsp = {
     format_on_save = true, -- true/false or table of filetypes {'.ts', '.js',}
     rename_notification = true,

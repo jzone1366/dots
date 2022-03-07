@@ -20,4 +20,5 @@ local colors = {
   floatBorder = theme.rose,
   selection_caret = theme.iris,
 }
+
 return colors
