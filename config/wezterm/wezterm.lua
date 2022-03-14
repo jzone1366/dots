@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
-local PaperZoneLight = require("colors.PaperZoneLight")
-local PaperZoneDark = require("colors.PaperZoneDark")
+local TwilightLight = require("colors.TwilightLight")
 
 local function merge(t1, t2)
 	for k, v in pairs(t2) do
@@ -16,7 +15,6 @@ local default_opts = {
 	--font = wezterm.font("Hack Nerd Font"),
 	font_size = 13.5,
 
-	--color_scheme = "RosePine",
 	hide_tab_bar_if_only_one_tab = true,
 
 	default_cursor_style = "SteadyBar",
@@ -31,6 +29,6 @@ local default_opts = {
 	line_height = 1.0,
 }
 
-local opts = merge(default_opts, PaperZoneLight)
+local opts = merge(default_opts, TwilightLight)
 
 return opts

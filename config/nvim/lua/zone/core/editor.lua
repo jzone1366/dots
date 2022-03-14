@@ -11,6 +11,7 @@ cmd([[
 g.mapleader = ' '
 
 -- misc
+opt.runtimepath:append('~/dev/papercolor/lua')
 opt.syntax = 'enable'
 opt.encoding = 'utf-8'
 opt.clipboard = 'unnamedplus'

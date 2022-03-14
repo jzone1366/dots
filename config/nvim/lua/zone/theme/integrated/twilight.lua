@@ -1,8 +1,8 @@
-local theme = require('nightfox.colors')
+local theme = require('twilight.colors')
 local themeColors = theme.init()
 
 local colors = {
-  white = themeColors.fg_alt,
+  white = themeColors.white,
   bg = themeColors.bg,
   bg_highlight = themeColors.bg_highlight,
   normal = themeColors.blue,

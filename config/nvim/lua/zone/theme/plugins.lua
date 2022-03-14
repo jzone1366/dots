@@ -6,9 +6,9 @@ M.supported_themes = {
   'kanagawa',
   'nightfox',
   'onedark',
-  'paperzone',
   'rose-pine',
   'tokyonight',
+  'twilight',
 }
 
 function M.init(use, config)
@@ -60,16 +60,6 @@ function M.init(use, config)
     disable = config.theme ~= 'onedark',
   })
 
-  -- @TODO update with correct github when pushed up.
-  use({
-    '~/dev/papercolor/lua/paperzone',
-    as = 'paperzone',
-    config = function()
-      vim.cmd('color paperzone')
-    end,
-    disable = config.theme ~= 'paperzone',
-  })
-
   use({
     'rose-pine/neovim',
     as = 'rose-pine',
@@ -81,7 +71,7 @@ function M.init(use, config)
     disable = config.theme ~= 'rose-pine',
   })
 
-  use({ -- color scheme
+  use({
     'folke/tokyonight.nvim',
     as = 'tokyonight',
     config = function()
@@ -90,6 +80,15 @@ function M.init(use, config)
       vim.cmd('color tokyonight')
     end,
     disable = config.theme ~= 'tokyonight',
+  })
+
+  use({
+    'jzone1366/twilight.nvim',
+    as = 'twilight',
+    config = function()
+      require('twilight').load('light')
+    end,
+    disable = config.theme ~= 'twilight',
   })
 end
 
