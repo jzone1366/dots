@@ -5,13 +5,18 @@ local indent = 2
 
 cmd([[
 	filetype plugin indent on
-	autocmd BufWritePre * :%s/\s\+$//e
 ]])
+
+local augroup_name = 'ZoneNvimEditor'
+local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  command = [[%s/\s\+$//e]],
+  group = group,
+})
 
 g.mapleader = ' '
 
 -- misc
-opt.runtimepath:append('~/dev/papercolor/lua')
 opt.syntax = 'enable'
 opt.encoding = 'utf-8'
 opt.clipboard = 'unnamedplus'

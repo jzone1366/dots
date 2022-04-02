@@ -1,7 +1,7 @@
 local config = require('zone.config')
-local utils = require('zone.utils')
 
 -- default gitsigns config from github.
+-- stylua: ignore
 local default_config = {
     signs = {
       add          = {hl = 'GitGutterAdd',    text = '│', numhl='GitSignsAddNr'},

@@ -2,6 +2,7 @@ local M = {}
 
 M.supported_themes = {
   'ayu',
+  'chalklines',
   'gruvbox',
   'kanagawa',
   'nightfox',
@@ -20,6 +21,15 @@ function M.init(use, config)
       vim.cmd('color ayu-light')
     end,
     disable = config.theme ~= 'ayu',
+  })
+
+  use({
+    '~/dev/chalklines',
+    as = 'chalklines',
+    config = function()
+      vim.cmd('colorscheme chalklines')
+    end,
+    disable = config.theme ~= 'chalklines',
   })
 
   use({
@@ -83,7 +93,8 @@ function M.init(use, config)
   })
 
   use({
-    'jzone1366/twilight.nvim',
+    '~/dev/twilight',
+    --'jzone1366/twilight.nvim',
     as = 'twilight',
     config = function()
       require('twilight').load('light')

@@ -1,5 +1,4 @@
 local cmp = require('cmp')
-local utils = require('zone.utils')
 local luasnip = require('luasnip')
 local config = require('zone.config')
 local icons = require('zone.theme.icons')
@@ -85,9 +84,14 @@ local opts = {
   },
 }
 
-vim.cmd([[
-  autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
-]])
+local augroup_name = 'ZoneNvimAutocomplete'
+local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    require('cmp').setup.buffer({ enabled = false })
+  end,
+  group = group,
+})
 
 cmp.setup(opts)
 
@@ -95,4 +99,12 @@ cmp.setup.cmdline('/', {
   sources = {
     { name = 'buffer' },
   },
+})
+
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = 'buffer' },
+  }),
 })

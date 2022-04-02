@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local TwilightLight = require("colors.TwilightLight")
+local Chalklines = require("colors.Chalklines")
 
 local function merge(t1, t2)
 	for k, v in pairs(t2) do
@@ -10,10 +10,11 @@ local function merge(t1, t2)
 end
 
 local default_opts = {
-	font = wezterm.font("GoMono Nerd Font"),
+	font = wezterm.font("CaskaydiaCove Nerd Font"),
+	--font = wezterm.font("GoMono Nerd Font"),
 	--font = wezterm.font("FiraCode Nerd Font"),
 	--font = wezterm.font("Hack Nerd Font"),
-	font_size = 13.5,
+	font_size = 14,
 
 	hide_tab_bar_if_only_one_tab = true,
 
@@ -26,9 +27,9 @@ local default_opts = {
 		bottom = 0,
 	},
 
-	line_height = 1.0,
+	line_height = 0.9,
 }
 
-local opts = merge(default_opts, TwilightLight)
+local opts = merge(default_opts, Chalklines)
 
 return opts

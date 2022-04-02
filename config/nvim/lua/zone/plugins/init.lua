@@ -29,12 +29,14 @@ return packer.startup(function()
   })
 
   -- theme stuff
-  use({ -- statusline
-    'NTBBloodbath/galaxyline.nvim',
-    branch = 'main',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+  use({
+    'feline-nvim/feline.nvim',
+    requires = {
+      { 'kyazdani42/nvim-web-devicons' },
+      { 'lewis6991/gitsigns.nvim', opt = true },
+    },
     config = function()
-      require('zone.plugins.galaxyline')
+      require('zone.plugins.feline')
     end,
     after = config.theme,
   })
@@ -42,7 +44,6 @@ return packer.startup(function()
   -- file explorer
   use({
     'kyazdani42/nvim-tree.lua',
-    --commit = '3f4ed9b6c2598ab8304186486a05ae7a328b8d49',
     config = function()
       require('zone.plugins.nvim-tree')
     end,
@@ -54,6 +55,7 @@ return packer.startup(function()
       'NvimTreeRefresh',
       'NvimTreeToggle',
     },
+    event = 'VimEnter',
   })
 
   use({
@@ -84,6 +86,7 @@ return packer.startup(function()
         after = 'nvim-lspconfig',
       },
     },
+    event = 'BufWinEnter',
   })
 
   -- autocompletion
@@ -130,7 +133,7 @@ return packer.startup(function()
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     opt = true,
-    event = 'BufRead',
+    event = 'BufWinEnter',
     config = function()
       require('zone.plugins.gitsigns')
     end,

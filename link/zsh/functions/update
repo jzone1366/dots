@@ -9,10 +9,6 @@ function update {
   brew reinstall neovim
   brew cleanup
 
-  echo 'updating fish shell'
-  fisher
-  fish_update_completions
-
-  echo 'checking Apple Updates'
-  /usr/sbin/softwareupdate -ia
+  #echo 'checking Apple Updates'
+  #/usr/sbin/softwareupdate -ia
 }

@@ -1,7 +1,7 @@
-local config = require('zone.config')
 local g = vim.g
 local icons = require('zone.theme.icons')
-local utils = require('zone.utils')
+local augroup_name = 'ZoneNvimNvimTree'
+local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
 
 -- settings
 g.nvim_tree_git_hl = 1
@@ -27,7 +27,6 @@ g.nvim_tree_respect_buf_cwd = 1
 
 -- set up args
 local args = {
-  auto_close = true,
   diagnostics = {
     enable = true,
   },
@@ -49,4 +48,10 @@ local args = {
   },
 }
 
-require('nvim-tree').setup(utils.merge(args, config.nvim_tree or {}))
+vim.api.nvim_create_autocmd('BufEnter', {
+  command = [[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
+  group = group,
+  nested = true,
+})
+
+require('nvim-tree').setup(args)

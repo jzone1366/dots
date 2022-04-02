@@ -1,4 +1,6 @@
 local config = require('zone.config')
+local augroup_name = 'ZoneNvimLspFormat'
+local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
 local M = {}
 
 local auto_format_lock = false
@@ -25,12 +27,14 @@ function M.on_attach(client, bufnr)
       else
         format_filetypes = '*'
       end
-      vim.cmd(([[
-          augroup ZoneFormat
-          autocmd!
-          autocmd BufWritePre %s lua vim.lsp.buf.formatting_sync(nil, 2000)
-          augroup end
-        ]]):format(format_filetypes))
+
+      vim.api.nvim_create_autocmd(string.format('BufWritePre %s', format_filetypes), {
+        callback = function()
+          vim.lsp.buf.formatting_sync(nil, config.lsp.format_timeout)
+        end,
+        group = group,
+        nested = true,
+      })
     end
   else
     client.resolved_capabilities.document_formatting = false

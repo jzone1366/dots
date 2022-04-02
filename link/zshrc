@@ -36,3 +36,5 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 
 autoload -Uz compinit
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
