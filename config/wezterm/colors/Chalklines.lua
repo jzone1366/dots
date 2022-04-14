@@ -1,52 +1,53 @@
+-- Chalklines Wezterm Colors
+-- Style: chalklines_dark
+-- Upstream: https://github.com/jzone1366/chalklines.nvim/raw/main/extra/dark/chalklines_dark_wezterm.lua
 return {
 	force_reverse_video_cursor = true,
 	colors = {
-		foreground = "#FCF7F8",
-		background = "#070A0E",
+		foreground = "#b3c9d7",
+		background = "#181818",
+		cursor_bg = "#f34b00",
+		cursor_border = "#f34b00",
+		cursor_fg = "#002831",
+		selection_bg = "#b3c9d7",
+		selection_fg = "#181818",
 
-		cursor_bg = "#FFEBFF",
-		cursor_border = "#FFEBFF",
-		cursor_fg = "#070A0E",
+		ansi = { "#474747", "#ff355b", "#b7e876", "#ffc251", "#76d4ff", "#ba76e7", "#6cbfb5", "#c2c8d7" },
+		brights = { "#474747", "#ff355b", "#b7e876", "#ffc251", "#76d5ff", "#ba76e7", "#6cbfb5", "#c2c8d7" },
 
-		selection_bg = "#181E24",
-		selection_fg = "#FCF7F8",
+		--indexed = { [16] = "#DE8B61", [17] = "#FFEBFF" },
 
-		ansi = { "#21282F", "#BF3F50", "#5CAB7D", "#FCD772", "#577FA1", "#ED7782", "#71B3D9", "#3A4650" },
-		brights = { "#29323A", "#BF3F50", "#5CAB7D", "#FCD772", "577FA1", "#ED7782", "#71B3D9", "#FCF7F8" },
+		--scrollbar_thumb = "#4A4748",
+		--split = "#262526",
 
-		indexed = { [16] = "#DE8B61", [17] = "#FFEBFF" },
+		--tab_bar = {
+		--	background = "#030203",
+		--	active_tab = {
+		--		bg_color = "#262526",
+		--		fg_color = "#FFEBFF",
+		--	},
+		--	inactive_tab = {
+		--		bg_color = "#030203",
+		--		fg_color = "#FCF7F8",
+		--	},
+		--	inactive_tab_hover = {
+		--		bg_color = "#262526",
+		--		fg_color = "#FCF7F8",
+		--	},
+		--	new_tab = {
+		--		bg_color = "#141414",
+		--		fg_color = "#5C595C",
+		--	},
+		--	new_tab_hover = {
+		--		bg_color = "#262526",
+		--		fg_color = "#FCF7F8",
+		--		italic = true,
+		--	},
+		--},
 
-		scrollbar_thumb = "#181E24",
-		split = "#040507",
+		--visual_bell = "#383638",
 
-		tab_bar = {
-			background = "#070A0E",
-			active_tab = {
-				bg_color = "#181E24",
-				fg_color = "#FFEBFF",
-			},
-			inactive_tab = {
-				bg_color = "#070A0E",
-				fg_color = "#FCF7F8",
-			},
-			inactive_tab_hover = {
-				bg_color = "#181E24",
-				fg_color = "#FCF7F8",
-			},
-			new_tab = {
-				bg_color = "#06080B",
-				fg_color = "#21282F",
-			},
-			new_tab_hover = {
-				bg_color = "#181E24",
-				fg_color = "#FCF7F8",
-				italic = true,
-			},
-		},
-
-		visual_bell = "#101419",
-
-		-- nightbuild only
-		compose_cursor = "#DE8B61",
+		---- nightbuild only
+		--compose_cursor = "#DE8B61",
 	},
 }

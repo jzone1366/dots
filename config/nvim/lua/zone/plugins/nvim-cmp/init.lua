@@ -1,11 +1,11 @@
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-local config = require('zone.config')
-local icons = require('zone.theme.icons')
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+local config = require 'zone.config'
+local icons = require 'zone.theme.icons'
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
 end
 
 local opts = {
@@ -18,15 +18,15 @@ local opts = {
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-e>'] = cmp.mapping({
+    ['<C-e>'] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
-    }),
+    },
     -- disabled for autopairs mapping
-    ['<CR>'] = cmp.mapping.confirm({
+    ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
-    }),
+    },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -54,20 +54,22 @@ local opts = {
       's',
     }),
   },
-  documentation = {
-    border = config.border,
-    winhighlight = 'FloatBorder:FloatBorder,Normal:Normal',
+  window = {
+    documentation = {
+      border = config.border,
+      winhighlight = 'FloatBorder:FloatBorder,Normal:Normal',
+    },
   },
   experimental = {
     ghost_text = true,
   },
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'buffer' },
     { name = 'luasnip' },
     { name = 'path' },
-  }),
+  },
   formatting = {
     format = function(entry, vim_item)
       -- Kind icons
@@ -88,7 +90,7 @@ local augroup_name = 'ZoneNvimAutocomplete'
 local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
-    require('cmp').setup.buffer({ enabled = false })
+    require('cmp').setup.buffer { enabled = false }
   end,
   group = group,
 })

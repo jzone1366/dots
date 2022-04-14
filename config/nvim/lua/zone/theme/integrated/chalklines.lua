@@ -1,24 +1,24 @@
-local theme = require('chalklines.core.color_palette')
+local theme = require 'chalklines.palette'
 
 local colors = {
-  white = theme.white,
-  bg = theme.gray2,
-  bg_highlight = theme.black4,
-  normal = theme.maroon,
-  insert = theme.pink,
-  command = theme.red,
-  visual = theme.yellow,
-  replace = theme.magenta,
+  white = theme.text,
+  bg = theme.surface,
+  bg_highlight = theme.surface,
+  normal = theme.green,
+  insert = theme.blue,
+  command = theme.yellow,
+  visual = theme.magenta,
+  replace = theme.cyan,
   diffAdd = theme.blue,
-  diffModified = theme.teal,
-  diffDeleted = theme.red,
-  trace = theme.red,
-  hint = theme.white,
-  info = theme.teal,
-  error = theme.magenta,
-  warn = theme.red,
-  floatBorder = theme.black4,
-  selection_caret = theme.maroon,
+  diffModified = theme.green,
+  diffDeleted = theme.cyan,
+  trace = theme.cyan,
+  hint = theme.green,
+  info = theme.blue,
+  error = theme.red,
+  warn = theme.cyan,
+  floatBorder = theme.cyan,
+  selection_caret = theme.magenta,
 }
 
 return colors

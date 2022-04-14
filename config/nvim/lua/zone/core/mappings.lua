@@ -1,7 +1,7 @@
 local map = require('zone.utils').map
 
-require('zone.plugins.nvim-tree.mappings')
-require('zone.plugins.auto-session.mappings')
+require 'zone.plugins.nvim-tree.mappings'
+require 'zone.plugins.auto-session.mappings'
 
 -- Quickfix mappings
 map('n', '<leader>ck', ':cexpr []<cr>')
@@ -23,6 +23,6 @@ map('n', '<leader>tn', ':tabnext<cr>')
 
 -- window navigation
 map('n', '<C-h>', '<C-w>h')
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
+--map('n', '<C-j>', '<C-w>j')
+--map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
