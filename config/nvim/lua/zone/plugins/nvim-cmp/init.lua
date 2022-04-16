@@ -9,12 +9,22 @@ local has_words_before = function()
 end
 
 local opts = {
+  enabled = function()
+    -- disable completion in comments
+    local context = require 'cmp.config.context'
+    -- keep command mode completion enabled when cursor is in a comment
+    if vim.api.nvim_get_mode().mode == 'c' then
+      return true
+    else
+      return not context.in_treesitter_capture 'comment' and not context.in_syntax_group 'Comment'
+    end
+  end,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -88,6 +98,7 @@ local opts = {
 
 local augroup_name = 'ZoneNvimAutocomplete'
 local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
+
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     require('cmp').setup.buffer { enabled = false }
@@ -98,12 +109,14 @@ vim.api.nvim_create_autocmd('FileType', {
 cmp.setup(opts)
 
 cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' },
   },
 })
 
 cmp.setup.filetype('gitcommit', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
   }, {
