@@ -1,9 +1,8 @@
-local config = require('zone.config')
-local utils = require('zone.utils')
+local utils = require 'zone.utils'
 
-require('Comment').setup(utils.merge({
+require('Comment').setup {
   pre_hook = function(ctx)
-    local U = require('Comment.utils')
+    local U = require 'Comment.utils'
     local location = nil
     if ctx.ctype == U.ctype.block then
       location = require('ts_context_commentstring.utils').get_cursor_location()
@@ -11,9 +10,9 @@ require('Comment').setup(utils.merge({
       location = require('ts_context_commentstring.utils').get_visual_start_location()
     end
 
-    return require('ts_context_commentstring.internal').calculate_commentstring({
+    return require('ts_context_commentstring.internal').calculate_commentstring {
       key = type,
       location = location,
-    })
-  end
-}, config.comments or {}))
+    }
+  end,
+}

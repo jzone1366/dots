@@ -1,6 +1,7 @@
-local config = require('zone.config')
-local icons = require('zone.theme.icons')
-local utils = require('zone.utils')
+local icons = require 'zone.theme.icons'
+
+-- set up LSP borders
+local borders = { { '╭' }, { '─' }, { '╮' }, { '│' }, { '╯' }, { '─' }, { '╰' }, { '│' } }
 
 -- set up LSP signs
 local signs = {
@@ -17,13 +18,13 @@ end
 
 -- set up vim.diagnostics
 -- vim.diagnostic.config opts
-vim.diagnostic.config(utils.merge({
+vim.diagnostic.config {
   underline = true,
   signs = true,
   update_in_insert = false,
   severity_sort = true,
   float = {
-    border = config.border,
+    border = borders,
     focusable = false,
     header = { icons.debug .. ' Diagnostics:', 'Normal' },
     source = 'always',
@@ -35,4 +36,4 @@ vim.diagnostic.config(utils.merge({
       min = vim.diagnostic.severity.HINT,
     },
   },
-}, config.diagnostic or {}))
+}

@@ -1,6 +1,5 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-local config = require 'zone.config'
 local icons = require 'zone.theme.icons'
 
 local has_words_before = function()
@@ -66,7 +65,7 @@ local opts = {
   },
   window = {
     documentation = {
-      border = config.border,
+      border = 'rounder',
       winhighlight = 'FloatBorder:FloatBorder,Normal:Normal',
     },
   },

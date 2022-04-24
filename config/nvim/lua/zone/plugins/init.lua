@@ -7,45 +7,45 @@ end
 local packer = zone_packer.packer
 local use = packer.use
 
-local config = require('zone.config')
+local theme_plugins = require 'zone.theme.plugins'
 
 return packer.startup(function()
-  use({
+  use {
     'wbthomason/packer.nvim',
     'lewis6991/impatient.nvim',
     'nathom/filetype.nvim',
     'nvim-lua/plenary.nvim',
-  })
+  }
 
   -- initialize theme plugins
-  require('zone.theme.plugins').init(use, config)
+  theme_plugins.init(use)
 
-  use({
+  use {
     'rcarriga/nvim-notify',
     config = function()
-      require('zone.plugins.notify')
+      require 'zone.plugins.notify'
     end,
-    after = config.theme,
-  })
+    after = theme_plugins.theme,
+  }
 
   -- theme stuff
-  use({
+  use {
     'feline-nvim/feline.nvim',
     requires = {
       { 'kyazdani42/nvim-web-devicons' },
       { 'lewis6991/gitsigns.nvim', opt = true },
     },
     config = function()
-      require('zone.plugins.feline')
+      require 'zone.plugins.feline'
     end,
-    after = config.theme,
-  })
+    after = theme_plugins.theme,
+  }
 
   -- file explorer
-  use({
+  use {
     'kyazdani42/nvim-tree.lua',
     config = function()
-      require('zone.plugins.nvim-tree')
+      require 'zone.plugins.nvim-tree'
     end,
     cmd = {
       'NvimTreeClipboard',
@@ -56,50 +56,52 @@ return packer.startup(function()
       'NvimTreeToggle',
     },
     event = 'VimEnter',
-  })
+  }
 
-  use({
+  use {
     'MunifTanjim/nui.nvim',
-  })
+  }
 
-  use({
+  use {
     'neovim/nvim-lspconfig',
     config = function()
-      require('zone.lsp')
+      require 'zone.lsp'
     end,
     requires = {
+      { 'folke/lua-dev.nvim' },
+      { 'nvim-lua/lsp-status.nvim' },
       { 'b0o/SchemaStore.nvim' },
       { 'williamboman/nvim-lsp-installer' },
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
       {
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
-          require('zone.lsp.providers.null_ls')
+          require 'zone.lsp.providers.null-ls'
         end,
         after = 'nvim-lspconfig',
       },
       {
         'ray-x/lsp_signature.nvim',
         config = function()
-          require('zone.plugins.lsp-signature')
+          require 'zone.plugins.lsp-signature'
         end,
         after = 'nvim-lspconfig',
       },
     },
     event = 'BufWinEnter',
-  })
+  }
 
   -- autocompletion
-  use({
+  use {
     'hrsh7th/nvim-cmp',
     config = function()
-      require('zone.plugins.nvim-cmp')
+      require 'zone.plugins.nvim-cmp'
     end,
     requires = {
       {
         'L3MON4D3/LuaSnip',
         config = function()
-          require('zone.plugins.luasnip')
+          require 'zone.plugins.luasnip'
         end,
         requires = {
           'rafamadriz/friendly-snippets',
@@ -113,44 +115,44 @@ return packer.startup(function()
       {
         'windwp/nvim-autopairs',
         config = function()
-          require('zone.plugins.auto-pairs')
+          require 'zone.plugins.auto-pairs'
         end,
         after = 'nvim-cmp',
       },
     },
     event = 'InsertEnter',
-  })
+  }
 
   -- git commands
-  use({
+  use {
     'tpope/vim-fugitive',
     opt = true,
     cmd = 'Git',
-  })
+  }
 
   -- git column signs
-  use({
+  use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     opt = true,
     event = 'BufWinEnter',
     config = function()
-      require('zone.plugins.gitsigns')
+      require 'zone.plugins.gitsigns'
     end,
-  })
+  }
 
   -- floating terminal
-  use({
+  use {
     'voldikss/vim-floaterm',
     opt = true,
     event = 'BufWinEnter',
     config = function()
-      require('zone.plugins.terminal')
+      require 'zone.plugins.terminal'
     end,
-  })
+  }
 
   -- file navigation
-  use({
+  use {
     'nvim-telescope/telescope.nvim',
     requires = {
       'nvim-lua/popup.nvim',
@@ -162,29 +164,29 @@ return packer.startup(function()
     },
     config = function()
       require('zone.plugins.telescope.mappings').init()
-      require('zone.plugins.telescope')
+      require 'zone.plugins.telescope'
     end,
     event = 'BufWinEnter',
-  })
+  }
 
   -- session/project management
-  use({
+  use {
     'goolord/alpha-nvim',
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
-      require('zone.plugins.alpha')
+      require 'zone.plugins.alpha'
     end,
-  })
+  }
 
-  use({
+  use {
     'rmagatti/auto-session',
     config = function()
-      require('zone.plugins.auto-session')
+      require 'zone.plugins.auto-session'
     end,
-  })
+  }
 
   -- lang/syntax stuff
-  use({
+  use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
       'windwp/nvim-ts-autotag',
@@ -193,53 +195,53 @@ return packer.startup(function()
     },
     run = ':TSUpdate',
     config = function()
-      require('zone.plugins.treesitter')
+      require 'zone.plugins.treesitter'
     end,
-  })
+  }
 
-  use({
+  use {
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
-  })
+  }
 
   -- comments and stuff
-  use({
+  use {
     'numToStr/Comment.nvim',
     config = function()
-      require('zone.plugins.comments')
+      require 'zone.plugins.comments'
     end,
     event = 'BufWinEnter',
-  })
+  }
 
   -- todo highlights
-  use({
+  use {
     'folke/todo-comments.nvim',
     requires = 'nvim-lua/plenary.nvim',
     config = function()
-      require('zone.plugins.todo-comments')
+      require 'zone.plugins.todo-comments'
     end,
     event = 'BufWinEnter',
-  })
+  }
   -- colorized hex codes
-  use({
+  use {
     'norcalli/nvim-colorizer.lua',
     opt = true,
     cmd = { 'ColorizerToggle' },
     config = function()
-      require('zone.plugins.colorizer')
+      require 'zone.plugins.colorizer'
     end,
-  })
+  }
 
   -- incrementer/decrementer
-  use({
+  use {
     'zegervdv/nrpattern.nvim',
     requires = {
       'tpope/vim-repeat',
     },
     config = function()
-      require('zone.plugins.nrpattern')
+      require 'zone.plugins.nrpattern'
     end,
-  })
+  }
 
   if zone_packer.first_install then
     packer.sync()

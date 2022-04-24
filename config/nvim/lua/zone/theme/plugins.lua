@@ -1,5 +1,7 @@
 local M = {}
 
+M.theme = 'chalklines'
+
 M.supported_themes = {
   'ayu',
   'chalklines',
@@ -9,10 +11,9 @@ M.supported_themes = {
   'onedark',
   'rose-pine',
   'tokyonight',
-  'twilight',
 }
 
-function M.init(use, config)
+function M.init(use)
   use {
     'Shatur/neovim-ayu',
     as = 'ayu',
@@ -20,7 +21,7 @@ function M.init(use, config)
       vim.o.background = 'light'
       vim.cmd 'color ayu-light'
     end,
-    disable = config.theme ~= 'ayu',
+    disable = M.theme ~= 'ayu',
   }
 
   use {
@@ -31,7 +32,7 @@ function M.init(use, config)
       --vim.o.background = 'light'
       vim.cmd 'colorscheme chalklines'
     end,
-    disable = config.theme ~= 'chalklines',
+    disable = M.theme ~= 'chalklines',
   }
 
   use {
@@ -42,7 +43,7 @@ function M.init(use, config)
       vim.o.background = 'dark'
       vim.cmd 'color gruvbox'
     end,
-    disable = config.theme ~= 'gruvbox',
+    disable = M.theme ~= 'gruvbox',
   }
 
   use {
@@ -51,7 +52,7 @@ function M.init(use, config)
     config = function()
       vim.cmd 'colorscheme kanagawa'
     end,
-    disable = config.theme ~= 'kanagawa',
+    disable = M.theme ~= 'kanagawa',
   }
 
   use {
@@ -60,7 +61,7 @@ function M.init(use, config)
     config = function()
       vim.cmd 'color dayfox'
     end,
-    disable = config.theme ~= 'nightfox',
+    disable = M.theme ~= 'nightfox',
   }
 
   use {
@@ -69,7 +70,7 @@ function M.init(use, config)
     config = function()
       vim.cmd 'color onedark'
     end,
-    disable = config.theme ~= 'onedark',
+    disable = M.theme ~= 'onedark',
   }
 
   use {
@@ -80,7 +81,7 @@ function M.init(use, config)
       vim.o.background = 'light'
       vim.cmd 'colorscheme rose-pine'
     end,
-    disable = config.theme ~= 'rose-pine',
+    disable = M.theme ~= 'rose-pine',
   }
 
   use {
@@ -91,17 +92,7 @@ function M.init(use, config)
       vim.g.tokyonight_sidebars = { 'qf' }
       vim.cmd 'color tokyonight'
     end,
-    disable = config.theme ~= 'tokyonight',
-  }
-
-  use {
-    '~/dev/twilight',
-    --'jzone1366/twilight.nvim',
-    as = 'twilight',
-    config = function()
-      require('twilight').load 'light'
-    end,
-    disable = config.theme ~= 'twilight',
+    disable = M.theme ~= 'tokyonight',
   }
 end
 

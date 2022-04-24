@@ -1,11 +1,10 @@
 local cmd = vim.cmd
 local opt = vim.opt
-local g = vim.g
 local indent = 2
 
-cmd([[
+cmd [[
 	filetype plugin indent on
-]])
+]]
 
 local augroup_name = 'ZoneNvimEditor'
 local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
@@ -14,7 +13,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   group = group,
 })
 
-g.mapleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 -- misc
 opt.syntax = 'enable'

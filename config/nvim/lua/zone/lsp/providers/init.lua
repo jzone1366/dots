@@ -1,9 +1,9 @@
-local config = require('zone.config')
-local default_config = require('zone.lsp.providers.defaults')
-local lsp_installer = require('nvim-lsp-installer')
-local utils = require('zone.utils')
+local config = require 'zone.config'
+local default_config = require 'zone.lsp.providers.defaults'
+local lsp_installer = require 'nvim-lsp-installer'
+local utils = require 'zone.utils'
 
-lsp_installer.settings({
+lsp_installer.settings {
   ui = {
     keymaps = {
       -- Keymap to expand a server in the UI
@@ -16,7 +16,7 @@ lsp_installer.settings({
       uninstall_server = 'x',
     },
   },
-})
+}
 
 -- initial default servers
 -- by default tsserver/ts_utils and null_ls are enabled
@@ -34,7 +34,7 @@ for config_server, config_opt in pairs(config.lsp.servers) do
 end
 
 -- go through requested_servers and ensure installation
-local lsp_installer_servers = require('nvim-lsp-installer.servers')
+local lsp_installer_servers = require 'nvim-lsp-installer.servers'
 for _, requested_server in pairs(requested_servers) do
   local ok, server = lsp_installer_servers.get_server(requested_server)
   if ok then
@@ -55,11 +55,11 @@ lsp_installer.on_server_ready(function(server)
 
   -- set up default zone options
   if server.name == 'tsserver' then
-    opts = utils.merge(opts, require('zone.lsp.providers.tsserver'))
+    opts = utils.merge(opts, require 'zone.lsp.providers.tsserver')
   elseif server.name == 'jsonls' then
-    opts = utils.merge(opts, require('zone.lsp.providers.jsonls'))
+    opts = utils.merge(opts, require 'zone.lsp.providers.jsonls')
   elseif server.name == 'sumneko_lua' then
-    opts = utils.merge(opts, require('zone.lsp.providers.sumneko_lua'))
+    opts = utils.merge(opts, require 'zone.lsp.providers.sumneko_lua')
   end
 
   -- override options if user definds them
@@ -71,5 +71,5 @@ lsp_installer.on_server_ready(function(server)
 
   -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
   server:setup(opts)
-  vim.cmd([[ do User LspAttachBuffers ]])
+  vim.cmd [[ do User LspAttachBuffers ]]
 end)

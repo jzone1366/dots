@@ -1,10 +1,10 @@
-local config = require('zone.config')
+local cur_theme = require('zone.theme.plugins').theme
 local colors = {}
 local mod = 'zone.theme.integrated.'
 local supported_themes = require('zone.theme.plugins').supported_themes
 
 for _, theme in pairs(supported_themes) do
-  if theme == config.theme then
+  if theme == cur_theme then
     colors = require(mod .. theme)
   end
 end

@@ -1,14 +1,14 @@
-local colors = require('zone.theme.colors')
-local condition = require('galaxyline.condition')
-local diag = require('galaxyline.providers.diagnostic')
-local fileinfo = require('galaxyline.providers.fileinfo')
-local galaxy = require('galaxyline')
+local colors = require 'zone.theme.colors'
+local condition = require 'galaxyline.condition'
+local diag = require 'galaxyline.providers.diagnostic'
+local fileinfo = require 'galaxyline.providers.fileinfo'
+local galaxy = require 'galaxyline'
 local get_highlight = require('zone.theme.utils').get_highlight
 local gls = galaxy.section
-local icons = require('zone.theme.icons')
+local icons = require 'zone.theme.icons'
 local set_highlight = require('zone.theme.utils').set_highlight
-local statusline_colors = get_highlight('StatusLine')
-local utils = require('zone.utils')
+local statusline_colors = get_highlight 'StatusLine'
+local utils = require 'zone.utils'
 
 local main_icon = icons.ghost
 
@@ -33,7 +33,7 @@ local get_mode = function()
 end
 
 local function get_basename(file)
-  return file:match('^.+/(.+)$')
+  return file:match '^.+/(.+)$'
 end
 
 local function get_git_root()
@@ -55,7 +55,7 @@ local check_buffer_and_width = function()
 end
 
 local FilePathShortProvider = function()
-  local fp = vim.fn.fnamemodify(vim.fn.expand('%'), ':~:.:h')
+  local fp = vim.fn.fnamemodify(vim.fn.expand '%', ':~:.:h')
   local tbl = utils.split(fp, '/')
   local len = #tbl
 
@@ -121,7 +121,7 @@ galaxy.short_line_list = {
 gls.left = {
   {
     GhostLeftBracket = {
-      provider = BracketProvider(icons.rounded_left_filled, true),
+      provider = BracketProvider(icons.left_semicircle, true),
       highlight = 'GalaxyViModeNestedInv',
     },
   },
@@ -133,7 +133,7 @@ gls.left = {
   },
   {
     ViModeLeftBracket = {
-      provider = BracketProvider(icons.rounded_right_filled, true),
+      provider = BracketProvider(icons.right_semicircle, true),
       highlight = 'GalaxyViMode',
     },
   },
@@ -195,7 +195,7 @@ gls.left = {
   },
   {
     ViModeBracket = {
-      provider = BracketProvider(icons.arrow_right_filled, true),
+      provider = BracketProvider(icons.right_arrow_filled, true),
       highlight = 'GalaxyViModeBracket',
     },
   },
@@ -209,7 +209,7 @@ gls.left = {
   {
     GitBranch = {
       provider = function()
-        local vcs = require('galaxyline.providers.vcs')
+        local vcs = require 'galaxyline.providers.vcs'
         local branch_name = vcs.get_git_branch()
         if not branch_name then
           return ' no git '
@@ -221,7 +221,7 @@ gls.left = {
       end,
       condition = check_git_and_buffer,
       highlight = 'GalaxyViModeInv',
-      separator = icons.arrow_right,
+      separator = icons.right_arrow,
       separator_highlight = 'GalaxyViModeInv',
     },
   },
@@ -251,7 +251,7 @@ gls.left = {
       provider = 'FileName',
       condition = condition.buffer_not_empty,
       highlight = 'GalaxyViModeInv',
-      separator = icons.arrow_right_filled,
+      separator = icons.right_arrow_filled,
       separator_highlight = 'GalaxyViModeNestedInv',
     },
   },
@@ -285,7 +285,7 @@ gls.right = {
   -- Error
   {
     DiagnosticErrorLeftBracket = {
-      provider = BracketProvider(icons.rounded_left_filled, diag.get_diagnostic_error),
+      provider = BracketProvider(icons.left_semicircle, diag.get_diagnostic_error),
       highlight = 'DiagnosticError',
       condition = condition.buffer_not_empty,
     },
@@ -300,7 +300,7 @@ gls.right = {
   },
   {
     DiagnosticErrorRightBracket = {
-      provider = BracketProvider(icons.rounded_right_filled .. ' ', diag.get_diagnostic_error),
+      provider = BracketProvider(icons.right_semicircle .. ' ', diag.get_diagnostic_error),
       highlight = 'DiagnosticError',
       condition = condition.buffer_not_empty,
     },
@@ -308,7 +308,7 @@ gls.right = {
   -- Warning
   {
     DiagnosticWarnLeftBracket = {
-      provider = BracketProvider(icons.rounded_left_filled, diag.get_diagnostic_warn),
+      provider = BracketProvider(icons.left_semicircle, diag.get_diagnostic_warn),
       highlight = 'DiagnosticWarn',
       condition = condition.buffer_not_empty,
     },
@@ -323,7 +323,7 @@ gls.right = {
   },
   {
     DiagnosticWarnRightBracket = {
-      provider = BracketProvider(icons.rounded_right_filled .. ' ', diag.get_diagnostic_warn),
+      provider = BracketProvider(icons.right_semicircle .. ' ', diag.get_diagnostic_warn),
       highlight = 'DiagnosticWarn',
       condition = condition.buffer_not_empty,
     },
@@ -331,7 +331,7 @@ gls.right = {
   -- Hint
   {
     DiagnosticHintLeftBracket = {
-      provider = BracketProvider(icons.rounded_left_filled, diag.get_diagnostic_hint),
+      provider = BracketProvider(icons.left_semicircle, diag.get_diagnostic_hint),
       highlight = 'DiagnosticHint',
       condition = condition.buffer_not_empty,
     },
@@ -346,7 +346,7 @@ gls.right = {
   },
   {
     DiagnosticHintRightBracket = {
-      provider = BracketProvider(icons.rounded_right_filled .. ' ', diag.get_diagnostic_hint),
+      provider = BracketProvider(icons.right_semicircle .. ' ', diag.get_diagnostic_hint),
       highlight = 'DiagnosticHint',
       condition = condition.buffer_not_empty,
     },
@@ -354,7 +354,7 @@ gls.right = {
   -- Git
   {
     GitBranchRightBracket = {
-      provider = BracketProvider(icons.arrow_left_filled, true),
+      provider = BracketProvider(icons.left_arrow_filled, true),
       condition = check_buffer_and_width,
       highlight = 'GalaxyViModeNestedInv',
     },
@@ -388,7 +388,7 @@ gls.right = {
   },
   {
     LSPStatusArrow = {
-      provider = BracketProvider('  ' .. icons.arrow_left, true),
+      provider = BracketProvider('  ' .. icons.left_arrow, true),
       highlight = 'GalaxyViModeInv',
       condition = check_buffer_and_width,
     },
@@ -411,7 +411,7 @@ gls.right = {
         end,
       },
       highlight = 'GalaxyViMode',
-      separator = icons.arrow_left_filled,
+      separator = icons.left_arrow_filled,
       separator_highlight = 'GalaxyGitLCBracket',
     },
   },
@@ -421,13 +421,13 @@ gls.right = {
         PercentProvider,
       },
       highlight = 'GalaxyViMode',
-      separator = icons.arrow_left .. ' ',
+      separator = icons.left_arrow .. ' ',
       separator_highlight = 'GalaxyViModeLeftBracket',
     },
   },
   {
     PercentRightBracket = {
-      provider = BracketProvider(icons.rounded_right_filled, true),
+      provider = BracketProvider(icons.right_semicircle, true),
       highlight = 'GalaxyPercentBracket',
     },
   },
@@ -436,7 +436,7 @@ gls.right = {
 gls.short_line_left = {
   {
     GhostLeftBracketShort = {
-      provider = BracketProvider(icons.rounded_left_filled, true),
+      provider = BracketProvider(icons.left_semicircle, true),
       highlight = { colors.white, 'StatusLine' },
     },
   },
@@ -448,7 +448,7 @@ gls.short_line_left = {
   },
   {
     GhostRightBracketShort = {
-      provider = BracketProvider(icons.rounded_right_filled, true),
+      provider = BracketProvider(icons.right_semicircle, true),
       highlight = { colors.white, 'StatusLine' },
     },
   },
@@ -492,7 +492,7 @@ gls.short_line_left = {
 gls.short_line_right = {
   {
     GitRootShortLeftBracket = {
-      provider = BracketProvider(icons.arrow_left_filled, true),
+      provider = BracketProvider(icons.left_arrow_filled, true),
       condition = condition.buffer_not_empty,
       highlight = { colors.white, 'StatusLine' },
     },
@@ -507,7 +507,7 @@ gls.short_line_right = {
   },
   {
     GitRootShortRightBracket = {
-      provider = BracketProvider(icons.rounded_right_filled, true),
+      provider = BracketProvider(icons.right_semicircle, true),
       condition = condition.buffer_not_empty,
       highlight = { colors.white, 'StatusLine' },
     },

@@ -1,13 +1,13 @@
-local config = require('zone.config')
+local borders = { { '╭' }, { '─' }, { '╮' }, { '│' }, { '╯' }, { '─' }, { '╰' }, { '│' } }
 
 -- set up lsp servers
-require('zone.lsp.providers')
-require('zone.lsp.diagnostics')
+require 'zone.lsp.providers'
+require 'zone.lsp.diagnostics'
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = config.border,
+  border = borders,
 })
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = config.border,
+  border = borders,
 })

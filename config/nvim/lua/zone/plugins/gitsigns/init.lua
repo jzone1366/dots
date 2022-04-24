@@ -1,5 +1,3 @@
-local config = require('zone.config')
-
 -- default gitsigns config from github.
 -- stylua: ignore
 local default_config = {
@@ -49,7 +47,7 @@ local default_config = {
     max_file_length = 40000,
     preview_config = {
       -- Options passed to nvim_open_win
-      border = config.border,
+      border = 'rounded',
       style = 'minimal',
       relative = 'cursor',
       row = 0,

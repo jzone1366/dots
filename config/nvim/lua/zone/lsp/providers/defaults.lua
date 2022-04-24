@@ -1,4 +1,4 @@
-local config = require('zone.config')
+local config = require 'zone.config'
 local augroup_name = 'ZoneNvimLspFormat'
 local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
 local M = {}
