@@ -1,5 +1,5 @@
 local filetypes = {
-  '*',
+	"*",
 }
 
 --stylua: ignore
@@ -15,4 +15,4 @@ local opts = {
   mode     = 'background';
 }
 
-require('colorizer').setup(filetypes, opts)
+require("colorizer").setup(filetypes, opts)

@@ -133,6 +133,7 @@ alias gcm='git commit'
 alias gd='git diff'
 alias gco='git checkout '
 alias gl='git log --pretty=oneline'
+alias gpl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gr='git remote'
 alias grs='git remote show'
 alias glol='git log --graph --abbrev-commit --oneline --decorate'

@@ -1,1 +1,1 @@
-require('nrpattern').setup()
+require("nrpattern").setup()

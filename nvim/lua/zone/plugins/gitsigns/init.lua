@@ -60,4 +60,4 @@ local default_config = {
 
 local opts = default_config
 
-require('gitsigns').setup(opts)
+require("gitsigns").setup(opts)
