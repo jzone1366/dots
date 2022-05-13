@@ -3,4 +3,4 @@
 --  components = require 'chalklines.group.modules.feline',
 --}
 --
-require("zone.statusline")
+require('zone.statusline')
