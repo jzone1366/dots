@@ -1,8 +1,7 @@
-local cmd = vim.cmd
 local opt = vim.opt
 local indent = 2
 
-cmd([[
+vim.cmd([[
 	filetype plugin indent on
 ]])
 

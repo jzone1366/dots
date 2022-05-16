@@ -1,3 +1,4 @@
+--@TODO: Add nvim-devicons to filename.
 ---- b0o/incline.nvim
 require('incline').setup({
   render = function(props)
