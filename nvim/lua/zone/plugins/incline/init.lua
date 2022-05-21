@@ -11,6 +11,11 @@ require('incline').setup({
     return bufname
   end,
   debounce_threshold = 30,
+  hide = {
+    cursorline = false,
+    focused_win = true,
+    only_win = false,
+  },
   window = {
     width = 'fit',
     placement = { horizontal = 'right', vertical = 'top' },

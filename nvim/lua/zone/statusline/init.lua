@@ -39,14 +39,6 @@ local separators = {
   code = '',
 }
 
-local sett = {
-  bkg = p.base,
-  diffs = p.orange,
-  extras = p.subtle,
-  curr_file = p.cyan,
-  curr_dir = p.magenta,
-}
-
 local vi_mode_colors = {
   ['n'] = { 'NORMAL', p.cyan },
   ['no'] = { 'N-PENDING', p.cyan },
@@ -107,13 +99,15 @@ local vi_mode_hl = function(hl)
       _hl = { fg = true }
     end
 
-    local color = vi_mode_colors[vim.fn.mode()][2] or p.fg
+    local color = vi_mode_colors[vim.fn.mode()][2] or p.text
 
     if _hl.fg == true then
       _hl.fg = color
+      _hl.bg = p.base
     end
     if _hl.bg == true then
       _hl.bg = color
+      _hl.fg = p.base
     end
     return _hl
   end
@@ -137,145 +131,187 @@ config.components.active[1] = {
       },
     },
     hl = file_info.hl({
-      fg = p.fg,
+      fg = p.text,
       bg = p.hl_med,
       style = 'bold',
     }),
     left_sep = {
-      { str = 'slant_left_2', hl = { fg = p.hl_med } },
-      { str = ' ', hl = { bg = p.hl_med } },
+      { str = 'slant_left_2', hl = { fg = p.hl_med, bg = p.base } },
+      { str = ' ', hl = { fg = p.base, bg = p.hl_med } },
     },
     right_sep = {
-      { str = 'slant_right_2', hl = { fg = p.hl_med } },
+      { str = 'slant_right_2', hl = { fg = p.hl_med, bg = p.base } },
     },
   },
   {
     provider = 'file_size',
+    hl = { fg = p.text, bg = p.base },
     enabled = function()
       return vim.fn.getfsize(vim.fn.expand('%:p')) > 0
     end,
-    left_sep = ' ',
+    left_sep = {
+      str = ' ',
+      hl = { fg = p.text, bg = p.base },
+    },
     right_sep = {
-      { str = ' ' },
-      { str = 'slant_left_2_thin', hl = { fg = p.fg } },
+      { str = ' ', hl = { fg = p.base, bg = p.base } },
+      { str = 'slant_left_2_thin', hl = { fg = p.text, bg = p.base } },
     },
   },
   {
     provider = 'position',
-    left_sep = ' ',
+    hl = { fg = p.text, bg = p.base },
+    left_sep = {
+      str = ' ',
+      hl = { fg = p.text, bg = p.base },
+    },
     right_sep = {
-      { str = ' ' },
-      { str = 'slant_right_2_thin', hl = { fg = p.fg } },
+      { str = ' ', hl = { fg = p.base, bg = p.base } },
+      { str = 'slant_right_2_thin', hl = { fg = p.text, bg = p.base } },
     },
   },
   {
     provider = config.custom_providers.lsp_code_actions,
-    hl = { fg = p.green },
+    hl = { fg = p.green, bg = p.base },
   },
   {
     provider = 'diagnostic_errors',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
     end,
-    hl = { fg = p.red },
+    hl = { fg = p.red, bg = p.base },
   },
   {
     provider = 'diagnostic_warnings',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
     end,
-    hl = { fg = p.yellow },
+    hl = { fg = p.yellow, bg = p.base },
   },
   {
     provider = 'diagnostic_hints',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
     end,
-    hl = { fg = p.magenta },
+    hl = { fg = p.magenta, bg = p.base },
   },
   {
     provider = 'diagnostic_info',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
     end,
-    hl = { fg = p.blue },
+    hl = { fg = p.blue, bg = p.base },
   },
 }
 
 config.components.active[2] = {
   {
     provider = 'lsp_progress',
-    hl = { fg = p.subtle, bold = false },
+    hl = { fg = p.subtle, bg = p.base, bold = false },
   },
 }
 
 config.components.active[3] = {
-  {
-    --provider = 'dap_clients',
-    provdier = ' ',
-    hl = { fg = p.green },
-    right_sep = ' ',
-  },
+  --{
+  --  provider = 'dap_clients',
+  --  provider = ' ',
+  --  hl = { fg = p.green, bg = p.base },
+  --  right_sep = ' ',
+  --},
   {
     provider = config.custom_providers.lsp_clients_running,
-    hl = { fg = p.green },
-    right_sep = ' ',
+    hl = { fg = p.green, bg = p.base },
+    right_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
   },
   {
     provider = 'lsp_clients_starting',
-    hl = { fg = p.blue },
-    right_sep = ' ',
+    hl = { fg = p.blue, bg = p.base },
+    right_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
   },
   {
     provider = 'lsp_clients_exited_ok',
-    hl = { fg = p.hl_high },
-    right_sep = ' ',
+    hl = { fg = p.hl_high, bg = p.base },
+    right_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
   },
   {
     provider = 'lsp_clients_exited_err',
-    hl = { fg = p.red },
-    right_sep = ' ',
+    hl = { fg = p.red, bg = p.base },
+    right_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
   },
   {
     provider = 'git_branch',
     hl = {
       fg = p.subtle,
+      bg = p.base,
       style = 'bold',
     },
-    right_sep = ' ',
-    left_sep = ' ',
+    right_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
+    left_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
   },
   {
     provider = 'git_diff_added',
     hl = {
       fg = p.green,
+      bg = p.base,
     },
   },
   {
     provider = 'git_diff_changed',
     hl = {
       fg = p.orange,
+      bg = p.base,
     },
   },
   {
     provider = 'git_diff_removed',
     hl = {
       fg = p.red,
+      bg = p.base,
     },
-    right_sep = ' ',
+    right_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
   },
   {
     provider = 'line_percentage',
     hl = {
+      fg = p.text,
+      bg = p.base,
       style = 'bold',
     },
-    right_sep = ' ',
-    left_sep = ' ',
+    right_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
+    left_sep = {
+      str = ' ',
+      hl = { fg = p.base, bg = p.base },
+    },
   },
   {
     provider = 'scroll_bar',
     hl = {
       fg = p.blue,
+      bg = p.base,
       style = 'bold',
     },
   },
@@ -303,11 +339,11 @@ config.components.inactive[1] = {
     hl = hl_if_focused(
       vi_mode_hl({
         fg = true,
-        bg = sett.bkg,
+        bg = p.base,
       }),
       {
         fg = p.hl_low,
-        bg = sett.bkg,
+        bg = p.base,
       }
     ),
   },
@@ -333,10 +369,10 @@ config.components.inactive[1] = {
     end,
     hl = hl_if_focused({
       fg = p.hl_low,
-      bg = sett.bkg,
+      bg = p.base,
     }, {
       fg = p.hl_low,
-      bg = sett.bkg,
+      bg = p.base,
     }),
   },
   {
@@ -355,11 +391,11 @@ config.components.inactive[1] = {
       {
         str = ' ' .. separators.slant_left_2,
         hl = hl_if_focused({
-          bg = sett.bkg,
+          bg = p.base,
           fg = p.hl_low,
         }, {
           fg = p.hl_low,
-          bg = sett.bkg,
+          bg = p.base,
         }),
       },
       { str = ' ', hl = { bg = p.hl_low, fg = 'NONE' } },
@@ -369,10 +405,10 @@ config.components.inactive[1] = {
         str = separators.slant_right_2 .. ' ',
         hl = hl_if_focused({
           fg = p.hl_low,
-          bg = sett.bkg,
+          bg = p.base,
         }, {
           fg = p.hl_low,
-          bg = sett.bkg,
+          bg = p.base,
         }),
       },
     },
@@ -382,9 +418,11 @@ config.components.inactive[2] = {
   {
     provider = ' ',
     hl = hl_if_focused({
-      bg = sett.bkg,
+      fg = 'NONE',
+      bg = p.base,
     }, {
-      bg = sett.bkg,
+      fg = 'NONE',
+      bg = p.base,
     }),
   },
 }
@@ -395,11 +433,11 @@ config.components.inactive[3] = {
     hl = hl_if_focused(
       vi_mode_hl({
         fg = true,
-        bg = sett.bkg,
+        bg = p.base,
       }),
       {
         fg = p.hl_low,
-        bg = sett.bkg,
+        bg = p.base,
       }
     ),
   },

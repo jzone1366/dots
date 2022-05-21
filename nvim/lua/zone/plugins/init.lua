@@ -173,6 +173,13 @@ return packer.startup(function()
     event = 'BufWinEnter',
   })
 
+  use({
+    'protex/better-digraphs.nvim',
+    opt = true,
+    event = 'BufWinEnter',
+    after = 'telescope.nvim',
+  })
+
   -- session/project management
   use({
     'goolord/alpha-nvim',
@@ -246,6 +253,9 @@ return packer.startup(function()
       require('zone.plugins.nrpattern')
     end,
   })
+
+  -- Code Style, Formatting, Linting
+  use('editorconfig/editorconfig-vim')
 
   if zone_packer.first_install then
     packer.sync()

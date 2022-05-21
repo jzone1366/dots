@@ -107,23 +107,24 @@ local lsp_servers = {
   'phpactor',
   {
     'pylsp', -- pip install "python-lsp-server[all]"
+    formatting = false,
     cmd = {
       'pylsp',
       '-v',
       '--log-file',
       vim.fn.stdpath('cache') .. '/pylsp.log',
     },
-    settings = {
-      pylsp = {
-        plugins = {
-          pylint = { enabled = true, args = { '-j0' } },
-          yapf = { enabled = true },
-          pycodestyle = { enabled = false },
-          autopep8 = { enabled = false },
-          pydocstyle = { enabled = false },
-        },
-      },
-    },
+    --    settings = {
+    --      pylsp = {
+    --        plugins = {
+    --          pylint = { enabled = true, args = { '-j0' } },
+    --          yapf = { enabled = false },
+    --          pycodestyle = { enabled = false },
+    --          autopep8 = { enabled = true },
+    --          pydocstyle = { enabled = false },
+    --        },
+    --      },
+    --    },
   },
   --'rust_analyzer', -- https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
   -- 'rnix', -- cargo install rnix-lsp
