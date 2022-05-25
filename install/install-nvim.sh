@@ -46,3 +46,7 @@ ln -sf "$DOTFILES/nvim/lua" "$VIMCONFIG"
 #
 ## spell files
 #ln -sf "$DOTFILES/nvim/spell" "$VIMCONFIG"
+
+## queries
+#rm -rf "$VIMCONFIG/queries"
+#ln -sf "$DOTFILES/nvim/queries" "$VIMCONFIG/queries"

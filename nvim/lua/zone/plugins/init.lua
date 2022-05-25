@@ -145,6 +145,12 @@ return packer.startup(function()
     end,
   })
 
+  -- Git Diff View
+  use({
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+  })
+
   -- floating terminal
   use({
     'voldikss/vim-floaterm',

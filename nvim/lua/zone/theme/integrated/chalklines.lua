@@ -1,4 +1,4 @@
-local theme = require('chalklines.palette')
+local theme = require('chalklines.palettes').init()
 
 local colors = {
   white = theme.text,
