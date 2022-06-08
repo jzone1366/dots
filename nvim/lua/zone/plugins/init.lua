@@ -31,7 +31,9 @@ return packer.startup(function()
 
   use({
     'stevearc/aerial.nvim',
-    telescope_ext = 'aerial',
+    config = function()
+      require('zone.plugins.aerial')
+    end,
   })
 
   -- theme stuff
@@ -203,6 +205,10 @@ return packer.startup(function()
   })
 
   -- lang/syntax stuff
+  use({
+    'phpactor/phpactor',
+    run = 'composed install --no-dev -o',
+  })
   use({
     'nvim-treesitter/nvim-treesitter',
     requires = {

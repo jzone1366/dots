@@ -28,4 +28,4 @@ ls.snippets.javascriptreact = ls.snippets.html
 ls.snippets.typescriptreact = ls.snippets.html
 
 -- You can also use lazy loading so you only get in memory snippets of languages you use
-require('luasnip/loaders/from_vscode').lazy_load({ include = { 'all' } })
+require('luasnip.loaders.from_vscode').lazy_load({ include = { 'all' } })

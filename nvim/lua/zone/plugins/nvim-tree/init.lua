@@ -1,4 +1,3 @@
-local g = vim.g
 local icons = require('zone.theme.icons')
 local augroup_name = 'ZoneNvimNvimTree'
 local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
