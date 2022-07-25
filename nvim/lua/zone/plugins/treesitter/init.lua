@@ -8,7 +8,7 @@ local defaults = {
     use_languagetree = true,
   },
   indent = {
-    enable = true,
+    enable = false, -- turned off as this causes weird indent behavior
   },
   autotag = {
     enable = true,

@@ -205,10 +205,7 @@ return packer.startup(function()
   })
 
   -- lang/syntax stuff
-  use({
-    'phpactor/phpactor',
-    run = 'composed install --no-dev -o',
-  })
+
   use({
     'nvim-treesitter/nvim-treesitter',
     requires = {

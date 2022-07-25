@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local chalklines = require("colors.chalklines")
+local chalklines = require("colors.Chalklines")
 
 local function merge(t1, t2)
 	for k, v in pairs(t2) do

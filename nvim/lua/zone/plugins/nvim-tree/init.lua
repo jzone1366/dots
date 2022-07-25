@@ -31,7 +31,7 @@ local args = {
   },
   git = {
     enable = true,
-    ignore = true,
+    ignore = false,
     timeout = 400,
   },
   renderer = {

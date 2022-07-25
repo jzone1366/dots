@@ -43,3 +43,5 @@ M.installed = {
 M.ignored = {
   'phpdoc',
 }
+
+return M

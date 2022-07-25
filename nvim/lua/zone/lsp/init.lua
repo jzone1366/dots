@@ -38,10 +38,11 @@ local fmt_triggers = {
 
 local lsp_handlers = {
   ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-      source = 'if_many',
-      severity = vim.diagnostic.severity.ERROR,
-    },
+    --virtual_text = {
+    --  source = 'if_many',
+    --  severity = vim.diagnostic.severity.ERROR,
+    --},
+    virtual_text = false,
     signs = true,
     underline = true,
     update_in_insert = false,
