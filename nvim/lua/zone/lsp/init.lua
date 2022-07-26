@@ -1,10 +1,11 @@
 local lsp_status = require('lsp-status')
-local lsp_installer = require('nvim-lsp-installer')
+local mason = require('mason')
+local masonlsp = require('mason-lspconfig')
 local user_lsp_status = require('zone.statusline.lsp')
 local nvim_cmp_lsp = require('cmp_nvim_lsp')
 local icons = require('zone.theme.icons')
 
-lsp_installer.settings({
+mason.setup({
   ui = {
     keymaps = {
       -- Keymap to expand a server in the UI
@@ -195,10 +196,11 @@ local function lsp_init()
 
   local capabilities = nvim_cmp_lsp.update_capabilities(lsp_status.capabilities)
 
-  -- USE LSP INSTALLER
-  lsp_installer.setup({
+  -- USE MASON-LSP INSTALLER
+  masonlsp.setup({
     automatic_installation = true,
   })
+
   local lspconfig = require('lspconfig')
   local lsp_servers = require('zone.lsp.servers')
 
@@ -211,7 +213,9 @@ local function lsp_init()
       },
       capabilities = capabilities,
     }
+
     local name = lsp
+
     if type(lsp) == 'table' then
       name = lsp[1]
       if lsp.formatting == false then
@@ -230,9 +234,11 @@ local function lsp_init()
     else
       name = lsp
     end
+
     if not lspconfig[name] then
       error('LSP: Server not found: ' .. name)
     end
+
     lspconfig[name].setup(opts)
     lsp_status.register_progress()
     lsp_status.config({ current_function = false })

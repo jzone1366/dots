@@ -82,7 +82,8 @@ return packer.startup(function()
     requires = {
       { 'nvim-lua/lsp-status.nvim' },
       { 'b0o/SchemaStore.nvim', module = 'schemastore' },
-      { 'williamboman/nvim-lsp-installer' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim'},
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
       { 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
       {
