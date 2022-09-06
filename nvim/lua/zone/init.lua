@@ -1,6 +1,6 @@
 local modules = {
-  'zone.compiled',
   'zone.core',
+  'zone.compiled',
   'zone.theme',
 }
 

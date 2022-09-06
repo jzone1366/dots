@@ -13,7 +13,6 @@ return packer.startup(function()
   use({
     'wbthomason/packer.nvim',
     'lewis6991/impatient.nvim',
-    'nathom/filetype.nvim',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
   })
@@ -83,7 +82,7 @@ return packer.startup(function()
       { 'nvim-lua/lsp-status.nvim' },
       { 'b0o/SchemaStore.nvim', module = 'schemastore' },
       { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim'},
+      { 'williamboman/mason-lspconfig.nvim' },
       { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
       { 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
       {

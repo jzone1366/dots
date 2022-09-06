@@ -1,24 +1,24 @@
-local theme = require('chalklines.palettes').init()
+local theme = require('chalklines').get_colors(vim.g.chalklines_theme)
 
 local colors = {
-  white = theme.text,
-  bg = theme.surface,
-  bg_highlight = theme.surface,
+  white = theme.white,
+  bg = theme.bg,
+  bg_highlight = theme.highlight,
   normal = theme.green,
   insert = theme.blue,
   command = theme.yellow,
-  visual = theme.magenta,
+  visual = theme.purple,
   replace = theme.cyan,
-  diffAdd = theme.blue,
-  diffModified = theme.green,
-  diffDeleted = theme.cyan,
+  diffAdd = theme.diff_add,
+  diffModified = theme.orange,
+  diffDeleted = theme.diff_delete,
   trace = theme.cyan,
   hint = theme.green,
   info = theme.blue,
   error = theme.red,
   warn = theme.cyan,
   floatBorder = theme.cyan,
-  selection_caret = theme.magenta,
+  selection_caret = theme.purple,
 }
 
 return colors

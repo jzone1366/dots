@@ -26,7 +26,7 @@ function M.init(use)
 
   use({
     'jzone1366/chalklines.nvim',
-    --'~/workspace/chalklines.nvim',
+    --'~/workspace/colors/chalklines.nvim',
     as = 'chalklines',
     config = function()
       vim.o.background = 'dark'

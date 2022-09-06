@@ -98,6 +98,15 @@ cmp.setup.cmdline('/', {
   },
 })
 
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'nvim_lua' },
+    { name = 'cmdline' },
+    { name = 'path' },
+  }),
+})
+
 cmp.setup.filetype('TelescopePrompt', {
   enabled = false,
 })

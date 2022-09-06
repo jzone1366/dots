@@ -1,28 +1,25 @@
 local icons = require('zone.theme.icons')
 local alpha = require('alpha')
 local dashboard = require('alpha.themes.dashboard')
+local headers = require('zone.plugins.alpha.headers')
+local fn = vim.fn
 
-dashboard.section.header.val = {
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '███████╗ ██████╗ ███╗   ██╗███████╗███╗   ██╗██╗   ██╗██╗███╗   ███╗',
-  '╚══███╔╝██╔═══██╗████╗  ██║██╔════╝████╗  ██║██║   ██║██║████╗ ████║',
-  '  ███╔╝ ██║   ██║██╔██╗ ██║█████╗  ██╔██╗ ██║██║   ██║██║██╔████╔██║',
-  ' ███╔╝  ██║   ██║██║╚██╗██║██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║',
-  '███████╗╚██████╔╝██║ ╚████║███████╗██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║',
-  '╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
-  '',
-  '',
-  '',
-  '',
-  '',
-  '',
+-- Top Percent
+local marginTopPercent = 0.15
+local topPadding = fn.max({ 2, fn.floor(fn.winheight(0) * marginTopPercent) })
+
+-- Middle Percent
+local marginMiddlePercent = 0.1
+local middlePadding = fn.max({ 2, fn.floor(fn.winheight(0) * marginMiddlePercent) })
+
+dashboard.config.layout = {
+  { type = 'padding', val = topPadding },
+  dashboard.section.header,
+  { type = 'padding', val = middlePadding },
+  dashboard.section.buttons,
+  dashboard.section.footer,
 }
+dashboard.section.header.val = headers.random()
 
 dashboard.section.buttons.val = {
   dashboard.button(

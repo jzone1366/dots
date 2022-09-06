@@ -54,9 +54,7 @@ local function unload(module_pattern, reload)
 end
 
 local function clear_cache()
-  if 0 == vim.fn.delete(vim.fn.stdpath('config') .. '/lua/zone/compiled.lua') then
-    vim.cmd(':LuaCacheClear')
-  end
+  vim.cmd(':LuaCacheClear')
 end
 
 function M.post_reload(msg)
@@ -111,29 +109,27 @@ function M.update()
   local path = M.get_install_dir()
   local errors = {}
 
-  Job
-    :new({
-      command = 'git',
-      args = { 'pull', '--ff-only' },
-      cwd = path,
-      on_start = function()
-        Logger:log('Updating...')
-      end,
-      on_exit = function()
-        if vim.tbl_isempty(errors) then
-          Logger:log('Updated! Running ZoneReloadSync...')
-          M.reload_user_config_sync()
-        else
-          table.insert(errors, 1, 'Something went wrong! Please pull changes manually.')
-          table.insert(errors, 2, '')
-          Logger:error('Update failed!', { timeout = 30000 })
-        end
-      end,
-      on_stderr = function(_, err)
-        table.insert(errors, err)
-      end,
-    })
-    :sync()
+  Job:new({
+    command = 'git',
+    args = { 'pull', '--ff-only' },
+    cwd = path,
+    on_start = function()
+      Logger:log('Updating...')
+    end,
+    on_exit = function()
+      if vim.tbl_isempty(errors) then
+        Logger:log('Updated! Running ZoneReloadSync...')
+        M.reload_user_config_sync()
+      else
+        table.insert(errors, 1, 'Something went wrong! Please pull changes manually.')
+        table.insert(errors, 2, '')
+        Logger:error('Update failed!', { timeout = 30000 })
+      end
+    end,
+    on_stderr = function(_, err)
+      table.insert(errors, err)
+    end,
+  }):sync()
 end
 
 M.is_normal_win = function(winid)

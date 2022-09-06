@@ -1,5 +1,4 @@
-local cnf = require('chalklines.config').get()
-local p = cnf.palette
+local p = require('chalklines').get_colors(vim.g.chalklines_theme)
 
 local fn = vim.fn
 local bo = vim.bo
@@ -129,7 +128,7 @@ function M.file_info(component, opts)
     icon = {
       str = opts.file_modified_icon or '',
       hl = {
-        fg = opts.active and p.magenta,
+        fg = opts.active and p.purple,
       },
     }
   end

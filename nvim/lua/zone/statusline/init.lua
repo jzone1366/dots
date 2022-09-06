@@ -1,8 +1,7 @@
 local feline = require('feline')
 local lsp = require('feline.providers.lsp')
 
-local cnf = require('chalklines.config').get()
-local p = cnf.palette
+local p = require('chalklines').get_colors(vim.g.chalklines_theme)
 
 local file_info = require('zone.statusline.file_info')
 
@@ -40,19 +39,19 @@ local separators = {
 }
 
 local vi_mode_colors = {
-  ['n'] = { 'NORMAL', p.cyan },
-  ['no'] = { 'N-PENDING', p.cyan },
-  ['i'] = { 'INSERT', p.green },
-  ['ic'] = { 'INSERT', p.green },
+  ['n'] = { 'NORMAL', p.green },
+  ['no'] = { 'N-PENDING', p.green },
+  ['i'] = { 'INSERT', p.blue },
+  ['ic'] = { 'INSERT', p.blue },
   ['t'] = { 'TERMINAL', p.green },
-  ['v'] = { 'VISUAL', p.magenta },
-  ['V'] = { 'V-LINE', p.magenta },
-  [''] = { 'V-BLOCK', p.magenta },
-  ['R'] = { 'REPLACE', p.surface },
-  ['Rv'] = { 'V-REPLACE', p.surface },
-  ['s'] = { 'SELECT', p.surface },
-  ['S'] = { 'S-LINE', p.surface },
-  [''] = { 'S-BLOCK', p.surface },
+  ['v'] = { 'VISUAL', p.purple },
+  ['V'] = { 'V-LINE', p.purple },
+  [''] = { 'V-BLOCK', p.purple },
+  ['R'] = { 'REPLACE', p.cyan },
+  ['Rv'] = { 'V-REPLACE', p.cyan },
+  ['s'] = { 'SELECT', p.cyan },
+  ['S'] = { 'S-LINE', p.cyan },
+  [''] = { 'S-BLOCK', p.cyan },
   ['c'] = { 'COMMAND', p.orange },
   ['cv'] = { 'COMMAND', p.orange },
   ['ce'] = { 'COMMAND', p.orange },
@@ -69,7 +68,6 @@ local filetypes_override_name = {
 }
 
 local config = {
-  preset = 'default',
 
   separators = separators,
 
@@ -99,15 +97,15 @@ local vi_mode_hl = function(hl)
       _hl = { fg = true }
     end
 
-    local color = vi_mode_colors[vim.fn.mode()][2] or p.text
+    local color = vi_mode_colors[vim.fn.mode()][2] or p.fg
 
     if _hl.fg == true then
       _hl.fg = color
-      _hl.bg = p.base
+      _hl.bg = p.bg
     end
     if _hl.bg == true then
       _hl.bg = color
-      _hl.fg = p.base
+      _hl.fg = p.bg
     end
     return _hl
   end
@@ -131,83 +129,83 @@ config.components.active[1] = {
       },
     },
     hl = file_info.hl({
-      fg = p.text,
-      bg = p.hl_med,
+      fg = p.fg,
+      bg = p.cursorline,
       style = 'bold',
     }),
     left_sep = {
-      { str = 'slant_left_2', hl = { fg = p.hl_med, bg = p.base } },
-      { str = ' ', hl = { fg = p.base, bg = p.hl_med } },
+      { str = 'slant_left_2', hl = { fg = p.cursorline, bg = p.bg } },
+      { str = ' ', hl = { fg = p.bg, bg = p.cursorline } },
     },
     right_sep = {
-      { str = 'slant_right_2', hl = { fg = p.hl_med, bg = p.base } },
+      { str = 'slant_right_2', hl = { fg = p.cursorline, bg = p.bg } },
     },
   },
   {
     provider = 'file_size',
-    hl = { fg = p.text, bg = p.base },
+    hl = { fg = p.fg, bg = p.bg },
     enabled = function()
       return vim.fn.getfsize(vim.fn.expand('%:p')) > 0
     end,
     left_sep = {
       str = ' ',
-      hl = { fg = p.text, bg = p.base },
+      hl = { fg = p.fg, bg = p.bg },
     },
     right_sep = {
-      { str = ' ', hl = { fg = p.base, bg = p.base } },
-      { str = 'slant_left_2_thin', hl = { fg = p.text, bg = p.base } },
+      { str = ' ', hl = { fg = p.bg, bg = p.bg } },
+      { str = 'slant_left_2_thin', hl = { fg = p.fg, bg = p.bg } },
     },
   },
   {
     provider = 'position',
-    hl = { fg = p.text, bg = p.base },
+    hl = { fg = p.fg, bg = p.bg },
     left_sep = {
       str = ' ',
-      hl = { fg = p.text, bg = p.base },
+      hl = { fg = p.fg, bg = p.bg },
     },
     right_sep = {
-      { str = ' ', hl = { fg = p.base, bg = p.base } },
-      { str = 'slant_right_2_thin', hl = { fg = p.text, bg = p.base } },
+      { str = ' ', hl = { fg = p.bg, bg = p.bg } },
+      { str = 'slant_right_2_thin', hl = { fg = p.fg, bg = p.bg } },
     },
   },
   {
     provider = config.custom_providers.lsp_code_actions,
-    hl = { fg = p.green, bg = p.base },
+    hl = { fg = p.red, bg = p.bg },
   },
   {
     provider = 'diagnostic_errors',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.ERROR)
     end,
-    hl = { fg = p.red, bg = p.base },
+    hl = { fg = p.red, bg = p.bg },
   },
   {
     provider = 'diagnostic_warnings',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.WARN)
     end,
-    hl = { fg = p.yellow, bg = p.base },
+    hl = { fg = p.yellow, bg = p.bg },
   },
   {
     provider = 'diagnostic_hints',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.HINT)
     end,
-    hl = { fg = p.magenta, bg = p.base },
+    hl = { fg = p.purple, bg = p.bg },
   },
   {
     provider = 'diagnostic_info',
     enabled = function()
       return lsp.diagnostics_exist(vim.diagnostic.severity.INFO)
     end,
-    hl = { fg = p.blue, bg = p.base },
+    hl = { fg = p.blue, bg = p.bg },
   },
 }
 
 config.components.active[2] = {
   {
     provider = 'lsp_progress',
-    hl = { fg = p.subtle, bg = p.base, bold = false },
+    hl = { fg = p.fg, bg = p.bg, bold = false },
   },
 }
 
@@ -215,103 +213,103 @@ config.components.active[3] = {
   --{
   --  provider = 'dap_clients',
   --  provider = ' ',
-  --  hl = { fg = p.green, bg = p.base },
+  --  hl = { fg = p.green, bg = p.bg },
   --  right_sep = ' ',
   --},
   {
     provider = config.custom_providers.lsp_clients_running,
-    hl = { fg = p.green, bg = p.base },
+    hl = { fg = p.green, bg = p.bg },
     right_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
   },
   {
     provider = 'lsp_clients_starting',
-    hl = { fg = p.blue, bg = p.base },
+    hl = { fg = p.blue, bg = p.bg },
     right_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
   },
   {
     provider = 'lsp_clients_exited_ok',
-    hl = { fg = p.hl_high, bg = p.base },
+    hl = { fg = p.cursorline, bg = p.bg },
     right_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
   },
   {
     provider = 'lsp_clients_exited_err',
-    hl = { fg = p.red, bg = p.base },
+    hl = { fg = p.red, bg = p.bg },
     right_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
   },
   {
     provider = 'git_branch',
     hl = {
-      fg = p.subtle,
-      bg = p.base,
+      fg = p.fg_gutter,
+      bg = p.bg,
       style = 'bold',
     },
     right_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
     left_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
   },
   {
     provider = 'git_diff_added',
     hl = {
-      fg = p.green,
-      bg = p.base,
+      fg = p.diff_add,
+      bg = p.bg,
     },
   },
   {
     provider = 'git_diff_changed',
     hl = {
       fg = p.orange,
-      bg = p.base,
+      bg = p.bg,
     },
   },
   {
     provider = 'git_diff_removed',
     hl = {
-      fg = p.red,
-      bg = p.base,
+      fg = p.diff_delete,
+      bg = p.bg,
     },
     right_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
   },
   {
     provider = 'line_percentage',
     hl = {
-      fg = p.text,
-      bg = p.base,
+      fg = p.fg,
+      bg = p.bg,
       style = 'bold',
     },
     right_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
     left_sep = {
       str = ' ',
-      hl = { fg = p.base, bg = p.base },
+      hl = { fg = p.bg, bg = p.bg },
     },
   },
   {
     provider = 'scroll_bar',
     hl = {
       fg = p.blue,
-      bg = p.base,
+      bg = p.bg,
       style = 'bold',
     },
   },
@@ -339,11 +337,11 @@ config.components.inactive[1] = {
     hl = hl_if_focused(
       vi_mode_hl({
         fg = true,
-        bg = p.base,
+        bg = p.bg,
       }),
       {
-        fg = p.hl_low,
-        bg = p.base,
+        fg = p.cursorline,
+        bg = p.bg,
       }
     ),
   },
@@ -368,11 +366,11 @@ config.components.inactive[1] = {
       return icon
     end,
     hl = hl_if_focused({
-      fg = p.hl_low,
-      bg = p.base,
+      fg = p.cursorline,
+      bg = p.bg,
     }, {
-      fg = p.hl_low,
-      bg = p.base,
+      fg = p.cursorline,
+      bg = p.bg,
     }),
   },
   {
@@ -384,31 +382,31 @@ config.components.inactive[1] = {
       },
     },
     hl = file_info.hl({
-      fg = p.subtle,
-      bg = p.hl_low,
+      fg = p.fg,
+      bg = p.cursorline,
     }),
     left_sep = {
       {
         str = ' ' .. separators.slant_left_2,
         hl = hl_if_focused({
-          bg = p.base,
-          fg = p.hl_low,
+          bg = p.bg,
+          fg = p.cursorline,
         }, {
-          fg = p.hl_low,
-          bg = p.base,
+          fg = p.cursorline,
+          bg = p.bg,
         }),
       },
-      { str = ' ', hl = { bg = p.hl_low, fg = 'NONE' } },
+      { str = ' ', hl = { bg = p.cursorline, fg = 'NONE' } },
     },
     right_sep = {
       {
         str = separators.slant_right_2 .. ' ',
         hl = hl_if_focused({
-          fg = p.hl_low,
-          bg = p.base,
+          fg = p.cursorline,
+          bg = p.bg,
         }, {
-          fg = p.hl_low,
-          bg = p.base,
+          fg = p.cursorline,
+          bg = p.bg,
         }),
       },
     },
@@ -419,10 +417,10 @@ config.components.inactive[2] = {
     provider = ' ',
     hl = hl_if_focused({
       fg = 'NONE',
-      bg = p.base,
+      bg = p.bg,
     }, {
       fg = 'NONE',
-      bg = p.base,
+      bg = p.bg,
     }),
   },
 }
@@ -433,11 +431,11 @@ config.components.inactive[3] = {
     hl = hl_if_focused(
       vi_mode_hl({
         fg = true,
-        bg = p.base,
+        bg = p.bg,
       }),
       {
-        fg = p.hl_low,
-        bg = p.base,
+        fg = p.cursorline,
+        bg = p.bg,
       }
     ),
   },

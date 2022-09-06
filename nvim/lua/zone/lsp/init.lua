@@ -5,6 +5,20 @@ local user_lsp_status = require('zone.statusline.lsp')
 local nvim_cmp_lsp = require('cmp_nvim_lsp')
 local icons = require('zone.theme.icons')
 
+local function format(diagnostic)
+  local icon = icons.errors
+  if diagnostic.severity == vim.diagnostic.severity.WARN then
+    icon = icons.warn
+  end
+
+  if diagnostic.severity == vim.diagnostic.severity.HINT then
+    icon = icons.hint
+  end
+
+  local message = string.format(' %s [%s][%s] %s', icon, diagnostic.code, diagnostic.source, diagnostic.message)
+  return message
+end
+
 mason.setup({
   ui = {
     keymaps = {
@@ -39,11 +53,18 @@ local fmt_triggers = {
 
 local lsp_handlers = {
   ['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    --virtual_text = {
-    --  source = 'if_many',
-    --  severity = vim.diagnostic.severity.ERROR,
-    --},
-    virtual_text = false,
+    scope = 'line',
+    source = false,
+    format = format,
+    virtual_text = {
+      prefix = icons.chubby_dot,
+      spacing = 2,
+      source = false,
+      severity = {
+        min = vim.diagnostic.severity.HINT,
+      },
+      format = format,
+    },
     signs = true,
     underline = true,
     update_in_insert = false,
