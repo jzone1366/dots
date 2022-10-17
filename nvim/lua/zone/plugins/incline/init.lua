@@ -1,6 +1,8 @@
 --@TODO: Add nvim-devicons to filename.
 ---- b0o/incline.nvim
-require('incline').setup({
+local incline = require('incline')
+
+incline.setup({
   render = function(props)
     local bufname = vim.api.nvim_buf_get_name(props.buf)
     if bufname == '' then

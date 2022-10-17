@@ -165,7 +165,7 @@ function M.set_fmt_on_save(val, silent)
   if M.fmt_on_save_enabled then
     vim.api.nvim_create_autocmd(fmt_triggers[vim.o.filetype] or fmt_triggers.default, {
       callback = function()
-        vim.lsp.buf.format(nil, 10000)
+        vim.lsp.buf.format()
       end,
       group = augid,
     })
@@ -206,7 +206,7 @@ function M.code_action_listener()
 end
 
 local function lsp_init()
-  vim.lsp.set_log_level('warn')
+  vim.lsp.set_log_level(vim.lsp.log_levels.DEBUG)
   for k, v in pairs(lsp_handlers) do
     vim.lsp.handlers[k] = v
   end
@@ -215,7 +215,7 @@ local function lsp_init()
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
   end
 
-  local capabilities = nvim_cmp_lsp.update_capabilities(lsp_status.capabilities)
+  local capabilities = nvim_cmp_lsp.default_capabilities(lsp_status.capabilities)
 
   -- USE MASON-LSP INSTALLER
   masonlsp.setup({
