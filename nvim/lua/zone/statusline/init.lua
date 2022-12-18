@@ -8,6 +8,8 @@ local file_info = require('zone.statusline.file_info')
 require('zone.statusline.lsp')
 --require 'zone.statusline.dap'
 
+print(vim.inspect(vim.bo.filetype))
+
 local utils = require('zone.utils')
 
 --@TODO: Update to put in with theme.icons
@@ -68,11 +70,19 @@ local filetypes_override_name = {
 }
 
 local config = {
-
   separators = separators,
-
   force_inactive = {
-    filetypes = utils.tbl_listkeys(filetypes_override_name),
+    filetypes = {
+      '^NvimTree$',
+      '^packer$',
+      '^startify$',
+      '^alpha$',
+      '^fugitive$',
+      '^fugitiveblame$',
+      '^qf$',
+      '^help$',
+      '^aerial$',
+    },
     buftypes = {
       'terminal',
       'nofile',
@@ -210,12 +220,6 @@ config.components.active[2] = {
 }
 
 config.components.active[3] = {
-  --{
-  --  provider = 'dap_clients',
-  --  provider = ' ',
-  --  hl = { fg = p.green, bg = p.bg },
-  --  right_sep = ' ',
-  --},
   {
     provider = config.custom_providers.lsp_clients_running,
     hl = { fg = p.green, bg = p.bg },
@@ -305,14 +309,14 @@ config.components.active[3] = {
       hl = { fg = p.bg, bg = p.bg },
     },
   },
-  {
-    provider = 'scroll_bar',
-    hl = {
-      fg = p.blue,
-      bg = p.bg,
-      style = 'bold',
-    },
-  },
+  --  {
+  --    provider = 'scroll_bar',
+  --    hl = {
+  --      fg = p.blue,
+  --      bg = p.bg,
+  --      style = 'bold',
+  --    },
+  --  },
   {
     provider = ' ' .. separators.slant_left .. separators.block,
     hl = vi_mode_hl(),

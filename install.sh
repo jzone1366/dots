@@ -55,11 +55,11 @@ dot_is_installed nvim && dot_install nvim
 dot_is_installed tmux && dot_install tmux
 dot_is_installed wezterm && dot_install wezterm
 dot_is_installed git && dot_install git
-dot_is_installed go && dot_install_func go install_go_binaries
 dot_is_installed php && dot_install php
-dot_is_installed kitty && dot_install kitty
 dot_is_installed zathura && dot_install zathura
+dot_is_installed figma $$ dot_install figma
 
+#dot_is_installed go && dot_install_func go install_go_binaries
 #dot_is_installed git && dot_install projects
 #dot_is_installed lxappearance && dot_install theme
 #dot_is_installed feh && dot_install feh

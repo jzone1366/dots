@@ -20,16 +20,27 @@ local function format(diagnostic)
 end
 
 mason.setup({
+  log_level = vim.log.levels.DEBUG,
   ui = {
     keymaps = {
-      -- Keymap to expand a server in the UI
-      toggle_server_expand = 'i',
-      -- Keymap to install a server
-      install_server = '<CR>',
-      -- Keymap to reinstall/update a server
-      update_server = 'u',
-      -- Keymap to uninstall a server
-      uninstall_server = 'x',
+      -- Keymap to expand a package
+      toggle_package_expand = "<CR>",
+      -- Keymap to install the package under the current cursor position
+      install_package = "i",
+      -- Keymap to reinstall/update the package under the current cursor position
+      update_package = "u",
+      -- Keymap to check for new version for the package under the current cursor position
+      check_package_version = "c",
+      -- Keymap to update all installed packages
+      update_all_packages = "U",
+      -- Keymap to check which installed packages are outdated
+      check_outdated_packages = "C",
+      -- Keymap to uninstall a package
+      uninstall_package = "x",
+      -- Keymap to cancel a package installation
+      cancel_installation = "<C-c>",
+      -- Keymap to apply language filter
+      apply_language_filter = "<C-f>",
     },
   },
 })
@@ -219,11 +230,12 @@ local function lsp_init()
 
   -- USE MASON-LSP INSTALLER
   masonlsp.setup({
+    ensure_installed = {},
     automatic_installation = true,
   })
 
-  local lspconfig = require('lspconfig')
   local lsp_servers = require('zone.lsp.servers')
+  local lspconfig = require('lspconfig')
 
   for _, lsp in ipairs(lsp_servers) do
     local opts = {
@@ -256,11 +268,13 @@ local function lsp_init()
       name = lsp
     end
 
-    if not lspconfig[name] then
+    local client = lspconfig[name]
+
+    if not client then
       error('LSP: Server not found: ' .. name)
     end
 
-    lspconfig[name].setup(opts)
+    client.setup(opts)
     lsp_status.register_progress()
     lsp_status.config({ current_function = false })
   end

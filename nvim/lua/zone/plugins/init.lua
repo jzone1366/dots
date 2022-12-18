@@ -10,11 +10,29 @@ local use = packer.use
 local theme_plugins = require('zone.theme.plugins')
 
 return packer.startup(function()
+  use({ 'wbthomason/packer.nvim' })
+
   use({
-    'wbthomason/packer.nvim',
-    'lewis6991/impatient.nvim',
-    'nvim-lua/plenary.nvim',
-    'MunifTanjim/nui.nvim',
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('zone.lsp')
+    end,
+    requires = {
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+      { 'nvim-lua/lsp-status.nvim' },
+      { 'b0o/SchemaStore.nvim' },
+      { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
+      { 'jose-elias-alvarez/null-ls.nvim' },
+      {
+        'ray-x/lsp_signature.nvim',
+        config = function()
+          require('zone.plugins.lsp-signature')
+        end,
+        after = 'nvim-lspconfig',
+        module = 'lsp_signature',
+      },
+    },
   })
 
   -- initialize theme plugins
@@ -71,30 +89,6 @@ return packer.startup(function()
       'NvimTreeToggle',
     },
     event = 'VimEnter',
-  })
-
-  use({
-    'neovim/nvim-lspconfig',
-    config = function()
-      require('zone.lsp')
-    end,
-    requires = {
-      { 'nvim-lua/lsp-status.nvim' },
-      { 'b0o/SchemaStore.nvim', module = 'schemastore' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
-      { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
-      { 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
-      {
-        'ray-x/lsp_signature.nvim',
-        config = function()
-          require('zone.plugins.lsp-signature')
-        end,
-        after = 'nvim-lspconfig',
-        module = 'lsp_signature',
-      },
-    },
-    event = 'BufWinEnter',
   })
 
   -- autocompletion
@@ -261,10 +255,18 @@ return packer.startup(function()
     config = function()
       require('zone.plugins.nrpattern')
     end,
+    event = 'BufWinEnter',
   })
 
   -- Code Style, Formatting, Linting
   use('editorconfig/editorconfig-vim')
+
+  -- Performance
+  use({
+    'lewis6991/impatient.nvim',
+    'nvim-lua/plenary.nvim',
+    'MunifTanjim/nui.nvim',
+  })
 
   if zone_packer.first_install then
     packer.sync()

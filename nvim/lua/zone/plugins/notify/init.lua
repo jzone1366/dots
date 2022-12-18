@@ -1,6 +1,4 @@
 local icons = require('zone.theme.icons')
-local utils = require('zone.utils')
-
 local notify = require('notify')
 
 notify.setup({

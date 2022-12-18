@@ -3,7 +3,7 @@ My dotfiles to start version controlling my setups for nvim and other programs.
 
 ## Installation
 You need to clone this repository by running
-`git clone git@github.com:jzone1366/dotfiles.git`
+`git clone --recurse-submodules git@github.com:jzone1366/dotfiles.git`
 
 Once it's cloned then you can run `install.sh` to start symlinnking the configurations. THIS IS A DESTRUCTIVE ACTION SO BACK UP EVERYTHING BEFORE YOU DO IT.
 
@@ -11,7 +11,7 @@ Once it's cloned then you can run `install.sh` to start symlinnking the configur
 
 ## Disclaimer
 This is a work in progress. This is also set to defaults that I use and may not work correctly on your machine.
-I currently use these settings on my Macbook at work and on my Linux Mint Machine at home.
+This is used exclusively on macbooks now and may not work correctly on other distros.
 
 
 ## TODO:
