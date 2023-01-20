@@ -49,10 +49,19 @@ local args = {
   },
 }
 
-vim.api.nvim_create_autocmd('BufEnter', {
-  command = [[if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]],
-  group = group,
-  nested = true,
-})
-
-require('nvim-tree').setup(args)
+return {
+  'kyazdani42/nvim-tree.lua',
+  config = function()
+    require('nvim-tree').setup(args)
+  end,
+  init = function()
+    require('zone.plugins.nvim-tree.mappings')
+  end,
+  cmd = {
+    'NvimTreeClipboard',
+    'NvimTreeFindFile',
+    'NvimTreeOpen',
+    'NvimTreeRefresh',
+    'NvimTreeToggle',
+  }
+}

@@ -1,4 +1,4 @@
-local set_highlight = require('zone.theme.utils').set_highlight
+local set_highlight = require('zone.utils.theme').set_highlight
 
 -- terminal highlights
 set_highlight('FloatBorder', {

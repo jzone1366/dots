@@ -10,6 +10,19 @@ function M.map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+function M.create_buf_map(bufnr, opts)
+  return function(mode, lhs, rhs, map_opts)
+    M.map(
+      mode,
+      lhs,
+      rhs,
+      M.merge({
+        buffer = bufnr,
+      }, opts or {}, map_opts or {})
+    )
+  end
+end
+
 function M.merge(...)
   return vim.tbl_deep_extend('force', ...)
 end

@@ -1,25 +1,13 @@
-local servers = 'zone.plugins.treesitter.servers'
-
-local defaults = {
-  ensure_installed = servers.installed,
-  ignore_install = servers.ignored,
-  highlight = {
-    enable = true,
-    use_languagetree = true,
+return {
+  'nvim-treesitter/nvim-treesitter',
+  dependencies = {
+    'windwp/nvim-ts-autotag',
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    'nvim-treesitter/nvim-treesitter-refactor',
   },
-  indent = {
-    enable = false, -- turned off as this causes weird indent behavior
-  },
-  autotag = {
-    enable = true,
-  },
-  context_commentstring = {
-    enable = true,
-  },
-  refactor = {
-    highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = false },
-  },
+  event = 'BufEnter',
+  build = ':TSUpdate',
+  config = function()
+    require('zone.plugins.treesitter.config')
+  end,
 }
-
-require('nvim-treesitter.configs').setup(defaults)

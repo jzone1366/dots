@@ -1,7 +1,9 @@
+local cmd = vim.cmd
 local opt = vim.opt
+local g = vim.g
 local indent = 2
 
-vim.cmd([[
+cmd([[
 	filetype plugin indent on
 ]])
 
@@ -12,8 +14,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   group = group,
 })
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+g.mapleader = ' '
+g.maplocalleader = ','
 
 -- misc
 opt.syntax = 'enable'
@@ -58,7 +60,7 @@ opt.listchars = {
   nbsp = '×',
 }
 opt.showmode = false
-opt.lazyredraw = true
+opt.lazyredraw = false
 opt.mouse = 'a'
 opt.splitright = true -- Open new split to the right
 opt.splitbelow = true -- Open new split below

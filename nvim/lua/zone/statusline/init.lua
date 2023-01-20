@@ -8,9 +8,6 @@ local file_info = require('zone.statusline.file_info')
 require('zone.statusline.lsp')
 --require 'zone.statusline.dap'
 
-print(vim.inspect(vim.bo.filetype))
-
-local utils = require('zone.utils')
 
 --@TODO: Update to put in with theme.icons
 local separators = {
