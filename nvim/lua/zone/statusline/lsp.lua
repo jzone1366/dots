@@ -128,7 +128,7 @@ end
 
 function M.code_actions()
   local bufnr = vim.api.nvim_get_current_buf()
-  local code_actions = require('zone.lsp').code_actions[bufnr]
+  local code_actions = require('zone.utils.lsp').code_actions[bufnr]
   local buf_has_actions = code_actions and code_actions.count and code_actions.count > 0
   return buf_has_actions and tostring(code_actions.count) or '', icons.code_actions
 end

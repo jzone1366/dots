@@ -1,11 +1,10 @@
-local g = vim.g
-local title = vim.env.SHELL
-
-g.floaterm_width = 0.7
-g.floaterm_height = 0.8
-g.floaterm_title = '[' .. title .. ']:($1/$2)'
-g.floaterm_borderchars = '─│─│╭╮╯╰'
-g.floaterm_opener = 'vsplit'
-
-require('zone.plugins.terminal.mappings')
-require('zone.plugins.terminal.highlights')
+return {
+  'voldikss/vim-floaterm',
+  cmd = { 'FloatermToggle', 'FloatermNew' },
+  keys = {
+    { '<C-l>', '<cmd>FloatermToggle<cr>', desc = 'Floating Terminal' },
+  },
+  config = function()
+    require('zone.plugins.terminal.config')
+  end,
+}

@@ -1,5 +1,3 @@
-local p = require('chalklines').get_colors(vim.g.chalklines_theme)
-
 local fn = vim.fn
 local bo = vim.bo
 local api = vim.api
@@ -128,7 +126,7 @@ function M.file_info(component, opts)
     icon = {
       str = opts.file_modified_icon or '',
       hl = {
-        fg = opts.active and p.purple,
+        fg = opts.active and opts.palette.git.changed,
       },
     }
   end
