@@ -1,6 +1,6 @@
 local icons = require('zone.theme.icons')
-local augroup_name = 'ZoneNvimNvimTree'
-local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
+--local augroup_name = 'ZoneNvimNvimTree'
+--local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
 
 -- ARGUMENTS FOR SETUP.
 -- SOME OF THESE ARE THE DEFAULT OPTIONS, JUST HERE FOR BREVITY.
@@ -15,11 +15,6 @@ local args = {
       warning = icons.warn,
       error = icons.error,
     },
-  },
-  ignore_ft_on_setup = {
-    'startify',
-    'dashboard',
-    'alpha',
   },
   update_focused_file = {
     enable = true,
@@ -63,5 +58,5 @@ return {
     'NvimTreeOpen',
     'NvimTreeRefresh',
     'NvimTreeToggle',
-  }
+  },
 }

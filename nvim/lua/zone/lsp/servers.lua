@@ -2,7 +2,7 @@ local utils = require('zone.utils')
 local lazy = require('zone.utils.lazy')
 
 local luals_conf = {
-  'sumneko_lua',
+  'lua_ls',
   settings = {
     Lua = {
       runtime = {

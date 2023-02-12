@@ -5,6 +5,8 @@ return {
   config = function()
     local config = {
       presets = {
+        bottom_search = true,
+        command_palette = true,
         lsp_doc_border = true,
       },
       views = {
