@@ -22,7 +22,7 @@ local icons = {
 
 local aliases = {
   pyls_ms = 'MPLS',
-  sumneko_lua = 'LuaLS',
+  lua_language_server = 'LuaLS',
 }
 
 local function getClientData(client)
@@ -58,7 +58,7 @@ function M.getExitedBufClients(bufnr)
   return getBufClients(bufnr, M.clients.exited)
 end
 
-function M.on_attach(client, bufnr)
+function M.on_attach(client, _) -- (client, bufnr)
   local clientData = getClientData(client)
   M.clients.running[client.id] = clientData
   M.clients.exited[client.id] = nil
@@ -122,7 +122,9 @@ function M.status_clients(status)
       skip = skip or status == 'running' and not c.client.initialized
       count = skip and count or count + 1
     end
-    return count > 0 and tostring(count) or '', icons.status
+    if count > 0 and tostring(count) then
+      return tostring(count) .. icons.status
+    end
   end
 end
 
@@ -130,18 +132,10 @@ function M.code_actions()
   local bufnr = vim.api.nvim_get_current_buf()
   local code_actions = require('zone.utils.lsp').code_actions[bufnr]
   local buf_has_actions = code_actions and code_actions.count and code_actions.count > 0
-  return buf_has_actions and tostring(code_actions.count) or '', icons.code_actions
+
+  if buf_has_actions and tostring(code_actions.count) then
+    return tostring(code_actions.count) .. icons.code_actions
+  end
 end
-
-local register = require('zone.statusline.providers').register
-
-register('lsp_clients', M.status_clients())
-register('lsp_clients_running', M.status_clients('running'))
-register('lsp_clients_starting', M.status_clients('starting'))
-register('lsp_clients_exited', M.status_clients('exited'))
-register('lsp_clients_exited_ok', M.status_clients('exited_ok'))
-register('lsp_clients_exited_err', M.status_clients('exited_err'))
-register('lsp_progress', M.status_progress)
-register('lsp_code_actions', M.code_actions)
 
 return M

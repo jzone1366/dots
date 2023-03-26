@@ -1,7 +1,7 @@
 local lsp_status = require('lsp-status')
 local mason = require('mason')
 local masonlsp = require('mason-lspconfig')
-local user_lsp_status = require('zone.statusline.lsp')
+local user_lsp_status = require('zone.lsp.statusline')
 local nvim_cmp_lsp = require('cmp_nvim_lsp')
 local icons = require('zone.theme.icons')
 
@@ -24,23 +24,23 @@ mason.setup({
   ui = {
     keymaps = {
       -- Keymap to expand a package
-      toggle_package_expand = "<CR>",
+      toggle_package_expand = '<CR>',
       -- Keymap to install the package under the current cursor position
-      install_package = "i",
+      install_package = 'i',
       -- Keymap to reinstall/update the package under the current cursor position
-      update_package = "u",
+      update_package = 'u',
       -- Keymap to check for new version for the package under the current cursor position
-      check_package_version = "c",
+      check_package_version = 'c',
       -- Keymap to update all installed packages
-      update_all_packages = "U",
+      update_all_packages = 'U',
       -- Keymap to check which installed packages are outdated
-      check_outdated_packages = "C",
+      check_outdated_packages = 'C',
       -- Keymap to uninstall a package
-      uninstall_package = "x",
+      uninstall_package = 'x',
       -- Keymap to cancel a package installation
-      cancel_installation = "<C-c>",
+      cancel_installation = '<C-c>',
       -- Keymap to apply language filter
-      apply_language_filter = "<C-f>",
+      apply_language_filter = '<C-f>',
     },
   },
 })
@@ -80,7 +80,6 @@ local lsp_handlers = {
     underline = true,
     update_in_insert = false,
   }),
-
   ['textDocument/definition'] = function(_, result)
     if result == nil or vim.tbl_isempty(result) then
       print('Definition not found')
@@ -103,10 +102,8 @@ local lsp_handlers = {
       jumpto(result)
     end
   end,
-
   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = M.border }),
   ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = M.border }),
-
   ['window/showMessage'] = function(_, result, ctx)
     local client = vim.lsp.get_client_by_id(ctx.client_id)
     local lvl = ({ 'ERROR', 'WARN', 'INFO', 'DEBUG' })[result.type]

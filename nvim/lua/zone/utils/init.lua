@@ -1,6 +1,4 @@
 local M = {}
-local augroup_name = 'ZoneNvimUtils'
-local group = vim.api.nvim_create_augroup(augroup_name, { clear = true })
 
 function M.map(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }
@@ -66,45 +64,12 @@ local function unload(module_pattern, reload)
   end
 end
 
-local function clear_cache()
-  vim.cmd(':LuaCacheClear')
-end
-
 function M.post_reload(msg)
   local Logger = require('zone.utils.logger')
   unload('zone.utils', true)
   unload('zone.theme', true)
-  unload('zone.plugins.statusline', true)
   msg = msg or 'User config reloaded!'
   Logger:log(msg)
-end
-
-function M.reload_user_config_sync()
-  M.reload_user_config()
-  clear_cache()
-  unload('zone.core.pluginsInit', true)
-  vim.api.nvim_create_autocmd('User PackerCompileDone', {
-    callback = function()
-      M.post_reload()
-    end,
-    group = group,
-    once = true,
-  })
-  vim.cmd(':PackerSync')
-end
-
-function M.reload_user_config(compile)
-  compile = compile or false
-  if compile then
-    vim.api.nvim_create_autocmd('User PackerCompileDone', {
-      callback = function()
-        M.post_reload()
-      end,
-      group = group,
-      once = true,
-    })
-    vim.cmd(':PackerCompile')
-  end
 end
 
 function M.get_install_dir()

@@ -18,18 +18,14 @@ local default_opts = {
 	--font = wezterm.font("FiraCode Nerd Font"),
 	--font = wezterm.font("Hack Nerd Font"),
 	font_size = 14,
-
 	hide_tab_bar_if_only_one_tab = true,
-
 	default_cursor_style = "SteadyBar",
-
 	window_padding = {
 		left = 5,
 		right = 5,
 		top = 5,
 		bottom = 5,
 	},
-
 	line_height = 1.0,
 }
 
