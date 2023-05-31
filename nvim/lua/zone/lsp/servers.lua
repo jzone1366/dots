@@ -95,7 +95,7 @@ local lsp_servers = {
   },
   --'rust_analyzer', -- https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
   -- 'rnix', -- cargo install rnix-lsp
-  'sqls', -- npm i -g sql-language-server
+  'sqlls', -- npm i -g sql-language-server
   luals_conf, -- brew install lua-language-server
   'tailwindcss', -- npm install -g @tailwindcss/language-server
   {

@@ -9,8 +9,17 @@ local wezterm = require("wezterm")
 --	return t1
 --end
 
+local function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		return "Catppuccin Mocha" -- dark
+	else
+		return "Catppuccin Latte" -- light
+	end
+end
+
 local default_opts = {
-	color_scheme = "Catppuccin Mocha",
+	color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
+	--color_scheme = "Catppuccin Mocha",
 	--font = wezterm.font("JetBrainsMono Nerd Font"),
 	font = wezterm.font("Iosevka Nerd Font Mono"),
 	--font = wezterm.font("CaskaydiaCove Nerd Font"),
