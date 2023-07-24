@@ -1,19 +1,19 @@
 # NOTE: you can use vars with $<var> and ${<var>} as long as the str is double quoted: ""
 # WARNING: hex colors can't contain capital letters
 
-    thm_bg="#1e1e2e"            # Base
-    thm_bg_gutter="#11111b"     # Crust
-    thm_fg="#cdd6f4"            # Text
-    thm_cyan="#74c7ec"          # Sapphire
-    thm_gray="#313244"          # Surface0
-    thm_magenta="#b4befe"       # Lavender
-    thm_red="#f38ba8"           # Red
-    thm_green="#a6e3a1"         # Green
-    thm_yellow="#f9e2af"        # Yellow
-    thm_blue="#89b4fa"          # Blue
-    thm_orange="#fab387"        # Peach
-    thm_bg_highlight="#585b70"  # Surface2
-    thm_hl_med="#a6adc8"        # Subtext0
+    thm_bg="#eff1f5"            # Base
+    thm_bg_gutter="#dce0e8"     # Crust
+    thm_fg="#4c4f69"            # Text
+    thm_cyan="#209fb5"          # Sapphire
+    thm_gray="#ccd0da"          # Surface0
+    thm_magenta="#7287fd"       # Lavender
+    thm_red="#d20f39"           # Red
+    thm_green="#40a02b"         # Green
+    thm_yellow="#df8e1d"        # Yellow
+    thm_blue="#1e66f5"          # Blue
+    thm_orange="#fe640b"        # Peach
+    thm_bg_highlight="#acb0be"  # Surface2
+    thm_hl_med="#6c6f85"        # Subtext0
 
 # ----------------------------=== Theme ===--------------------------
 
