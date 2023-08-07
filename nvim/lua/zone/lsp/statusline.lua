@@ -1,3 +1,4 @@
+local theme_icons = require('zone.theme.icons')
 local M = {
   clients = { running = {}, exited = {} },
 }
@@ -16,7 +17,7 @@ local icons = {
     '█▄▂',
     '█▆▄',
   },
-  status = '  ',
+  status = ' ' .. theme_icons.circle .. ' ',
   code_actions = '  ',
 }
 

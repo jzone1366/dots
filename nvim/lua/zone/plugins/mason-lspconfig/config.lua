@@ -94,7 +94,7 @@ local lsp_handlers = {
     if vim.tbl_islist(result) then
       jumpto(result[1])
       if #result > 1 then
-        vim.fn.setqflist(vim.lsp.util.locations_to_items(result))
+        vim.fn.setqflist(vim.lsp.util.locations_to_items(result, 'utf-8'))
         vim.api.nvim_command('copen')
         vim.api.nvim_command('wincmd p')
       end
@@ -105,9 +105,9 @@ local lsp_handlers = {
   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = M.border }),
   ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = M.border }),
   ['window/showMessage'] = function(_, result, ctx)
-    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    local client = vim.lsp.get_client_by_id(ctx.client_id) or ''
     local lvl = ({ 'ERROR', 'WARN', 'INFO', 'DEBUG' })[result.type]
-    vim.notify({ result.message }, lvl, {
+    vim.notify(result.message, lvl, {
       title = 'LSP | ' .. client.name,
       timeout = 10000,
       keep = function()

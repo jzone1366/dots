@@ -11,7 +11,7 @@ M.set_highlight = function(hi, colors)
 end
 
 M.get_highlight = function(hi)
-  local hi_str = vim.api.nvim_command_output(('hi %s'):format(hi))
+  local hi_str = vim.api.nvim_exe2(('hi %s'):format(hi), {})
 
   local colors = {}
   for key, val in string.gmatch(hi_str, '(%w+)=(%S+)') do

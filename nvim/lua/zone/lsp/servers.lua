@@ -43,13 +43,13 @@ local lsp_servers = {
   'cmake',
   --   'denols', -- TODO: Prevent denols from starting in NodeJS projects https://github.com/denoland/deno
   'dockerls', -- npm install -g dockerfile-language-server-nodejs
-  'dotls', -- npm install -g dot-language-server
+  'dotls',    -- npm install -g dot-language-server
   {
-    'gopls', -- go install golang.org/x/tools/gopls@latest / https://github.com/golang/tools/tree/master/gopls
+    'gopls',  -- go install golang.org/x/tools/gopls@latest / https://github.com/golang/tools/tree/master/gopls
     formatting = false,
   },
-  'graphql', -- npm install -g graphql-language-service-cli
-  'html', -- npm i -g vscode-langservers-extracted
+  'graphql',  -- npm install -g graphql-language-service-cli
+  'html',     -- npm i -g vscode-langservers-extracted
   {
     'jsonls', -- npm i -g vscode-langservers-extracted
     formatting = false,
@@ -71,7 +71,7 @@ local lsp_servers = {
       }
     end),
   },
-  'phpactor',
+  -- 'phpactor',
   {
     'pylsp', -- pip install "python-lsp-server[all]"
     formatting = false,
@@ -95,15 +95,15 @@ local lsp_servers = {
   },
   --'rust_analyzer', -- https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
   -- 'rnix', -- cargo install rnix-lsp
-  'sqlls', -- npm i -g sql-language-server
-  luals_conf, -- brew install lua-language-server
+  'sqlls',       -- npm i -g sql-language-server
+  luals_conf,    -- brew install lua-language-server
   'tailwindcss', -- npm install -g @tailwindcss/language-server
   {
-    'tsserver', -- npm install -g typescript typescript-language-server
+    'tsserver',  -- npm install -g typescript typescript-language-server
     formatting = false,
   },
   'vuels',
-  'vimls', -- npm install -g vim-language-server
+  'vimls',  -- npm install -g vim-language-server
   'yamlls', -- npm install -g yaml-language-server
 }
 

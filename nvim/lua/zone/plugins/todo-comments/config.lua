@@ -3,8 +3,8 @@ local icons = require('zone.theme.icons')
 require('todo-comments').setup({
   keywords = {
     FIX = {
-      icon = icons.debug, -- icon used for the sign, and in search results
-      color = 'error', -- can be a hex color, or a named color (see below)
+      icon = icons.debug,                                                -- icon used for the sign, and in search results
+      color = 'error',                                                   -- can be a hex color, or a named color (see below)
       alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'fix', 'fixme', 'bug' }, -- a set of other keywords that all map to this FIX keywords
       -- signs = false, -- configure signs for some keywords individually
     },

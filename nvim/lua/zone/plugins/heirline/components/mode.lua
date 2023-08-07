@@ -6,7 +6,7 @@ local ViMode = {
   -- and the highlight functions, so we compute it only once per component
   -- evaluation and store it as a component attribute
   init = function(self)
-    self.mode = vim.fn.mode(1) -- :h mode()
+    self.mode = vim.fn.mode() -- :h mode()
 
     -- execute this only once, this is required if you want the ViMode
     -- component to be updated on operator pending mode
@@ -23,9 +23,7 @@ local ViMode = {
   -- them at initialisation time.
   static = {
     mode_names = utils.mode_names, -- change the strings if you like it vvvvverbose!
-
     mode_colors_map = utils.mode_colors_map,
-
     mode_color = function(self)
       local mode = conditions.is_active() and vim.fn.mode() or 'n'
       return self.mode_colors_map[mode]

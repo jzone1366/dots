@@ -36,7 +36,7 @@ function M.split(str, sep)
 end
 
 function M.get_active_lsp_client_names()
-  local active_clients = vim.lsp.get_active_clients()
+  local active_clients = vim.lsp.get_clients()
   local client_names = {}
   for _, client in pairs(active_clients or {}) do
     local buf = vim.api.nvim_get_current_buf()
