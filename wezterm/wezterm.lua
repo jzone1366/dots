@@ -20,6 +20,7 @@ local default_opts = {
   font_size = 13,
   hide_tab_bar_if_only_one_tab = true,
   default_cursor_style = "SteadyBar",
+  window_decorations = "TITLE|RESIZE",
   window_padding = {
     left = 5,
     right = 5,

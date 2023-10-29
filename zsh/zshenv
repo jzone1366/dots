@@ -69,6 +69,7 @@ export NPM_BIN="$XDG_CONFIG_HOME/node_modules/bin"
 export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/node_modules"
 
 # Python
+export PYENV_ROOT=$HOME/.pyenv
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '

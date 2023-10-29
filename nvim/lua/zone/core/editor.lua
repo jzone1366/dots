@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 g.mapleader = ' '
-g.maplocalleader = ','
+g.maplocalleader = '\\'
 
 -- misc
 opt.syntax = 'enable'
@@ -48,7 +48,7 @@ opt.cursorline = true
 opt.signcolumn = 'yes'
 opt.laststatus = 3
 opt.wrap = false
-opt.scrolloff = 18
+opt.scrolloff = 10
 opt.sidescrolloff = 3 -- Lines to scroll horizontally
 opt.list = true
 opt.listchars = {

@@ -121,7 +121,7 @@ local function on_attach(client, bufnr)
   if client.server_capabilities.documentFormattingProvider then
     M.set_fmt_on_save(true, true)
   end
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr });
   user_lsp_status.on_attach(client, bufnr)
   if client.server_capabilities.codeActionProvider then
     local augid = vim.api.nvim_create_augroup('user_lsp_code_actions', { clear = true })

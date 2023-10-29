@@ -5,7 +5,7 @@ return {
     'JoosepAlviste/nvim-ts-context-commentstring',
     'nvim-treesitter/nvim-treesitter-refactor',
   },
-  event = 'BufEnter',
+  event = { 'VeryLazy' },
   build = ':TSUpdate',
   config = function()
     require('zone.plugins.treesitter.config')

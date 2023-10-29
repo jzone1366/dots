@@ -115,10 +115,10 @@ M.is_normal_win = function(winid)
     return false
   end
   local bufid = vim.api.nvim_win_get_buf(winid)
-  if vim.api.nvim_buf_get_option(bufid, 'buftype') ~= '' then
+  if vim.api.nvim_get_option_value('buftype', { buf = bufid }) == '' then
     return false
   end
-  if vim.tbl_contains({ 'NvimTree', 'Trouble', 'aerial' }, vim.api.nvim_buf_get_option(bufid, 'filetype')) then
+  if vim.tbl_contains({ 'NvimTree', 'Trouble', 'aerial' }, vim.api.nvim_get_option_value('filetype', { buf = bufid })) then
     return false
   end
   return true

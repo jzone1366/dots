@@ -18,14 +18,22 @@ map('n', '<leader>tp', ':tabprevious<cr>', { desc = 'Prev tab' })
 map('n', '<leader>tn', ':tabnext<cr>', { desc = 'Next tab' })
 map('n', '<leader>td', ':tabclose<cr>', { desc = 'Close tab' })
 
--- window navigation
-map('n', '<C-h>', '<C-w>h')
+-- windows
+map('n', '<leader>ww', '<C-W>p', { desc = 'Other window', remap = true })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
+map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
+map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
+map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
+map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
+--map('n', '<C-h>', '<C-w>h')
 --map('n', '<C-j>', '<C-w>j')
 --map('n', '<C-k>', '<C-w>k')
-map('n', '<C-l>', '<C-w>l')
+--map('n', '<C-l>', '<C-w>l')
 
--- resize with arrows
-map('n', '<C-Up>', ':resize -2<CR>', { desc = 'Resize -2' })
-map('n', '<C-Down>', ':resize +2<CR>', { desc = 'Resize +2' })
-map('n', '<C-Left>', ':vertical resize -2<CR>', { desc = 'Vertical Resize -2' })
-map('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'Vertical Resize +2' })
+-- tabs
+map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
