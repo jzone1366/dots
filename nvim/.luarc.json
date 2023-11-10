@@ -1,0 +1,8 @@
+{
+    "workspace.library": [
+        "/Users/zonejm/.config/local/share/nvim/lazy/neodev.nvim/types/nightly",
+        "/opt/homebrew/Cellar/neovim/HEAD-0fe0cf5/share/nvim/runtime/lua",
+        "/Users/zonejm/.dotfiles/nvim/lua",
+        "${3rd}/luv/library"
+    ]
+}

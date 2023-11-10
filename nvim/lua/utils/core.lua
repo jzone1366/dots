@@ -1,0 +1,16 @@
+local M = {}
+
+function M.get_install_dir()
+  local config_dir = os.getenv('ZONENVIM_INSTALL_DIR')
+  if not config_dir then
+    return vim.fn.stdpath('config')
+  end
+  return config_dir
+end
+
+M.create_cmd = function(command, f, opts)
+  opts = opts or {}
+  vim.api.nvim_create_user_command(command, f, opts)
+end
+
+return M
