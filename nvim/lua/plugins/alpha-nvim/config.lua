@@ -25,7 +25,7 @@ dashboard.section.buttons.val = {
   dashboard.button(
     '<leader>ff',
     icons.file1 .. ' Find File',
-    '<Cmd>lua require("plugins.telescope.utils").project_files()<CR>'
+    '<Cmd>lua require("utils.telescope").project_files()<CR>'
   ),
   dashboard.button('<C-n>', icons.file2 .. ' Find Manager', '<Cmd>Neotree toggle<CR>'),
   dashboard.button('<leader>fs', icons.word .. ' Grep String', '<Cmd>Telescope grep_string<CR>'),
@@ -35,4 +35,3 @@ dashboard.section.buttons.val = {
 dashboard.section.footer.val = 'Keep Calm and Code On.'
 
 alpha.setup(dashboard.opts)
-

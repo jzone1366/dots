@@ -62,7 +62,7 @@ M.telescope = {
   {
     '<leader>ff',
     function()
-      require('plugins.telescope.utils').project_files()
+      require('utils.telescope').project_files()
     end,
     silent = true,
     desc = 'Find File',
