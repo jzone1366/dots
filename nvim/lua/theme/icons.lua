@@ -27,7 +27,6 @@ local icons = {
   moon = '',
   heart = '♥ ',
   ghost = '󰊠',
-  cosmic = '💫',
   bolt = '',
   code = '',
   star = '★',

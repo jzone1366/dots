@@ -3,9 +3,9 @@ local colors = require('plugins.heirline.components.colors')
 -- I take no credits for this! :lion:
 local ScrollBar = {
   static = {
-    -- sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' },
+    sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' },
     -- Another variant, because the more choice the better.
-    sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' },
+    --sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' },
   },
   provider = function(self)
     local curr_line = vim.api.nvim_win_get_cursor(0)[1]

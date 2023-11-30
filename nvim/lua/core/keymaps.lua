@@ -76,7 +76,7 @@ M.telescope = {
     desc = 'Find Project Find',
   },
   {
-    '<leader>fk',
+    '<leader>fb',
     function()
       require('telescope.builtin').buffers()
     end,

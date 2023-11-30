@@ -10,15 +10,8 @@ M.set_highlight = function(hi, colors)
   vim.cmd(('hi %s %s'):format(hi, hi_str))
 end
 
-M.get_highlight = function(hi)
-  local hi_str = vim.api.nvim_exe2(('hi %s'):format(hi), {})
-
-  local colors = {}
-  for key, val in string.gmatch(hi_str, '(%w+)=(%S+)') do
-    colors[key] = val
-  end
-
-  return colors
+M.get_highlight = function(name)
+  return vim.api.nvim_get_hl(0, { name = name, link = false })
 end
 
 return M

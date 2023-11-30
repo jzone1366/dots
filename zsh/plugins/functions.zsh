@@ -50,3 +50,15 @@ getTermColors() {
   done
 }
 
+
+printColors() {
+  colors=("Black" "Red" "Green" "Yellow" "Blue" "Magenta" "Cyan" "White")
+
+  for color in {0..7}; do
+      print -P -- "$color: %F{$color}${colors[$color+1]}%f"
+  done
+
+  for color in {8..15}; do
+      print -P -- "$color: %F{$color}Bright ${colors[$((color - 7))]}%f"
+  done
+}

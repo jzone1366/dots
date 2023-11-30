@@ -11,12 +11,17 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      -- Define Diagonostic Signs
+      vim.fn.sign_define("DiagnosticSignError",
+        { text = " ", texthl = "DiagnosticSignError" })
+      vim.fn.sign_define("DiagnosticSignWarn",
+        { text = " ", texthl = "DiagnosticSignWarn" })
+      vim.fn.sign_define("DiagnosticSignInfo",
+        { text = " ", texthl = "DiagnosticSignInfo" })
+      vim.fn.sign_define("DiagnosticSignHint",
+        { text = "󰌵", texthl = "DiagnosticSignHint" })
+
       local config = {
-        --   color_overrides = {
-        --       mocha = {
-        --           base = "#121212",
-        --       },
-        --   },
         integrations = {
           alpha = true,
           mini = true,
@@ -25,18 +30,6 @@ return {
           lsp_trouble = true,
           which_key = true,
         },
-        --highlight_overrides = {
-        --  mocha = function(mocha)
-        --    return {
-        --      NeoTreeNormal = { bg = mocha.none },
-        --    }
-        --  end,
-        --  latte = function(latte)
-        --    return {
-        --      NeoTreeNormal = { bg = latte.none },
-        --    }
-        --  end,
-        --},
       }
 
       require('catppuccin').setup(config)

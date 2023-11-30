@@ -16,6 +16,9 @@ local config = function()
     virtual_text = false,
   })
 
+  vim.lsp.set_log_level("off")
+  --vim.lsp.set_log_level("debug")
+
   -- global keybindings
   keymaps.global_lsp()
 
@@ -24,7 +27,7 @@ local config = function()
     lsp_status.on_attach(client)
 
     if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint(buffer, true)
+      vim.lsp.inlay_hint.enable(buffer, true)
     end
   end
 

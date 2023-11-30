@@ -22,7 +22,7 @@ opt.syntax = 'enable'
 opt.encoding = 'utf-8'
 opt.clipboard = 'unnamedplus'
 opt.backspace = { 'eol', 'start', 'indent' }
-opt.matchpairs = { '(:)', '{:}', '[:]', '<:>' }
+--opt.matchpairs = { '(:)', '{:}', '[:]', '<:>' }
 
 -- indention
 opt.autoindent = true
