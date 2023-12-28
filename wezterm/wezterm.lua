@@ -8,7 +8,8 @@ local function scheme_for_appearance(appearance)
   end
 end
 
-local default_opts = {
+
+return {
   color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
 
   font = wezterm.font_with_fallback({
@@ -23,7 +24,7 @@ local default_opts = {
   --font = wezterm.font("GoMono Nerd Font"),
   --font = wezterm.font("FiraCode Nerd Font"),
   --font = wezterm.font("Hack Nerd Font"),
-  font_size = 13,
+  font_size = 14,
   hide_tab_bar_if_only_one_tab = true,
   default_cursor_style = "SteadyBar",
   window_decorations = "RESIZE|TITLE",
@@ -35,7 +36,3 @@ local default_opts = {
     bottom = 5,
   },
 }
-
-local opts = default_opts
-
-return opts
