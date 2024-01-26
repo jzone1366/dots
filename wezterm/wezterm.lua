@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local kanagawa = require('colors/kanagawa');
 
 local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
@@ -8,9 +9,17 @@ local function scheme_for_appearance(appearance)
   end
 end
 
+local function colors_for_appearance(appearance)
+  if appearance:find("Dark") then
+    return kanagawa.dragon
+  else
+    return kanagawa.lotus
+  end
+end
 
-return {
-  color_scheme = scheme_for_appearance(wezterm.gui.get_appearance()),
+
+local config = {
+  force_reverse_video_cursor = true,
 
   font = wezterm.font_with_fallback({
     "Monaspace Xenon",
@@ -36,3 +45,7 @@ return {
     bottom = 5,
   },
 }
+
+config.colors = colors_for_appearance(wezterm.gui.get_appearance());
+
+return config;

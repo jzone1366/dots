@@ -5,12 +5,12 @@ local os_is_dark = function()
   )):find('dark') ~= nil
 end
 
+
 return {
-  { -- color scheme
-    'catppuccin/nvim',
+  {
+    'rebelot/kanagawa.nvim',
     lazy = false,
     priority = 1000,
-    enabled = false,
     config = function()
       -- Define Diagonostic Signs
       vim.fn.sign_define("DiagnosticSignError",
@@ -22,23 +22,12 @@ return {
       vim.fn.sign_define("DiagnosticSignHint",
         { text = "󰌵", texthl = "DiagnosticSignHint" })
 
-      local config = {
-        integrations = {
-          alpha = true,
-          mini = true,
-          neotree = true,
-          nvimtree = false,
-          lsp_trouble = true,
-          which_key = true,
-        },
-      }
-
-      require('catppuccin').setup(config)
+      require('kanagawa').setup()
       if os_is_dark() then
-        vim.cmd('color catppuccin-mocha')
+        vim.cmd('color kanagawa-dragon')
       else
-        vim.cmd('color catppuccin-latte')
+        vim.cmd('color kanagawa-lotus')
       end
     end,
-  },
+  }
 }
