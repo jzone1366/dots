@@ -19,7 +19,6 @@ g.dragon = {
   indexed = { [16] = "#b6927b", [17] = "#b98d7b" }, -- surimiOrange peachred
 }
 
--- TODO: Update with lotus colors
 g.lotus = {
   foreground = "#545464",
   background = "#f2ecbc",
