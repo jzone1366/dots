@@ -53,9 +53,11 @@ source $DOTFILES/aliases/aliases
 # | SCRIPTS |
 # +---------+
 
+source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $DOTFILES/zsh/scripts.zsh
 
-source "$DOTFILES/zsh/plugins/fg_bg.sh"
+source $DOTFILES/zsh/plugins/fg_bg.sh
+
 zle -N fg-bg
 bindkey '^Z' fg-bg
 
@@ -96,7 +98,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Change cursor
-source "$DOTFILES/zsh/plugins/cursor_mode"
+source $DOTFILES/zsh/plugins/cursor_mode
 
 # Add Vi text-objects for brackets and quotes
 autoload -Uz select-bracketed select-quoted
@@ -189,6 +191,7 @@ source $DOTFILES/zsh/plugins/update.zsh
 
 
 
+
 # +------------------+
 # | Possibly Delete  |
 # +------------------+
@@ -205,3 +208,10 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+#
+#
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/homebrew/opt/openssl@3/include/

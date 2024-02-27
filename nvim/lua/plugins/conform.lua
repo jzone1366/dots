@@ -16,6 +16,7 @@ local opts = {
     rust = { "rustfmt" },
     go = { "gofmt" },
     sql = { "sql_formatter" },
+    --python = { 'black' } -- isort add this
   },
   format_on_save = function(bufnr)
     -- Disable with a global or buffer-local variable

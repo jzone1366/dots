@@ -47,5 +47,4 @@
 
 # --------=== Modes
     setw -g clock-mode-colour "$thm_blue"
-    setw -g mode-style "fg=$thm_cyan bg=$thm_bg_med bold"
-
+    setw -g mode-style "fg=$thm_fg bg=$thm_bg_gutter bold"

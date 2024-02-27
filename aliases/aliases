@@ -103,7 +103,6 @@ alias port="netstat -tulpn | grep"
 # | Neovim |
 # +--------+
 
-#alias vim='nvim'
 alias v='nvim'
 alias vi='nvim'
 alias svim='sudoedit'
