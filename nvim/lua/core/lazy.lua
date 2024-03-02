@@ -12,20 +12,20 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-local u = require('utils.core')
-local ui = require('theme.ui')
-
 -- Load plugin specs from lua/plugins/*.lua
-require('lazy').setup('plugins', {
-  lockfile = u.get_install_dir() .. '/lazy-lock.json',
+require('lazy').setup('core.plugins', {
   defaults = { lazy = true },
+  install = { colorscheme = { 'catpuccin' } },
+  checker = { enabled = true },
+  concurrency = 5,
   ui = {
-    border = ui.border,
+    border = 'rounded',
     size = { width = 0.7, height = 0.7 },
   },
   change_detection = {
     notify = false,
   },
+  debug = false,
   performance = {
     rtp = {
       disabled_plugins = {

@@ -6,7 +6,7 @@ local ViMode = {
   -- and the highlight functions, so we compute it only once per component
   -- evaluation and store it as a component attribute
   init = function(self)
-    self.mode = vim.fn.mode() -- :h mode()
+    self.mode = vim.fn.mode(1) -- :h mode()
 
     -- execute this only once, this is required if you want the ViMode
     -- component to be updated on operator pending mode
@@ -37,7 +37,7 @@ local ViMode = {
   -- control the padding and make sure our string is always at least 2
   -- characters long. Plus a nice Icon.
   provider = function(self)
-    return '%2(' .. self.mode_names[self.mode] .. '%)'
+    return string.format('%2s', self.mode_names[self.mode])
   end,
   -- Same goes for the highlight. Now the foreground will change according to the current mode.
   hl = utils.vi_mode_hl(),
