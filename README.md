@@ -3,7 +3,7 @@ My dotfiles to start version controlling my setups for nvim and other programs.
 
 ## Installation
 You need to clone this repository by running
-`git clone --recurse-submodules git@github.com:jzone1366/dotfiles.git`
+`git clone --recurse-submodules git@github.com:jzone1366/dots.git`
 
 Once it's cloned then you can run `install.sh` to start symlinnking the configurations. THIS IS A DESTRUCTIVE ACTION SO BACK UP EVERYTHING BEFORE YOU DO IT.
 
