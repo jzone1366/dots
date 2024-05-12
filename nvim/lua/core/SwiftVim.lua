@@ -8,7 +8,7 @@
 local icons = require('theme.icons')
 
 SwiftVim = {
-  colorscheme = 'tokyonight',
+  --colorscheme = 'tokyonight',
   ui = {
     float = {
       border = 'rounded',
@@ -54,10 +54,6 @@ SwiftVim = {
   -- Please keep it
   icons = icons,
   -- Statusline configuration
-  statusline = {
-    path_enabled = false,
-    path = 'relative', -- absolute/relative
-  },
   lsp = {
     virtual_text = true, -- show virtual text (errors, warnings, info) inline messages
   },

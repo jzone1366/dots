@@ -48,7 +48,7 @@ require("toggleterm").setup {
     winblend = 4,
   },
   winbar = {
-    enabled = true,
+    enabled = false,
   },
 }
 

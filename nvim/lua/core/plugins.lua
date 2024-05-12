@@ -12,8 +12,12 @@ return {
         integrations = {
           alpha = true,
           mini = true,
-          neotree = true,
-          nvimtree = false,
+          navic = {
+            enabled = true,
+            custom_bg = "NONE",
+          },
+          neotree = false,
+          nvimtree = true,
           lsp_trouble = true,
           which_key = true,
         },
@@ -89,6 +93,7 @@ return {
   },
   {
     'nvim-tree/nvim-tree.lua',
+    enabled = true,
     cmd = {
       'NvimTreeOpen',
       'NvimTreeClose',
@@ -219,7 +224,9 @@ return {
   {
     'dmmulroy/tsc.nvim',
     cmd = { 'TSC' },
-    config = true,
+    config = function()
+      require('plugins.tsc')
+    end,
   },
   {
     'dnlhc/glance.nvim',
@@ -228,9 +235,9 @@ return {
     end,
     cmd = { 'Glance' },
     keys = {
-      { 'gd', '<cmd>Glance definitions<CR>', desc = 'LSP Definition' },
-      { 'gr', '<cmd>Glance references<CR>', desc = 'LSP References' },
-      { 'gm', '<cmd>Glance implementations<CR>', desc = 'LSP Implementations' },
+      { 'gd', '<cmd>Glance definitions<CR>',      desc = 'LSP Definition' },
+      { 'gr', '<cmd>Glance references<CR>',       desc = 'LSP References' },
+      { 'gm', '<cmd>Glance implementations<CR>',  desc = 'LSP Implementations' },
       { 'gy', '<cmd>Glance type_definitions<CR>', desc = 'LSP Type Definitions' },
     },
   },
@@ -253,13 +260,13 @@ return {
     },
     cmd = 'Refactor',
     keys = {
-      { '<leader>re', ':Refactor extract ', mode = 'x', desc = 'Extract function' },
-      { '<leader>rf', ':Refactor extract_to_file ', mode = 'x', desc = 'Extract function to file' },
-      { '<leader>rv', ':Refactor extract_var ', mode = 'x', desc = 'Extract variable' },
-      { '<leader>ri', ':Refactor inline_var', mode = { 'x', 'n' }, desc = 'Inline variable' },
-      { '<leader>rI', ':Refactor inline_func', mode = 'n', desc = 'Inline function' },
-      { '<leader>rb', ':Refactor extract_block', mode = 'n', desc = 'Extract block' },
-      { '<leader>rf', ':Refactor extract_block_to_file', mode = 'n', desc = 'Extract block to file' },
+      { '<leader>re', ':Refactor extract ',              mode = 'x',          desc = 'Extract function' },
+      { '<leader>rf', ':Refactor extract_to_file ',      mode = 'x',          desc = 'Extract function to file' },
+      { '<leader>rv', ':Refactor extract_var ',          mode = 'x',          desc = 'Extract variable' },
+      { '<leader>ri', ':Refactor inline_var',            mode = { 'x', 'n' }, desc = 'Inline variable' },
+      { '<leader>rI', ':Refactor inline_func',           mode = 'n',          desc = 'Inline function' },
+      { '<leader>rb', ':Refactor extract_block',         mode = 'n',          desc = 'Extract block' },
+      { '<leader>rf', ':Refactor extract_block_to_file', mode = 'n',          desc = 'Extract block to file' },
     },
     config = true,
   },
@@ -268,7 +275,8 @@ return {
   {
     'mistricky/codesnap.nvim',
     build = 'make',
-    cmd = 'CodeSnapPreviewOn',
+    cmd = 'CodeSnap',
+    version = "^1",
     opts = {
       watermark = nil,
     },
@@ -300,7 +308,7 @@ return {
     lazy = false,
     keys = {
       { '<leader>ac', "<cmd>lua require('comment-box').llbox()<CR>", desc = 'comment box' },
-      { '<leader>ac', "<cmd>lua require('comment-box').llbox()<CR>", mode = 'v', desc = 'comment box' },
+      { '<leader>ac', "<cmd>lua require('comment-box').llbox()<CR>", mode = 'v',          desc = 'comment box' },
     },
   },
   {
@@ -314,8 +322,8 @@ return {
       { '<Leader>at', '<cmd>ToggleTerm direction=float<CR>', desc = 'terminal float' },
     },
   },
-  { 'tpope/vim-repeat', lazy = false },
-  { 'tpope/vim-speeddating', lazy = false },
+  { 'tpope/vim-repeat',           lazy = false },
+  { 'tpope/vim-speeddating',      lazy = false },
   { 'dhruvasagar/vim-table-mode', ft = { 'markdown' } },
   {
     'smoka7/multicursors.nvim',
@@ -431,6 +439,7 @@ return {
   },
   {
     'akinsho/bufferline.nvim',
+    enabled = false,
     event = 'VeryLazy',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
@@ -469,7 +478,7 @@ return {
       { '<Leader>bsd', '<cmd>BufferLineSortByDirectory<CR>',         desc = 'Sort by directory' },
       { '<Leader>bse', '<cmd>BufferLineSortByExtension<CR>',         desc = 'Sort by extension' },
       { '<Leader>bsr', '<cmd>BufferLineSortByRelativeDirectory<CR>', desc = 'Sort by relative dir' },
-    -- stylua: ignore end
+      -- stylua: ignore end
     },
   },
   {
@@ -526,7 +535,7 @@ return {
       require('plugins.session-manager')
     end,
     keys = {
-      { '<Leader>ps', '<cmd>SessionManager available_commands<CR>', desc = 'session manager' },
+      { '<Leader>ps', '<cmd>SessionManager available_commands<CR>',   desc = 'session manager' },
       { '<Leader>pS', '<cmd>SessionManager save_current_session<CR>', desc = 'save session' },
     },
   },
@@ -539,6 +548,7 @@ return {
   {
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async',
+    enabled = true,
     config = function()
       vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
       vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
@@ -631,9 +641,9 @@ return {
           },
         },
       }, {
-        mode = 'n', -- NORMAL mode
+        mode = 'n',     -- NORMAL mode
         prefix = '<leader>',
-        silent = true, -- use `silent` when creating keymaps
+        silent = true,  -- use `silent` when creating keymaps
         noremap = true, -- use `noremap` when creating keymaps
         nowait = false, -- use `nowait` when creating keymaps
       })
@@ -646,9 +656,9 @@ return {
           },
         },
       }, {
-        mode = 'x', -- VISUAL mode
+        mode = 'x',     -- VISUAL mode
         prefix = '<leader>',
-        silent = true, -- use `silent` when creating keymaps
+        silent = true,  -- use `silent` when creating keymaps
         noremap = true, -- use `noremap` when creating keymaps
         nowait = false, -- use `nowait` when creating keymaps
       })
@@ -663,7 +673,7 @@ return {
   },
   {
     'NvChad/nvim-colorizer.lua',
-    event = { 'BufReadPre', 'BufNewFile'},
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require('plugins.colorizer')
     end,
@@ -687,7 +697,7 @@ return {
     },
     opts = {
       border = SwiftVim.ui.float.border or 'rounded', -- Valid window border style,
-      show_unknown_classes = true, -- Shows the unknown classes popup
+      show_unknown_classes = true,                    -- Shows the unknown classes popup
     },
   },
   {
@@ -766,7 +776,8 @@ return {
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
-    event = 'VeryLazy',
+    event = 'BufReadPre',
+    cond = SwiftVim.plugins.ai.copilot.enabled,
     opts = {
       show_help = 'no',
       prompts = {
@@ -783,9 +794,9 @@ return {
       end, 3000)
     end,
     keys = {
-      { '<leader>ccb', ':CopilotChatBuffer<cr>', desc = 'CopilotChat - Buffer' },
+      { '<leader>ccb', ':CopilotChatBuffer<cr>',      desc = 'CopilotChat - Buffer' },
       { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code' },
-      { '<leader>cct', '<cmd>CopilotChatTests<cr>', desc = 'CopilotChat - Generate tests' },
+      { '<leader>cct', '<cmd>CopilotChatTests<cr>',   desc = 'CopilotChat - Generate tests' },
       {
         '<leader>ccT',
         '<cmd>CopilotChatVsplitToggle<cr>',
@@ -840,7 +851,7 @@ return {
     end,
     keys = {
       { '<Leader>gd', "<cmd>lua require('plugins.git.diffview').toggle_file_history()<CR>", desc = 'diff file' },
-      { '<Leader>gS', "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>", desc = 'status' },
+      { '<Leader>gS', "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>",       desc = 'status' },
     },
   },
   {
@@ -850,9 +861,9 @@ return {
       require('plugins.git.conflict')
     end,
     keys = {
-      { '<Leader>gcb', '<cmd>GitConflictChooseBoth<CR>', desc = 'choose both' },
+      { '<Leader>gcb', '<cmd>GitConflictChooseBoth<CR>',   desc = 'choose both' },
       { '<Leader>gcn', '<cmd>GitConflictNextConflict<CR>', desc = 'move to next conflict' },
-      { '<Leader>gcc', '<cmd>GitConflictChooseOurs<CR>', desc = 'choose current' },
+      { '<Leader>gcc', '<cmd>GitConflictChooseOurs<CR>',   desc = 'choose current' },
       { '<Leader>gcp', '<cmd>GitConflictPrevConflict<CR>', desc = 'move to prev conflict' },
       { '<Leader>gci', '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose incoming' },
     },

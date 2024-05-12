@@ -201,4 +201,7 @@ alias ssh='TERM=xterm ssh'
 alias ddg="duckduckgo"
 alias wiki="wikipedia"
 alias nerdfetch='curl -fsSL https://raw.githubusercontent.com/ThatOneCalculator/NerdFetch/master/nerdfetch | sh'
-alias reload='source $HOME/.zshenv && source ${ZDOTDIR:-$HOME}/.zshrc'
+alias reload='source $HOME/.zshenv && source ${ZDOTDIR}/.zshrc'
+alias vpn='sudo route -n add -net 10.0.0.0/8 -interface ppp0'
+
+alias s="ssh -i ~/.ssh/key2ql.pem"

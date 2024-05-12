@@ -10,7 +10,7 @@ bufferline.setup({
     end,
     show_buffer_close_icons = false,
     separator_style = { '|', '|' },
-    always_show_bufferline = true,
+    always_show_bufferline = false,
     style_preset = bufferline.style_preset.no_italic,
     numbers = function(opts)
       return string.format('%s', opts.ordinal)
@@ -25,7 +25,6 @@ bufferline.setup({
       {
         filetype = 'NvimTree',
         text = 'File Explorer',
-        highlight = 'SwiftVimNvimTreeTitle',
         text_align = 'center',
         separator = true,
       },
