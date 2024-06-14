@@ -111,6 +111,7 @@ require('nvim-tree').setup({
   -- configuration options for the system open command (`s` in the tree by default)
   filters = {
     dotfiles = false,
+    git_ignored = false,
     custom = {},
   },
   actions = {

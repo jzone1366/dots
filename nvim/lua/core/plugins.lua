@@ -558,7 +558,7 @@ return {
   {
     'echasnovski/mini.align',
     lazy = false,
-    version = '*',
+    version = false,
     config = function()
       require('mini.align').setup()
     end,

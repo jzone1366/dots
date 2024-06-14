@@ -32,7 +32,7 @@ SwiftVim = {
     },
     -- Completely replaces the UI for messages, cmdline and the popupmenu
     experimental_noice = {
-      enabled = true,
+      enabled = false,
     },
     -- Enables moving by subwords and skips significant punctuation with w, e, b motions
     jump_by_subwords = {
@@ -47,13 +47,11 @@ SwiftVim = {
     zen = {
       alacritty_enabled = false,
       kitty_enabled = false,
-      wezterm_enabled = false,
+      wezterm_enabled = true,
       enabled = true, -- sync after change
     },
   },
-  -- Please keep it
   icons = icons,
-  -- Statusline configuration
   lsp = {
     virtual_text = true, -- show virtual text (errors, warnings, info) inline messages
   },
