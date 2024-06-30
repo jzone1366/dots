@@ -37,7 +37,8 @@ config.scrollback_lines = 5000
 config.adjust_window_size_when_changing_font_size = false
 config.force_reverse_video_cursor = true
 config.default_cursor_style = "SteadyBar"
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"   -- RESIZE
+--config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"   -- RESIZE
+config.window_decorations = "RESIZE"
 
 
 tab.setup(config)

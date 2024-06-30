@@ -35,8 +35,8 @@ mason_lsp.setup({
     'sqlls',
     'tailwindcss',
     'terraformls',
-    'tsserver',
     'vimls',
+    'vtsls',
     'yamlls',
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
@@ -84,10 +84,6 @@ require('mason-lspconfig').setup_handlers({
       capabilities = capabilities,
       handlers = handlers,
     })
-  end,
-
-  ['tsserver'] = function()
-    -- Skip since we use typescript-tools.nvim
   end,
 
   ['tailwindcss'] = function()

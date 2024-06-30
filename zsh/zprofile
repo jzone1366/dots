@@ -8,3 +8,6 @@ export PATH=$JBOSS_HOME/bin:$PATH
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# Created by `pipx` on 2024-06-14 14:29:36
+export PATH="$PATH:/Users/jzone/.local/bin"

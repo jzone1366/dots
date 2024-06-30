@@ -1,4 +1,6 @@
 local wezterm = require("wezterm")
+local catppuccin = require("palettes.catppuccin")
+
 local Tab = {}
 
 local function get_process(tab)
@@ -147,14 +149,12 @@ function Tab.setup(config)
     end
 
     -- Color palette for each cell
-    local text_fg = '#c0c0c0'
+    local text_fg = catppuccin.mocha.background
     local colors = {
-      '#1e1e2e',
-      '#3c1361',
-      '#52307c',
-      '#663a82',
-      '#7c5295',
-      '#b491c8',
+      catppuccin.mocha.background,
+      catppuccin.mocha.blue,
+      catppuccin.mocha.cyan,
+      catppuccin.mocha.green,
     }
 
     local elements = {}

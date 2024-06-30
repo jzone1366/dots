@@ -209,6 +209,17 @@ return {
     config = function()
       require('plugins.typescript-tools')
     end,
+    enabled = false,
+  },
+  {
+    "yioneko/nvim-vtsls",
+    ft = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    },
+    dependencies = { "nvim-lspconfig" },
   },
   {
     'axelvc/template-string.nvim',

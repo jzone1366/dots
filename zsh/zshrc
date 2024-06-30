@@ -209,3 +209,6 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/homebrew/opt/openssl@3/include/
+
+# Created by `pipx` on 2024-06-14 14:29:36
+export PATH="$PATH:/Users/jzone/.local/bin"
