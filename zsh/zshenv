@@ -74,12 +74,39 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
 
+# JAVA
+export JBOSS_HOME="$HOME/tools/jboss"
+export TOMCAT_HOME="$HOME/tools/tomcat"
+export ACTIVEMQ_HOME="$HOME/tools/activemq"
+export JAVA_HOME="/usr/bin/java"
+
 # git
 #export GIT_REVIEW_BASE=master # See gitconfig
 
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+
+# OPENSSL
+export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/homebrew/opt/openssl@3/include/
+
+# pnpm
+export PNPM_HOME="/Users/jzone/.config/local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
 # PATH
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
 export PATH="$COMPOSER_HOME/vendor/bin:$PATH"                       # COMPOSER
 export PATH="$GOBIN:$PATH"                                          # GOBIN
 export PATH="$NPM_BIN:$PATH"                                        # NPM
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"	    # GNUBIN
-
+export PATH="$JBOSS_HOME/bin:$PATH"                                 # JBOSS
+export PATH="$TOMCAT_HOM/bin:$PATH"                                 # TOMCAT
+export PATH="$ACTIVEMQ_HOME/bin:$PATH"                              # ACTIVEMQ
+export PATH="$PATH:/Users/jzone/.local/bin"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local catppuccin = require("palettes.catppuccin")
+local utils = require("utils")
 
 local M = {}
 

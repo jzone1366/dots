@@ -205,3 +205,4 @@ alias reload='source $HOME/.zshenv && source ${ZDOTDIR}/.zshrc'
 alias vpn='sudo route -n add -net 10.0.0.0/8 -interface ppp0'
 
 alias s="ssh -i ~/.ssh/ql2keydb.pem"
+alias s2="ssh -i ~/.ssh/ql2-2024-key.pem"

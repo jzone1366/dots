@@ -1,5 +1,5 @@
 local conditions = require('heirline.conditions')
-local icons = SwiftVim.icons
+local icons = require('theme.icons')
 
 local Git = {
   condition = conditions.is_git_repo,

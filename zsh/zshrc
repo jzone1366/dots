@@ -152,10 +152,11 @@ source $DOTFILES/zsh/plugins/gitit.zsh
 # +-----+
 # | FZF |
 # +-----+
+source <(fzf --zsh)
 
-if [ $(command -v "fzf") ]; then
-    source $DOTFILES/zsh/fzf.zsh
-fi
+#if [ $(command -v "fzf") ]; then
+#    source $DOTFILES/zsh/fzf.zsh
+#fi
 
 # +---------+
 # | BINDING |
@@ -189,26 +190,3 @@ source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # +------------------+
 source $DOTFILES/zsh/plugins/functions.zsh
 source $DOTFILES/zsh/plugins/update.zsh
-
-
-# +------------------+
-# | Possibly Delete  |
-# +------------------+
-
-# pnpm
-export PNPM_HOME="/Users/jzone/.config/local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-
-export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/homebrew/opt/openssl@3/include/
-
-# Created by `pipx` on 2024-06-14 14:29:36
-export PATH="$PATH:/Users/jzone/.local/bin"
