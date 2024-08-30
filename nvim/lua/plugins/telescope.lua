@@ -65,12 +65,12 @@ return {
         builtin.git_branches({ show_remote_tracking_branches = false })
       end
 
-      map("n", "<leader>ff", builtin.find_files, { silent = true, desc = "Telescope find files" })
-      map("n", "<leader>fh", builtin.help_tags, { silent = true, desc = "Telescope help tags" })
-      map("n", "<leader>fg", builtin.live_grep, { silent = true, desc = "Telescope live grep" })
-      map("n", "<leader>fk", builtin.keymaps, { silent = true, desc = "Telescope keymaps" })
-      map("n", "<leader>fd", builtin.diagnostics, { silent = true, desc = "Telescope diagnostics" })
-      map("n", "<leader>f;", telescope.extensions.repo.list, { silent = true, desc = "Telescope repo list" })
+      map("n", "<leader>tf", builtin.find_files, { silent = true, desc = "Telescope find files" })
+      map("n", "<leader>th", builtin.help_tags, { silent = true, desc = "Telescope help tags" })
+      map("n", "<leader>tg", builtin.live_grep, { silent = true, desc = "Telescope live grep" })
+      map("n", "<leader>tk", builtin.keymaps, { silent = true, desc = "Telescope keymaps" })
+      map("n", "<leader>td", builtin.diagnostics, { silent = true, desc = "Telescope diagnostics" })
+      map("n", "<leader>t;", telescope.extensions.repo.list, { silent = true, desc = "Telescope repo list" })
       map("n", "<leader>b", builtin.buffers, { silent = true, desc = "Telescope buffers" })
       -- shows all diff for current buffer
       map("n", "<leader>gd", builtin.git_bcommits, { silent = true, desc = "Telescope git bcommits"})
