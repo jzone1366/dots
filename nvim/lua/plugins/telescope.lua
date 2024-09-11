@@ -66,7 +66,7 @@ return {
             end
 
             map("n", "<leader>tf", builtin.find_files, { silent = true, desc = "Telescope find files" })
-            map("n", "<leader>th", builtin.help_tags, { silent = true, desc = "Telescope help tags" })
+            map("n", "<leader>tt", builtin.help_tags, { silent = true, desc = "Telescope help tags" })
             map("n", "<leader>tg", builtin.live_grep, { silent = true, desc = "Telescope live grep" })
             map("n", "<leader>tk", builtin.keymaps, { silent = true, desc = "Telescope keymaps" })
             map("n", "<leader>td", builtin.diagnostics, { silent = true, desc = "Telescope diagnostics" })
