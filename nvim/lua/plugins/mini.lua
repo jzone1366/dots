@@ -1,5 +1,13 @@
 return {
     {
+        'echasnovski/mini.animate',
+        lazy = false,
+        version = false,
+        config = function()
+            require('mini.animate').setup()
+        end
+    },
+    {
         'echasnovski/mini.align',
         lazy = false,
         version = false,

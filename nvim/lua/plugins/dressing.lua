@@ -1,7 +1,19 @@
 return {
     'stevearc/dressing.nvim',
-    event = 'VeryLazy',
-    dependencies = 'MunifTanjim/nui.nvim',
+    lazy = true,
+    init = function()
+        local function load()
+            require("lazy").load({ plugins = { "dressing.nvim" } })
+        end
+        vim.ui.select = function(...)
+            load()
+            return vim.ui.select(...)
+        end
+        vim.ui.input = function(...)
+            load()
+            return vim.ui.input(...)
+        end
+    end,
     config = function()
         require('dressing').setup({
             input = {
