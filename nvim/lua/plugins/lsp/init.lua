@@ -19,7 +19,9 @@ return {
 
     -- Autocompletion
     {
-        'hrsh7th/nvim-cmp',
+        --'hrsh7th/nvim-cmp', -- Go back to this if he updates
+        "iguanacucumber/magazine.nvim",
+        name = "nvim-cmp",   -- Otherwise highlighting gets messed up
         event = 'InsertEnter',
         dependencies = {
             'onsails/lspkind-nvim',

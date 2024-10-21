@@ -71,7 +71,7 @@ return {
             map("n", "<leader>tk", builtin.keymaps, { silent = true, desc = "Telescope keymaps" })
             map("n", "<leader>td", builtin.diagnostics, { silent = true, desc = "Telescope diagnostics" })
             map("n", "<leader>t;", telescope.extensions.repo.list, { silent = true, desc = "Telescope repo list" })
-            map("n", "<leader>b", builtin.buffers, { silent = true, desc = "Telescope buffers" })
+            map("n", "<leader>tb", builtin.buffers, { silent = true, desc = "Telescope buffers" })
             -- shows all diff for current buffer
             map("n", "<leader>gd", builtin.git_bcommits, { silent = true, desc = "Telescope git bcommits" })
             map("n", "<leader>gl", builtin.git_commits, { silent = true, desc = "Telescope git commits" })
