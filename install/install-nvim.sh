@@ -3,6 +3,7 @@
 mkdir -p "$VIMCONFIG"
 
 ln -sf "$DOTFILES/nvim/init.lua" "$VIMCONFIG"
+ln -sf "$DOTFILES/nvim/filetype.lua" "$VIMCONFIG"
 
 # Install all mandatory folders if they don't exist already
 mkdir -p "$VIMCONFIG/backup"
@@ -13,6 +14,10 @@ mkdir -p "$VIMCONFIG/after"
 # lua
 rm -rf "$VIMCONFIG/lua"
 ln -sf "$DOTFILES/nvim/lua" "$VIMCONFIG"
+
+# after
+rm -rf "$VIMCONFIG/after/ftplugin"
+ln -sf "$DOTFILES/nvim/after/ftplugin" "$VIMCONFIG/after"
 
 ## UNCOMMENT BELOW WHEN YOU ADD THESE FILES
 ## macros

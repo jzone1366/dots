@@ -2,7 +2,7 @@ local M = {}
 
 M.settings = {
   codelenses = {
-    gc_details = false,
+    gc_details = true,
     generate = true,
     regenerate_cgo = true,
     run_govulncheck = true,

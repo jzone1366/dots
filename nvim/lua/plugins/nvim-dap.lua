@@ -79,9 +79,9 @@ return {
                     },
                 },
                 floating = {
-                    max_height = nil,                               -- These can be integers or a float between 0 and 1.
-                    max_width = nil,                                -- Floats will be treated as percentage of your screen.
-                    border = SwiftVim.ui.float.border or 'rounded', -- Border style. Can be "single", "double" or "rounded"
+                    max_height = nil,   -- These can be integers or a float between 0 and 1.
+                    max_width = nil,    -- Floats will be treated as percentage of your screen.
+                    border = 'rounded', -- Border style. Can be "single", "double" or "rounded"
                     mappings = {
                         close = { 'q', '<Esc>' },
                     },
@@ -315,7 +315,6 @@ return {
         },
         dependencies = {
             'theHamsta/nvim-dap-virtual-text',
-            'rcarriga/nvim-dap-ui',
             'mxsdev/nvim-dap-vscode-js',
         },
     },
@@ -331,5 +330,12 @@ return {
                 vim.cmd(':TSInstall dap_repl')
             end
         end,
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio"
+        }
     },
 }
