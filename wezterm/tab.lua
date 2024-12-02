@@ -108,7 +108,7 @@ local function get_current_working_folder_name(tab)
   end
 end
 
-function Tab.setup(config)
+function Tab.apply_to_config(config)
   -- TAB Bar
   config.use_fancy_tab_bar = true
   config.tab_max_width = 50

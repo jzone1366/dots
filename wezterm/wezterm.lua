@@ -14,21 +14,22 @@ config.keys = keys.keys
 
 -- Now I can use an unpatched font and have a fallback for the symbols.
 config.font = wezterm.font_with_fallback({
-  "Monaspace Xenon",
-  "Symbols Nerd Font",
+    "Monaspace Xenon",
+    "Symbols Nerd Font",
 })
+
 config.font_size = 16
 
 config.window_padding = {
-  left = 5,
-  right = 5,
-  top = 5,
-  bottom = 5,
+    left = 5,
+    right = 5,
+    top = 5,
+    bottom = 5,
 }
 
 config.inactive_pane_hsb = {
-  saturation = 0.8,
-  brightness = 0.7
+    saturation = 0.8,
+    brightness = 0.7
 }
 
 config.use_dead_keys = false
@@ -39,9 +40,10 @@ config.force_reverse_video_cursor = true
 config.default_cursor_style = "SteadyBar"
 --config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"   -- RESIZE
 config.window_decorations = "RESIZE"
+config.max_fps = 240
 
 
-tab.setup(config)
-appearance.setup(config)
+tab.apply_to_config(config)
+appearance.apply_to_config(config)
 
 return config

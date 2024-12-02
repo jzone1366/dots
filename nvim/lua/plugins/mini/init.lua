@@ -1,5 +1,12 @@
 return {
     {
+        'echasnovski/mini.icons',
+        version = '*',
+        config = function()
+            require('mini.icons').setup()
+        end
+    },
+    {
         'echasnovski/mini.animate',
         lazy = false,
         version = false,

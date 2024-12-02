@@ -13,15 +13,15 @@ return {
         lazy = false,
         config = true,
         keys = {
-            { '<LEADER>m', '<cmd>Mason<CR>', { silent = true, desc = 'Mason' } },
+            { '<leader>m', '<cmd>Mason<CR>', { silent = true, desc = 'Mason' } },
         }
     },
 
     -- Autocompletion
     {
-        --'hrsh7th/nvim-cmp', -- Go back to this if he updates
-        "iguanacucumber/magazine.nvim",
-        name = "nvim-cmp",   -- Otherwise highlighting gets messed up
+        'hrsh7th/nvim-cmp', -- Go back to this if he updates
+        --"iguanacucumber/magazine.nvim",
+        --name = "nvim-cmp", -- Otherwise highlighting gets messed up
         event = 'InsertEnter',
         dependencies = {
             'onsails/lspkind-nvim',
@@ -151,7 +151,7 @@ return {
                     'jsonls',
                     'lua_ls',
                     'pyright',
-                    'ruff_lsp',
+                    'ruff',
                     'rust_analyzer',
                     'sqlls',
                     'tailwindcss',

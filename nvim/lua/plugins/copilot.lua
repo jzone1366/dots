@@ -12,6 +12,7 @@ return {
     {
         'CopilotC-Nvim/CopilotChat.nvim',
         event = 'BufReadPre',
+        branch = 'main',
         opts = {
             show_help = 'no',
             prompts = {
@@ -21,12 +22,7 @@ return {
                 Refactor = 'Refactor the code to improve clarity and readability.',
             },
         },
-        build = function()
-            vim.defer_fn(function()
-                vim.cmd('UpdateRemotePlugins')
-                vim.notify('CopilotChat - Updated remote plugins. Please restart Neovim.')
-            end, 3000)
-        end,
+        build = "make tiktoken",
         keys = {
             { '<leader>ccb', ':CopilotChatBuffer<cr>',      desc = 'CopilotChat - Buffer' },
             { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code' },
