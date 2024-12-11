@@ -30,7 +30,7 @@ M.settings = {
   usePlaceholders = true,
   completeUnimported = true,
   staticcheck = true,
-  directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+  directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
   semanticTokens = true,
 }
 
@@ -41,7 +41,7 @@ M.on_attach = function(client, _) -- (client, bufnr)
       full = true,
       legend = {
         tokenTypes = semantic.tokenTypes,
-        tokenModifiers = semantic.tokenModifiers
+        tokenModifiers = semantic.tokenModifiers,
       },
       range = true,
     }

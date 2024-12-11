@@ -15,7 +15,7 @@ vim.opt.runtimepath:prepend(lazypath)
 -- Load plugin specs from lua/plugins/*.lua
 require('lazy').setup('plugins', {
   defaults = { lazy = true },
-  install = { colorscheme = { 'catpuccin' } },
+  install = { colorscheme = { 'catppuccin' } },
   checker = { enabled = true },
   concurrency = 5,
   ui = {

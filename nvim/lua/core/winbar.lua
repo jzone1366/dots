@@ -127,13 +127,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
 
     if vim.bo.filetype == 'dap-repl' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' '
-        .. '%#'
-        .. hl_group
-        .. '#'
-        .. icons.consoleDebug
-        .. 'Debug Console'
-        .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.consoleDebug .. 'Debug Console' .. '%*'
       return
     end
 

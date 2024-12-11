@@ -1,4 +1,4 @@
 return {
-    "tiagovla/scope.nvim",
-    lazy = true,
+  'tiagovla/scope.nvim',
+  lazy = true,
 }
