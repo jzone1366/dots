@@ -128,7 +128,7 @@ return {
             enabled = false,
           },
           char = {
-            keys = { 'f', 'F', 't', 'T', ';' }, -- NOTE: using "," here breaks which-key
+            keys = { 'f', 'F', 't', 'T' }, -- NOTE: using "," here breaks which-key
           },
         },
       },

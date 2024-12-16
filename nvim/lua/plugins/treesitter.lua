@@ -30,7 +30,6 @@ return {
         'devicetree',
         'dockerfile',
         'diff',
-        'elixir',
         'elm',
         'embedded_template',
         'erlang',
@@ -71,7 +70,6 @@ return {
         'scheme',
         'sql',
         'surface',
-        'teal',
         'terraform',
         'tmux',
         'toml',
@@ -153,7 +151,6 @@ return {
         kittybuf = 'bash',
         typescriptreact = 'tsx',
         zsh = 'bash',
-        eelixir = 'elixir',
       }
 
       for ft, parser in pairs(ft_to_parser_aliases) do
@@ -161,7 +158,6 @@ return {
       end
 
       -- local non_filetype_match_injection_language_aliases = {
-      --   ex = "elixir",
       --   pl = "perl",
       --   bash = "sh", -- reversing these two from the treesitter source
       --   uxn = "uxntal",

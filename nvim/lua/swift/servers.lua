@@ -61,64 +61,6 @@ M.list = function(default_capabilities, default_on_attach)
         },
       },
     },
-    lexical = function()
-      if not U.lsp.is_enabled_elixir_ls('lexical') then
-        return false
-      end
-
-      -- local function cmd() return vim.env.XDG_DATA_HOME .. "/lsp/lexical/_build/dev/package/lexical/bin/start_lexical.sh" end
-
-      return {
-        manual_install = true,
-        cmd = { vim.env.XDG_DATA_HOME .. '/lsp/lexical/_build/dev/package/lexical/bin/start_lexical.sh' },
-        single_file_support = true,
-        filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
-        root_dir = function(fname)
-          local matches = vim.fs.find({ 'mix.exs' }, { upward = true, limit = 2, path = fname })
-          local child_or_root_path, maybe_umbrella_path = unpack(matches)
-          local root_dir = vim.fs.dirname(maybe_umbrella_path or child_or_root_path)
-
-          -- right now i just want lexical for handling eelixir files (aka .exs files);
-          if string.match(fname, '%.exs') ~= nil then
-            return root_dir
-          end
-        end,
-      }
-    end,
-    elixirls = function()
-      if not U.lsp.is_enabled_elixir_ls('elixirls') then
-        return false
-      end
-
-      return {
-        manual_install = true,
-        cmd = { fmt('%s/lsp/elixir-ls/%s', vim.env.XDG_DATA_HOME, 'language_server.sh') },
-        filetypes = { 'elixir', 'eelixir', 'heex', 'surface' },
-        root_dir = function(fname)
-          local matches = vim.fs.find({ 'mix.exs' }, { upward = true, limit = 2, path = fname })
-          local child_or_root_path, maybe_umbrella_path = unpack(matches)
-          local root_dir = vim.fs.dirname(maybe_umbrella_path or child_or_root_path)
-
-          return root_dir
-        end,
-        single_file_support = true,
-        settings = {
-          mixEnv = 'dev',
-          mix_env = 'dev',
-          autoBuild = true,
-          fetchDeps = true,
-          incrementalDialyzer = true,
-          dialyzerEnabled = true,
-          dialyzerFormat = 'dialyxir_long',
-          enableTestLenses = true,
-          suggestSpecs = true,
-          autoInsertRequiredAlias = true,
-          signatureAfterComplete = true,
-        },
-        -- on_attach = function(client, buffer) vim.pprint({ client, buffer }) end,
-      }
-    end,
-    elmls = {},
     emmet_ls = {
       init_options = {
         showSuggestionsAsSnippets = false,
@@ -659,7 +601,6 @@ M.list = function(default_capabilities, default_on_attach)
         '.git'
       ),
     },
-    teal_ls = {},
     terraformls = {},
     -- NOTE: presently enabled via typescript-tools
     ts_ls = function()

@@ -174,6 +174,7 @@ return {
       })
     end,
   },
+
   {
     'echasnovski/mini.pick',
     version = false,

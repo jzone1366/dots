@@ -1,5 +1,6 @@
 local BORDER_STYLE = 'rounded'
 local fmt = string.format
+local icons = require('swift.settings.icons')
 
 vim.lsp.set_log_level('ERROR')
 
@@ -65,11 +66,12 @@ local M = {
   border_chars = border_chars[BORDER_STYLE],
   telescope_border_chars = telescope_border_chars[BORDER_STYLE],
   borders = borders,
+  icons = icons,
   colorscheme = 'catppuccin',
   default_colorcolumn = '81',
   notifier_enabled = true,
   debug_enabled = false,
-  picker = 'telescope', -- alt: telescope, fzf_lua
+  picker = 'mini', -- alt: telescope, fzf_lua
   formatter = 'conform', -- alt: null-ls/none-ls, conform
   tree = 'neo-tree', -- alt: tree = 'nvim-tree',
   explorer = 'oil', -- alt: dirbuf, oil
@@ -164,225 +166,6 @@ local M = {
     emmet_ls = 'em',
     lexical = 'lex',
   },
-
-  icons = {
-    lsp = {
-      error = '', -- alts: 󰬌      
-      warn = '󰔷', -- alts: 󰬞 󰔷   ▲ 󰔷
-      info = '󰖧', -- alts: 󰖧 󱂈 󰋼  󰙎   󰬐 󰰃     ● 󰬐 
-      hint = '▫', -- alts:  󰬏 󰰀  󰌶 󰰂 󰰂 󰰁 󰫵 󰋢   
-      ok = '✓', -- alts: ✓✓
-      clients = '', -- alts:     󱉓 󱡠 󰾂 
-    },
-
-    test = {
-      passed = '', --alts: 
-      failed = '', --alts: 
-      running = '',
-      skipped = '○',
-      unknown = '', -- alts: 
-    },
-
-    vscode = {
-      Text = '󰉿 ',
-      Method = '󰆧 ',
-      Function = '󰊕 ',
-      Constructor = ' ',
-      Field = '󰜢 ',
-      Variable = '󰀫 ',
-      Class = '󰠱 ',
-      Interface = ' ',
-      Module = ' ',
-      Property = '󰜢 ',
-      Unit = '󰑭 ',
-      Value = '󰎠 ',
-      Enum = ' ',
-      Keyword = '󰌋 ',
-      Snippet = ' ',
-      Color = '󰏘 ',
-      File = '󰈙 ',
-      Reference = '󰈇 ',
-      Folder = '󰉋 ',
-      EnumMember = ' ',
-      Constant = '󰏿 ',
-      Struct = '󰙅 ',
-      Event = ' ',
-      Operator = '󰆕 ',
-      TypeParameter = ' ',
-      Copilot = '',
-    },
-
-    kind = {
-      Array = '',
-      Boolean = '',
-      Class = '󰠱',
-      -- Class = "", -- Class
-      Codeium = '',
-      Color = '󰏘',
-      -- Color = "", -- Color
-      Constant = '󰏿',
-      -- Constant = "", -- Constant
-      Constructor = '',
-      -- Constructor = "", -- Constructor
-      Enum = '', -- alts: 
-      -- Enum = "", -- Enum -- alts: 了
-      EnumMember = '', -- alts: 
-      -- EnumMember = "", -- EnumMember
-      Event = '',
-      Field = '󰜢',
-      File = '󰈙',
-      -- File = "", -- File
-      Folder = '󰉋',
-      -- Folder = "", -- Folder
-      Function = '󰊕',
-      Interface = '',
-      Key = '',
-      Keyword = '󰌋',
-      -- Keyword = "", -- Keyword
-      Method = '',
-      Module = '',
-      Namespace = '',
-      Null = '󰟢', -- alts: 󰱥󰟢
-      Number = '󰎠', -- alts: 
-      Object = '',
-      -- Operator = "\u{03a8}", -- Operator
-      Operator = '󰆕',
-      Package = '',
-      Property = '󰜢',
-      -- Property = "", -- Property
-      Reference = '󰈇',
-      Snippet = '', -- alts: 
-      String = '', -- alts:  󱀍 󰀬 󱌯
-      Struct = '󰙅',
-      Text = '󰉿',
-      TypeParameter = '',
-      Unit = '󰑭',
-      -- Unit = "", -- Unit
-      Value = '󰎠',
-      Variable = '󰀫',
-      -- Variable = "", -- Variable, alts: 
-
-      -- Text = "",
-      -- Method = "",
-      -- Function = "",
-      -- Constructor = "",
-      -- Field = "",
-      -- Variable = "",
-      -- Class = "",
-      -- Interface = "",
-      -- Module = "",
-      -- Property = "",
-      -- Unit = "",
-      -- Value = "",
-      -- Enum = "",
-      -- Keyword = "",
-      -- Snippet = "",
-      -- Color = "",
-      -- File = "",
-      -- Reference = "",
-      -- Folder = "",
-      -- EnumMember = "",
-      -- Constant = "",
-      -- Struct = "",
-      -- Event = "",
-      -- Operator = "",
-      -- TypeParameter = "",
-    },
-
-    separators = {
-      thin_block = '│',
-      left_thin_block = '▏',
-      vert_bottom_half_block = '▄',
-      vert_top_half_block = '▀',
-      right_block = '🮉',
-      right_med_block = '▐',
-      light_shade_block = '░',
-    },
-
-    misc = {
-      formatter = '', -- alts: 󰉼
-      buffers = '',
-      clock = '',
-      ellipsis = '…',
-      lblock = '▌',
-      rblock = '▐',
-      bug = '', -- alts: 
-      question = '',
-      lock = '󰌾', -- alts:   
-      shaded_lock = '',
-      circle = '',
-      project = '',
-      dashboard = '',
-      history = '󰄉',
-      comment = '󰅺',
-      robot = '󰚩', -- alts: 󰭆
-      lightbulb = '󰌵',
-      file_tree = '󰙅',
-      help = '󰋖', -- alts: 󰘥 󰮥 󰮦 󰋗 󰞋 󰋖
-      search = '', -- alts: 󰍉
-      code = '',
-      telescope = '',
-      terminal = '', -- alts: 
-      gear = '',
-      package = '',
-      list = '',
-      sign_in = '',
-      check = '✓', -- alts: ✓
-      fire = '',
-      note = '󰎛',
-      bookmark = '',
-      pencil = '󰏫',
-      arrow_right = '',
-      caret_right = '',
-      chevron_right = '',
-      double_chevron_right = '»',
-      table = '',
-      calendar = '',
-      fold_open = '',
-      fold_close = '',
-      hydra = '🐙',
-      flames = '󰈸', -- alts: 󱠇󰈸
-      vsplit = '◫',
-      v_border = '▐ ',
-      virtual_text = '◆',
-      mode_term = '',
-      ln_sep = 'ℓ', -- alts: ℓ 
-      sep = '⋮',
-      perc_sep = '',
-      modified = '', -- alts: ∘✿✸✎ ○∘●●∘■ □ ▪ ▫● ◯ ◔ ◕ ◌ ◎ ◦ ◆ ◇ ▪▫◦∘∙⭘
-      mode = '',
-      vcs = '',
-      readonly = '',
-      prompt = '',
-      console_debug = '  ',
-      markdown = {
-        h1 = '◉', -- alts: 󰉫¹◉
-        h2 = '◆', -- alts: 󰉬²◆
-        h3 = '󱄅', -- alts: 󰉭³✿
-        h4 = '⭘', -- alts: 󰉮⁴○⭘
-        h5 = '◌', -- alts: 󰉯⁵◇◌
-        h6 = '', -- alts: 󰉰⁶
-        dash = '',
-      },
-    },
-
-    git = {
-      add = '▕', -- alts:  ▕,▕, ▎, ┃, │, ▌, ▎ 🮉
-      change = '▕', -- alts:  ▕ ▎║▎
-      mod = '',
-      remove = '', -- alts: 
-      delete = '🮉', -- alts: ┊▎▎
-      topdelete = '🮉',
-      changedelete = '🮉',
-      untracked = '▕',
-      ignore = '',
-      rename = '',
-      diff = '',
-      repo = '',
-      symbol = '', -- alts:  
-      unstaged = '󰛄',
-    },
-  },
 }
 
 M.apply_abbreviations = function()
@@ -390,11 +173,11 @@ M.apply_abbreviations = function()
 end
 
 M.apply = function()
-  -- function modified_icon() return vim.bo.modified and M.icons.misc.circle or "" end
+  -- function modified_icon() return vim.bo.modified and icons.misc.circle or "" end
   local settings = {
     g = {
-      mapleader = ',',
-      maplocalleader = ' ',
+      mapleader = ' ',
+      maplocalleader = ',',
       -- ruby_host_prog = "~/.local/share/mise/installs/ruby/latest",
       bullets_checkbox_markers = ' x',
       bullets_outline_levels = { 'ROM', 'ABC', 'rom', 'abc', 'std-' },
@@ -438,13 +221,6 @@ M.apply = function()
       cache_path = fmt('%s/.cache/nvim', home_path),
       local_state_path = fmt('%s/.local/state/nvim', home_path),
       local_share_path = fmt('%s/.local/share/nvim', home_path),
-      db_ui_path = fmt('%s/_sql', icloud_documents_path),
-      notes_path = fmt('%s/_notes', icloud_documents_path),
-      obsidian_path = fmt('%s/_obsidian', icloud_documents_path),
-      zk_path = fmt('%s/_zk', icloud_documents_path),
-      org_path = fmt('%s/_org', icloud_documents_path),
-      neorg_path = fmt('%s/_org', icloud_documents_path),
-      hs_emmy_path = fmt('%s/Spoons/EmmyLua.spoon', hammerspoon_path),
     },
     o = {
       cmdwinheight = 7,
@@ -542,10 +318,10 @@ M.apply = function()
         eob = ' ', -- suppress ~ at EndOfBuffer
         diff = '╱', -- alts: = ⣿ ░ ─
         msgsep = ' ', -- alts: ‾ ─
-        foldopen = M.icons.misc.fold_open, -- alts: ▾
+        foldopen = icons.misc.fold_open, -- alts: ▾
         -- foldsep = "│",
         foldsep = ' ',
-        foldclose = M.icons.misc.fold_close, -- alts: ▸
+        foldclose = icons.misc.fold_close, -- alts: ▸
         stl = ' ', -- alts: ─ ⣿ ░ ▐ ▒▓
         stlnc = ' ', -- alts: ─
       },

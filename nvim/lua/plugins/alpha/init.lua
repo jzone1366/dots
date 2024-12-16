@@ -25,10 +25,10 @@ return {
     dashboard.section.header.val = headers.random()
 
     dashboard.section.buttons.val = {
-      dashboard.button('<leader>sf', icons.kind.File .. ' Search File', '<cmd>Pick files<CR>'),
+      dashboard.button('<leader>ff', icons.kind.File .. ' Find File', '<cmd>Pick files<CR>'),
       --dashboard.button('<C-e>', icons.kind.Folder .. ' Find Manager', '<Cmd>NvimTreeToggle<CR>'),
       dashboard.button('<C-e>', icons.kind.Folder .. ' Find Manager', '<Cmd>Neotree toggle reveal position=left<CR>'),
-      dashboard.button('<leader>sgg', icons.kind.String .. ' Grep String', '<cmd>Pick grep_live<CR>'),
+      dashboard.button('<leader>fgg', icons.kind.String .. ' Find by Grep String', '<cmd>Pick grep_live<CR>'),
     }
 
     dashboard.section.footer.val = 'Keep Calm and Code On.'

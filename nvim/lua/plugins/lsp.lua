@@ -213,6 +213,11 @@ return {
           client.server_capabilities.semanticTokensProvider = vim.NIL
         end
 
+        if client.server_capabilities.documentSymbolProvider then
+          require('nvim-navic').attach(client, bufnr)
+          require('nvim-navbuddy').attach(client, bufnr)
+        end
+
         -- if client.server_capabilities.signatureHelpProvider then require("swift.lsp_signature").setup(client) end
         if client.server_capabilities.codeLensProvider then
           vim.lsp.codelens.refresh({ bufnr = bufnr })
@@ -396,52 +401,8 @@ return {
           vim.cmd('Trouble diagnostics toggle focus=true')
         end, '[g]oto [q]uickfixlist global diagnostics (trouble)')
 
-        -- map("gd", function() require("telescope.builtin").lsp_definitions() end, "[g]oto [d]efinition")
-        -- map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
-        -- map("gd", function() vim.lsp.buf.definition({ on_list = choose_list_first }) end, "[g]oto [d]efinition")
-        -- map("gd", vim.lsp.buf.definition, "[g]oto [d]efinition")
-        -- nmap("gd", go_to_unique_definition, "[g]oto [d]efinition")
-        nmap('gd', function()
-          vim.lsp.buf.definition({ on_list = choose_list_first })
-          vim.schedule(function()
-            vim.cmd.norm('zz')
-            swift.blink_cursorline(175)
-          end)
-        end, '[g]oto [d]efinition')
-        nmap('gD', function()
-          -- vim.schedule(function()
-          --   vim.cmd("vsplit | lua vim.lsp.buf.definition()")
-          --   vim.cmd("norm zz")
-          -- end)
-
-          -- vim.cmd.split({ mods = { vertical = true, split = "botright" } })
-          -- vim.defer_fn(function()
-          --   vim.lsp.buf.definition({ on_list = choose_list_first, reuse_win = false })
-          --   -- vim.cmd.FzfLua("lsp_definitions")
-          --   -- go_to_unique_definition()
-
-          -- end, 700)
-
-          require('fzf-lua').lsp_definitions({
-            sync = true,
-            jump_to_single_result = true,
-            jump_to_single_result_action = require('fzf-lua.actions').file_vsplit,
-          })
-        end, '[g]oto [d]efinition (split)')
-        -- map("gr", function() vim.cmd.Trouble("lsp_references focus=true") end, "[g]oto [r]eferences")
-        -- map("gr", function() vim.cmd.FzfLua("lsp_references") end, "[g]oto [r]eferences")
-        nmap('gr', function()
-          if not vim.tbl_contains(SETTINGS.references_exclusions, client.name) then
-            require('fzf-lua').lsp_references({
-              includeDeclaration = false,
-              ignore_current_line = true,
-            })
-          end
-        end, '[g]oto [r]eferences')
-        nmap('gI', require('telescope.builtin').lsp_implementations, '[g]oto [i]mplementation')
-        nmap('<leader>ltd', require('telescope.builtin').lsp_type_definitions, '[t]ype [d]efinition')
-        nmap('<leader>lsd', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
-        nmap('<leader>lsw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
+        --nmap('<leader>lsd', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
+        --nmap('<leader>lsw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
         vnmap('g.', function()
           fix_current_action()
         end, '[g]o run nearest/current code action')

@@ -1,6 +1,6 @@
 local fmt = string.format
 local map = vim.keymap.set
-local unmap = vim.api.nvim_del_keymap
+--local unmap = vim.api.nvim_del_keymap
 
 local U = require('swift.utils')
 local M = {}
@@ -98,6 +98,7 @@ local function leaderMapper(mode, key, rhs, opts)
   end
   map(mode, '<leader>' .. key, rhs, opts)
 end
+
 local function localLeaderMapper(mode, key, rhs, opts)
   if type(opts) == 'string' then
     opts = { desc = opts }
@@ -124,9 +125,6 @@ end
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- [[ command mode ]] ----------------------------------------------------------
 map('v', '<leader>S', ':!sort<cr>', { desc = 'Sort selection' })
@@ -237,8 +235,9 @@ end, { desc = 'Open all folds' })
 map('n', 'zo', 'zO', { desc = 'Open all folds descending from current line' })
 
 -- [[ plugin management ]] -----------------------------------------------------
-map('n', '<leader>ps', '<cmd>Lazy sync<cr>', { desc = '[lazy] sync plugins' })
-map('n', '<leader>pm', '<cmd>Lazy<cr>', { desc = '[lazy] plugins' })
+map('n', '<leader>/s', '<cmd>Lazy sync<cr>', { desc = '[lazy] sync plugins' })
+map('n', '<leader>/m', '<cmd>Lazy<cr>', { desc = '[lazy] plugins' })
+map('n', '<leader>/u', '<cmd>Lazy update<cr>', { desc = '[lazy] update plugins' })
 
 -- [[ indents ]] ---------------------------------------------------------------
 local indent_opts = { desc = 'VSCode-style block indentation' }
@@ -486,13 +485,6 @@ map('n', 'Sy', function()
   vim.notify(resultString, vim.log.levels.INFO, { title = 'Yanked capture', render = 'wrapped-compact' })
 end, { desc = 'Copy treesitter captures under cursor' })
 
--- [[ terminal ]] --------------------------------------------------------------
-
-map('n', '<leader>tt', '<cmd>T direction=horizontal move_on_direction_change=true<cr>', { desc = 'horizontal' })
-map('n', '<leader>tf', '<cmd>T direction=float move_on_direction_change=true<cr>', { desc = 'float' })
-map('n', '<leader>tv', '<cmd>T direction=vertical move_on_direction_change=true<cr>', { desc = 'vertical' })
-map('n', '<leader>tp', '<cmd>T direction=tab<cr>', { desc = 'tab-persistent' })
-
 -- [[ edit files / file explorering / executions ]] ------------------------------------------------------------
 local editFileMappings = {
   r = {
@@ -577,85 +569,6 @@ local editFileMappings = {
       vim.notify(fmt('yanked %s to clipboard', vim.fn.expand('%')))
     end,
     '[e]xplore file -> yank path',
-  },
-  xf = {
-    function()
-      local filetype = vim.bo.ft
-      local file = vim.fn.expand('%') -- Get the current file name
-      local first_line = vim.fn.getline(1) -- Get the first line of the file
-      if string.match(first_line, '^#!/') then -- If first line contains shebang
-        local escaped_file = vim.fn.shellescape(file) -- Properly escape the file name for shell commands
-
-        -- Execute the script on a tmux pane on the right. On my mac I use zsh, so
-        -- running this script with bash to not execute my zshrc file after
-        -- vim.cmd("silent !tmux split-window -h -l 60 'bash -c \"" .. escaped_file .. "; exec bash\"'")
-        -- `-l 60` specifies the size of the tmux pane, in this case 60 columns
-        vim.notify('executing shell script in tmux split')
-        vim.cmd(
-          'silent !tmux split-window -h -l 60 \'bash -c "'
-            .. escaped_file
-            .. '; echo; echo Press any key to exit...; read -n 1; exit"\''
-        )
-      elseif filetype == 'lua' then
-        vim.notify('sourcing file')
-        vim.cmd('source %')
-      else
-        vim.notify('Not a script. Shebang line not found.')
-        -- vim.cmd("echo 'Not a script. Shebang line not found.'")
-      end
-    end,
-    'e[x]ecute [f]ile',
-  },
-  xl = {
-    function()
-      local file_dir = vim.fn.expand(vim.g.notes_path)
-      -- local file_dir = vim.fn.expand("%:p:h") -- Get the directory of the current file
-      local pane_width = 60
-      local right_pane_id =
-        vim.fn.system("tmux list-panes -F '#{pane_id} #{pane_width}' | awk '$2 == " .. pane_width .. " {print $1}'")
-      if right_pane_id ~= '' then
-        -- If the right pane exists, close it
-        vim.fn.system('tmux kill-pane -t ' .. right_pane_id)
-      else
-        -- If the right pane doesn't exist, open it
-        vim.fn.system('tmux split-window -h -l ' .. pane_width .. ' \'cd "' .. file_dir .. '" && zsh -i\'')
-      end
-    end,
-    'e[x]ecute [l]ine',
-  },
-  tt = {
-    function()
-      local file_dir = vim.fn.expand('%:p:h') -- Get the directory of the current file
-      local pane_width = 60
-      local right_pane_id =
-        vim.fn.system("tmux list-panes -F '#{pane_id} #{pane_width}' | awk '$2 == " .. pane_width .. " {print $1}'")
-      if right_pane_id ~= '' then
-        -- If the right pane exists, close it
-        vim.fn.system('tmux kill-pane -t ' .. right_pane_id)
-      else
-        -- If the right pane doesn't exist, open it
-        vim.fn.system('tmux split-window -h -l ' .. pane_width .. ' \'cd "' .. file_dir .. '" && zsh -i\'')
-        vim.fn.system("tmux send-keys 'ls' 'C-m'")
-      end
-    end,
-    '[e]xplore cwd files -> [t]mux',
-  },
-  tn = {
-    function()
-      local file_dir = vim.fn.expand(vim.g.notes_path)
-      local pane_width = 60
-      local right_pane_id =
-        vim.fn.system("tmux list-panes -F '#{pane_id} #{pane_width}' | awk '$2 == " .. pane_width .. " {print $1}'")
-      if right_pane_id ~= '' then
-        -- If the right pane exists, close it
-        vim.fn.system('tmux kill-pane -t ' .. right_pane_id)
-      else
-        -- If the right pane doesn't exist, open it
-        vim.fn.system('tmux split-window -h -l ' .. pane_width .. ' \'cd "' .. file_dir .. '" && zsh -i\'')
-        vim.fn.system("tmux send-keys 'ls' 'C-m'")
-      end
-    end,
-    '[e]xplore notes files -> tmux',
   },
 }
 -- <leader>e<key>
