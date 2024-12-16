@@ -37,7 +37,6 @@ local config = {
       enabled = true,
       custom_bg = 'NONE',
     },
-    neotree = true,
     notify = true,
   },
 }

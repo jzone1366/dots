@@ -2,7 +2,6 @@ local map = require('utils').map
 
 return {
   'nvim-tree/nvim-tree.lua',
-  cond = vim.g.tree == 'nvim-tree',
   cmd = {
     'NvimTreeOpen',
     'NvimTreeClose',

@@ -4,6 +4,7 @@ return {
     version = false,
     config = function()
       require('mini.icons').setup()
+
       -- Mocks nvim-web-devicons, for plugins that don't support Mini.Icons
       MiniIcons.mock_nvim_web_devicons()
     end,

@@ -12,3 +12,4 @@ config/nvim/.netrwhist
 config/**/plugged/**/*
 config/fish/fish_variables
 config/fish/*.tmp.*
+.DS_Store

@@ -2,7 +2,7 @@ return {
   'goolord/alpha-nvim',
   lazy = false,
   config = function()
-    local icons = require('swift.settings').icons
+    local icons = require('theme.icons')
     local alpha = require('alpha')
     local dashboard = require('alpha.themes.dashboard')
     local headers = require('plugins.alpha.headers')
@@ -25,10 +25,9 @@ return {
     dashboard.section.header.val = headers.random()
 
     dashboard.section.buttons.val = {
-      dashboard.button('<leader>sf', icons.kind.File .. ' Search File', '<cmd>Pick files<CR>'),
-      --dashboard.button('<C-e>', icons.kind.Folder .. ' Find Manager', '<Cmd>NvimTreeToggle<CR>'),
-      dashboard.button('<C-e>', icons.kind.Folder .. ' Find Manager', '<Cmd>Neotree toggle reveal position=left<CR>'),
-      dashboard.button('<leader>sgg', icons.kind.String .. ' Grep String', '<cmd>Pick grep_live<CR>'),
+      dashboard.button('<leader>sf', icons.fileNoBg .. ' Search File', '<cmd>Pick files<CR>'),
+      dashboard.button('<C-e>', icons.file .. ' Find Manager', '<Cmd>NvimTreeToggle<CR>'),
+      dashboard.button('<leader>sgg', icons.word .. ' Grep String', '<cmd>Pick grep_live<CR>'),
     }
 
     dashboard.section.footer.val = 'Keep Calm and Code On.'
