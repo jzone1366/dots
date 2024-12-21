@@ -280,6 +280,12 @@ map('x', 'D', '"_D')
 map('x', 'c', '"_c')
 map('x', 'C', '"_C')
 
+-- Better window movement
+map('n', '<C-h>', '<C-w>h', { silent = true, desc = 'Move to the window to the left' })
+map('n', '<C-j>', '<C-w>j', { silent = true, desc = 'Move to the window below' })
+map('n', '<C-k>', '<C-w>k', { silent = true, desc = 'Move to the window above' })
+map('n', '<C-l>', '<C-w>l', { silent = true, desc = 'Move to the window to the right' })
+
 map('n', 'dd', function()
   if vim.fn.prevnonblank('.') ~= vim.fn.line('.') then
     return '"_dd'
@@ -553,7 +559,7 @@ local editFileMappings = {
             { 'File deletion canceled.', 'Normal' },
           }, false, {})
         end
-        -- end)
+      -- end)
       else
         vim.api.nvim_echo({
           { 'No file to delete', 'WarningMsg' },

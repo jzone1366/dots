@@ -6,13 +6,6 @@ local git_keys = {}
 if vim.g.gitter == 'neogit' then
   git_keys = {
     {
-      '<leader>gS',
-      function()
-        require('neogit').open()
-      end,
-      desc = 'neogit: open status buffer',
-    },
-    {
       '<leader>gg',
       function()
         require('neogit').open()
@@ -122,43 +115,23 @@ return {
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
-      -- signs = {
-      --   add = { text = "+" },
-      --   change = { text = "~" },
-      --   delete = { text = "_" },
-      --   topdelete = { text = "‾" },
-      --   changedelete = { text = "~" },
-      -- },
-
       signs = {
         add = {
-          -- hl = "GitSignsAdd",
-          -- culhl = "GitSignsAddCursorLine",
-          -- numhl = "GitSignsAddNum",
           text = icons.git.add,
-        }, -- alts: ▕, ▎, ┃, │, ▌, ▎ 🮉
+        },
         change = {
-          -- hl = "GitSignsChange",
-          -- culhl = "GitSignsChangeCursorLine",
-          -- numhl = "GitSignsChangeNum",
           text = icons.git.change,
         }, -- alts: ▎║▎
         delete = {
-          -- hl = "GitSignsDelete",
-          -- culhl = "GitSignsDeleteCursorLine",
-          -- numhl = "GitSignsDeleteNum",
           text = icons.git.delete,
         }, -- alts: ┊▎▎
         topdelete = {
-          -- hl = "GitSignsDelete",
           text = icons.git.topdelete,
         }, -- alts: ▌ ▄▀
         changedelete = {
-          -- hl = "GitSignsChange",
           text = icons.git.changedelete,
         }, -- alts: ▌
         untracked = {
-          -- hl = "GitSignsAdd",
           text = icons.git.untracked,
         }, -- alts: ┆ ▕
         signs_staged = {

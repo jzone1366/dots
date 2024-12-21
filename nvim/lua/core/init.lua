@@ -1,5 +1,0 @@
-require('core.globals')
-require('core.options')
-require('core.lazy')
-require('core.keymappings')
-require('core.winbar')

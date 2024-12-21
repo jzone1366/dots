@@ -8,11 +8,11 @@ return {
   dependencies = {
     'rafamadriz/friendly-snippets',
     'saghen/blink.compat',
+    'giuxtaposition/blink-cmp-copilot',
     { 'chrisgrieser/cmp-nerdfont', lazy = true },
     { 'hrsh7th/cmp-emoji', lazy = true },
   },
-  event = 'VeryLazy',
-
+  event = 'InsertEnter',
   opts = {
     keymap = {
       preset = 'enter',
@@ -46,17 +46,7 @@ return {
 
     sources = {
       -- add lazydev to your completion providers
-      completion = {
-        enabled_providers = {
-          'lsp',
-          'path',
-          'snippets',
-          'buffer',
-          'lazydev',
-          'nerdfont',
-          'emoji',
-        },
-      },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'nerdfont', 'emoji', 'copilot' },
       providers = {
         -- dont show LuaLS require statements when lazydev has items
         lsp = { fallback_for = { 'lazydev' } },
@@ -89,8 +79,24 @@ return {
             return items
           end,
         },
+        copilot = {
+          name = 'copilot',
+          module = 'blink-cmp-copilot',
+          score_offset = 100,
+          async = true,
+          transform_items = function(_, items)
+            local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
+            local kind_idx = #CompletionItemKind + 1
+            CompletionItemKind[kind_idx] = 'Copilot'
+            for _, item in ipairs(items) do
+              item.kind = kind_idx
+            end
+            return items
+          end,
+        },
       },
     },
+
     windows = {
       documentation = {
         border = SETTINGS.borders.blink_empty,

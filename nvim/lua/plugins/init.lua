@@ -9,13 +9,6 @@ return {
     { 'tpope/vim-apathy', event = { 'VeryLazy' } },
     { 'tpope/vim-scriptease', event = { 'VeryLazy' }, cmd = { 'Messages', 'Mess', 'Noti' } },
     { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
-    {
-      'EinfachToll/DidYouMean',
-      event = { 'BufNewFile' },
-      init = function()
-        vim.g.dym_use_fzf = true
-      end,
-    },
     { 'ryvnf/readline.vim', event = 'CmdlineEnter' },
     {
       'farmergreg/vim-lastplace',
@@ -35,144 +28,13 @@ return {
     },
     {
       'numToStr/Comment.nvim',
+      dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
       opts = {
         ignore = '^$', -- ignore blank lines
       },
       config = function(_, opts)
         require('Comment').setup(opts)
       end,
-    },
-    {
-      'folke/trouble.nvim',
-      cmd = { 'TroubleToggle', 'Trouble' },
-      opts = {
-        auto_open = false,
-        use_diagnostic_signs = true,
-      },
-    },
-    {
-      'mrjones2014/smart-splits.nvim',
-      lazy = false,
-      commit = '36bfe63246386fc5ae2679aa9b17a7746b7403d5',
-      opts = { at_edge = 'stop' },
-      keys = {
-        {
-          '<A-h>',
-          function()
-            require('smart-splits').resize_left()
-          end,
-        },
-        {
-          '<A-l>',
-          function()
-            require('smart-splits').resize_right()
-          end,
-        },
-        {
-          '<C-h>',
-          function()
-            require('smart-splits').move_cursor_left()
-            vim.cmd.normal('zz')
-          end,
-        },
-        {
-          '<C-j>',
-          function()
-            require('smart-splits').move_cursor_down()
-          end,
-        },
-        {
-          '<C-k>',
-          function()
-            require('smart-splits').move_cursor_up()
-          end,
-        },
-        {
-          '<C-l>',
-          function()
-            require('smart-splits').move_cursor_right()
-            vim.cmd.normal('zz')
-          end,
-        },
-      },
-    },
-    {
-      'folke/flash.nvim',
-      event = 'VeryLazy',
-      opts = {
-        jump = { nohlsearch = true, autojump = false },
-        prompt = {
-          -- Place the prompt above the statusline.
-          win_config = { row = -3 },
-        },
-        search = {
-          multi_window = false,
-          mode = 'exact',
-          exclude = {
-            'cmp_menu',
-            'flash_prompt',
-            'qf',
-            function(win)
-              -- Floating windows from bqf.
-              if vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(win)):match('BqfPreview') then
-                return true
-              end
-
-              -- Non-focusable windows.
-              return not vim.api.nvim_win_get_config(win).focusable
-            end,
-          },
-        },
-        modes = {
-          search = {
-            enabled = false,
-          },
-          char = {
-            keys = { 'f', 'F', 't', 'T' }, -- NOTE: using "," here breaks which-key
-          },
-        },
-      },
-      keys = {
-        {
-          's',
-          mode = { 'n', 'x', 'o' },
-          function()
-            require('flash').jump()
-          end,
-        },
-        {
-          'm',
-          mode = { 'o', 'x' },
-          function()
-            require('flash').treesitter()
-          end,
-        },
-        -- { "vn", mode = { "n", "o", "x" }, function() require("flash").treesitter() end },
-        {
-          'r',
-          function()
-            require('flash').remote()
-          end,
-          mode = 'o',
-          desc = 'Remote Flash',
-        },
-        {
-          '<c-s>',
-          function()
-            require('flash').toggle()
-          end,
-          mode = { 'c' },
-          desc = 'Toggle Flash Search',
-        },
-        {
-          'S',
-          function()
-            require('flash').treesitter_search()
-          end,
-          mode = { 'o', 'x' },
-          desc = 'Flash Treesitter Search',
-        },
-      },
     },
   },
   {
@@ -205,7 +67,6 @@ return {
       local npairs = require('nvim-autopairs')
       npairs.setup()
 
-      npairs.add_rules(require('nvim-autopairs.rules.endwise-elixir'))
       npairs.add_rules(require('nvim-autopairs.rules.endwise-lua'))
       npairs.add_rules(require('nvim-autopairs.rules.endwise-ruby'))
     end,
@@ -236,7 +97,6 @@ return {
       })
     end,
   },
-  { 'lambdalisue/suda.vim', event = { 'VeryLazy' } },
   {
     'OXY2DEV/helpview.nvim',
     lazy = false,
@@ -292,12 +152,8 @@ return {
   },
   {
     'mcauley-penney/visual-whitespace.nvim',
-    --    branch = 'async',
     config = function()
       local U = require('swift.utils')
-      -- local ws_bg = U.get_hl_hex({ name = "Visual" })["bg"]
-      -- local ws_fg = U.get_hl_hex({ name = "Comment" })["fg"]
-
       local ws_bg = U.hl.get_hl('Visual', 'bg')
       local ws_fg = U.hl.get_hl('Comment', 'fg')
 

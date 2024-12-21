@@ -287,6 +287,7 @@ return {
           async_budget = 1,
           max_view_entries = 200,
         },
+        experimental = { ghost_text = true },
         preselect = cmp.PreselectMode.None,
         snippet = {
           expand = function(args)
@@ -294,10 +295,6 @@ return {
           end,
         },
         completion = { completeopt = 'menu,menuone,noinsert,noselect' },
-        -- confirmation = {
-        --   default_behavior = require("cmp.types").cmp.ConfirmBehavior.Insert,
-        --   get_commit_characters = function(commit_characters) return commit_characters end,
-        -- },
         entries = {
           name = 'custom',
           selection_order = 'near_cursor',

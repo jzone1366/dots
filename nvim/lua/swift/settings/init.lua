@@ -78,20 +78,17 @@ local M = {
   tester = 'vim-test', -- alt: neotest, vim-test, quicktest
   gitter = 'neogit', -- alt: neogit, fugitive
   snipper = 'snippets', -- alt: vsnip, luasnip, snippets (nvim-builtin)
-  note_taker = 'markdown_oxide', -- alt: zk, marksman, markdown_oxide, obsidian
+  note_taker = 'zk', -- alt: zk, marksman, markdown_oxide, obsidian
   ai = 'copilot', -- alt: minuet, neocodeium, codecompanion
   completer = 'cmp', -- alt: cmp, blink, epo
   ts_ignored_langs = {}, -- alt: { "svg", "json", "heex", "jsonc" }
   is_screen_sharing = false,
   enabled_plugins = {
     'abbreviations',
-    'megaline',
-    'megacolumn',
     'term',
     'lsp',
     'repls',
     'cursorline',
-    'colorcolumn',
     'windows',
     'numbers',
     'folds',
@@ -136,28 +133,12 @@ local M = {
     'yaml',
     'json',
   },
+
   highlight_color = {
     mode = 'background',
     enable_tailwind = true,
   },
-  colorizer = {
-    filetypes = { '*', '!lazy', '!gitcommit', '!NeogitCommitMessage', '!oil' },
-    buftypes = { '*', '!prompt', '!nofile', '!oil' },
-    user_default_options = {
-      RGB = false, -- #RGB hex codes
-      RRGGBB = true, -- #RRGGBB hex codes
-      names = false, -- "Name" codes like Blue or blue
-      RRGGBBAA = true, -- #RRGGBBAA hex codes
-      AARRGGBB = true, -- 0xAARRGGBB hex codes
-      rgb_fn = true, -- CSS rgb() and rgba() functions
-      hsl_fn = true, -- CSS hsl() and hsla() functions
-      -- css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-      css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-      sass = { enable = false, parsers = { 'css' } }, -- Enable sass colors
-      mode = 'background', -- Set the display mode.
-    },
-    -- all the sub-options of filetypes apply to buftypes
-  },
+
   lsp_lookup = {
     elixirls = 'ex',
     nextls = 'next',
@@ -178,7 +159,6 @@ M.apply = function()
     g = {
       mapleader = ' ',
       maplocalleader = ',',
-      -- ruby_host_prog = "~/.local/share/mise/installs/ruby/latest",
       bullets_checkbox_markers = ' x',
       bullets_outline_levels = { 'ROM', 'ABC', 'rom', 'abc', 'std-' },
       mkdp_echo_preview_url = 1,

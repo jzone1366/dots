@@ -1,7 +1,24 @@
 local SETTINGS = swift.req('swift.settings')
 
 return {
-  { 'echasnovski/mini.icons', version = false },
+  {
+    'echasnovski/mini.icons',
+    version = false,
+    config = function()
+      require('mini.icons').setup()
+
+      -- Mocks nvim-web-devicons, for plugins that don't support Mini.Icons
+      MiniIcons.mock_nvim_web_devicons()
+    end,
+  },
+  {
+    'echasnovski/mini.extra',
+    lazy = false,
+    version = false,
+    config = function()
+      require('mini.extra').setup()
+    end,
+  },
   {
     'echasnovski/mini.pick',
     version = false,

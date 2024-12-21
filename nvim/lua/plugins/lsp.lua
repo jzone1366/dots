@@ -406,11 +406,9 @@ return {
         vnmap('g.', function()
           fix_current_action()
         end, '[g]o run nearest/current code action')
-        vnmap('<leader>la', vim.lsp.buf.code_action, 'code [a]ctions')
-        vnmap('<leader>lca', vim.lsp.buf.code_action, '[c]ode [a]ctions')
-        nmap('ga', function()
-          vim.cmd.FzfLua('lsp_code_actions')
-        end, '[g]o [c]ode [a]ctions')
+        --vnmap('<leader>la', vim.lsp.buf.code_action, 'code [a]ctions')
+        --vnmap('<leader>lca', vim.lsp.buf.code_action, '[c]ode [a]ctions')
+        nmap('ga', vim.lsp.buf.code_action, '[g]o [c]ode [a]ctions')
         -- nmap("K", vim.lsp.buf.hover, "hover documentation")
 
         if client.supports_method(methods.textDocument_signatureHelp) then

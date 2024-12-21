@@ -1,4 +1,4 @@
-local icons = reqire('swift.settings.icons')
+local icons = require('swift.settings.icons')
 
 local M = {}
 
