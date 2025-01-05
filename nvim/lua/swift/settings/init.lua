@@ -10,15 +10,6 @@ local border_chars = {
   rounded = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
 }
 
-local telescope_border_chars = {
-  none = { '', '', '', '', '', '', '', '' },
-  single = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-  double = { '═', '║', '═', '║', '╔', '╗', '╝', '╚' },
-  rounded = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-  solid = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-  shadow = { '', '', '', '', '', '', '', '' },
-}
-
 local borders = {
   round = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
   none = { '', '', '', '', '', '', '', '' },
@@ -64,21 +55,18 @@ local M = {
   border_style = BORDER_STYLE,
   border = current_border(),
   border_chars = border_chars[BORDER_STYLE],
-  telescope_border_chars = telescope_border_chars[BORDER_STYLE],
   borders = borders,
   icons = icons,
   colorscheme = 'catppuccin',
   default_colorcolumn = '81',
   notifier_enabled = true,
   debug_enabled = false,
-  picker = 'mini', -- alt: telescope, fzf_lua
+  picker = 'mini', -- alt: fzf_lua
   formatter = 'conform', -- alt: null-ls/none-ls, conform
-  tree = 'neo-tree', -- alt: tree = 'nvim-tree',
-  explorer = 'oil', -- alt: dirbuf, oil
+  tree = 'neo-tree', -- alt: 'nvim-tree',
   tester = 'vim-test', -- alt: neotest, vim-test, quicktest
   gitter = 'neogit', -- alt: neogit, fugitive
   snipper = 'snippets', -- alt: vsnip, luasnip, snippets (nvim-builtin)
-  note_taker = 'zk', -- alt: zk, marksman, markdown_oxide, obsidian
   ai = 'copilot', -- alt: minuet, neocodeium, codecompanion
   completer = 'cmp', -- alt: cmp, blink, epo
   ts_ignored_langs = {}, -- alt: { "svg", "json", "heex", "jsonc" }
@@ -94,13 +82,6 @@ local M = {
     'folds',
     'env',
   },
-  disabled_semantic_tokens = {
-    -- "typescript",
-    -- "javascript",
-    -- "lua",
-  },
-  enabled_inlay_hints = {},
-  disabled_lsp_formatters = { 'tailwindcss', 'html', 'ts_ls', 'ls_emmet', 'zk', 'sumneko_lua' },
   ---@format disable
   enabled_elixir_ls = { 'elixirls', 'nextls', '' },
   completion_exclusions = { 'elixirls', '', 'lexical' },
@@ -386,7 +367,7 @@ M.apply = function()
     },
     pattern = {
       ['.*%.conf'] = 'conf',
-      -- [".*%.env%..*"] = "env",
+      ['.*%.env%..*'] = 'env',
       ['.*%.eslintrc%..*'] = 'jsonc',
       ['tsconfig*.json'] = 'jsonc',
       ['.*/%.vscode/.*%.json'] = 'jsonc',
@@ -400,7 +381,6 @@ M.apply = function()
       ['.nvimrc'] = 'lua',
       ['default-*%-packages'] = 'conf',
     },
-    -- ['.*tmux.*conf$'] = 'tmux',
   })
 
   M.apply_abbreviations()

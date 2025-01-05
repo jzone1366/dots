@@ -23,6 +23,10 @@ ln -sf "$DOTFILES/nvim/after/ftplugin" "$VIMCONFIG/after"
 rm -rf "$VIMCONFIG/after/plugin"
 ln -sf "$DOTFILES/nvim/after/plugin" "$VIMCONFIG/after"
 
+# after/queries
+rm -rf "$VIMCONFIG/after/queries"
+ln -sf "$DOTFILES/nvim/after/queries" "$VIMCONFIG/after"
+
 ## UNCOMMENT BELOW WHEN YOU ADD THESE FILES
 ## macros
 #rm -rf "$VIMCONFIG/macros"

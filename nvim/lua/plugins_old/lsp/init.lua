@@ -19,7 +19,7 @@ return {
 
   -- Autocompletion
   {
-    'hrsh7th/nvim-cmp', -- Go back to this if he updates
+    'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
       'onsails/lspkind-nvim',

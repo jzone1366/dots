@@ -110,7 +110,6 @@ return {
         mode = 'i',
         desc = '󰚩 Clear suggestion',
       },
-      -- { "<C-w>", function() require("neocodeium").accept_word() end, mode = "i", desc = "󰚩 Accept word" },
       {
         '<A-n>',
         function()
@@ -131,8 +130,6 @@ return {
         '<leader>oa',
         function()
           vim.cmd.NeoCodeium('toggle')
-          -- local on = require("neocodeium.options").options.enabled
-          -- require("config.utils").notify("NeoCodeium", on and "enabled" or "disabled", "info")
         end,
         desc = '󰚩 NeoCodeium Suggestions',
       },

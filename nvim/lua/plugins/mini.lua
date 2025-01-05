@@ -25,7 +25,9 @@ return {
     lazy = false,
     cond = vim.g.picker == 'mini',
     config = function()
-      require('mini.pick').setup({
+      local picker = require('mini.pick')
+      vim.ui.select = picker.ui_select
+      picker.setup({
         options = {
           content_from_bottom = true,
         },

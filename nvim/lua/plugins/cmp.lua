@@ -89,6 +89,7 @@ return {
     event = { 'InsertEnter *', 'CmdlineEnter *' },
     priority = 100,
     dependencies = {
+      'onsails/lspkind-nvim',
       {
         'petertriho/cmp-git',
         config = function()
@@ -124,7 +125,7 @@ return {
       { 'lukas-reineke/cmp-under-comparator' },
       -- { "davidsierradz/cmp-conventionalcommits" },
       { 'dmitmel/cmp-cmdline-history' },
-      { 'andersevenrud/cmp-tmux', cond = false },
+      { 'andersevenrud/cmp-tmux',              cond = false },
 
       {
         'zbirenbaum/copilot-cmp',
@@ -133,10 +134,10 @@ return {
         end,
       },
 
-      { 'iguanacucumber/mag-nvim-lsp', name = 'cmp-nvim-lsp', opts = {} },
-      { 'iguanacucumber/mag-nvim-lua', name = 'cmp-nvim-lua' },
-      { 'iguanacucumber/mag-buffer', name = 'cmp-buffer' },
-      { 'iguanacucumber/mag-cmdline', name = 'cmp-cmdline' },
+      { 'iguanacucumber/mag-nvim-lsp',                         name = 'cmp-nvim-lsp', opts = {} },
+      { 'iguanacucumber/mag-nvim-lua',                         name = 'cmp-nvim-lua' },
+      { 'iguanacucumber/mag-buffer',                           name = 'cmp-buffer' },
+      { 'iguanacucumber/mag-cmdline',                          name = 'cmp-cmdline' },
 
       { url = 'https://codeberg.org/FelipeLema/cmp-async-path' }, -- not by me, but better than cmp-path
     },
@@ -457,7 +458,7 @@ return {
         },
         sources = cmp.config.sources({
           { name = 'nvim_lsp_signature_help' },
-          { name = 'copilot', priority = 11, max_item_count = 3 },
+          { name = 'copilot',                priority = 11, max_item_count = 3 },
           {
             name = 'snippets',
             group_index = 1,
@@ -473,7 +474,7 @@ return {
             end,
           },
           { name = 'luasnip', group_index = 1, max_item_count = 5, keyword_length = 1 },
-          { name = 'vsnip', group_index = 1, max_item_count = 5, keyword_length = 1 },
+          { name = 'vsnip',   group_index = 1, max_item_count = 5, keyword_length = 1 },
           -- { name = "nvim_lua" },
           {
             name = 'nvim_lsp',
@@ -506,7 +507,7 @@ return {
         mapping = cmp.mapping.preset.cmdline(cmdline_keymaps),
         sources = {
           { name = 'nvim_lsp_document_symbol' },
-          { name = 'buffer', min_match_length = 2, max_item_count = 5 },
+          { name = 'buffer',                  min_match_length = 2, max_item_count = 5 },
         },
       })
 

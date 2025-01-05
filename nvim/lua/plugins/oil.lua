@@ -1,6 +1,7 @@
 return {
   'stevearc/oil.nvim',
   -- event = "VeryLazy",
+  cond = false,
   lazy = false,
   cmd = { 'Oil' },
   config = function()

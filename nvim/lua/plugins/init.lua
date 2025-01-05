@@ -38,11 +38,6 @@ return {
     },
   },
   {
-    'nacro90/numb.nvim',
-    event = 'CmdlineEnter',
-    opts = {},
-  },
-  {
     'windwp/nvim-ts-autotag',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     event = { 'BufReadPre', 'BufNewFile' },
@@ -139,16 +134,6 @@ return {
   {
     'tzachar/highlight-undo.nvim',
     opts = {},
-  },
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-        { path = 'wezterm-types', mods = { 'wezterm' } },
-      },
-    },
   },
   {
     'mcauley-penney/visual-whitespace.nvim',

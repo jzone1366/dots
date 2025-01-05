@@ -1,15 +1,8 @@
 local fmt = string.format
 local map = vim.keymap.set
---local unmap = vim.api.nvim_del_keymap
 
 local U = require('swift.utils')
 local M = {}
-
--- [[ unmap ]] -----------------------------------------------------------------
---unmap('n', 'gra') -- lsp default: code actions
---unmap('n', 'grn') -- lsp default: rename
---unmap('n', 'grr') -- lsp default: references
---unmap('n', 'gri') -- lsp default: implementation
 
 -- `:help vim.keymap.set()`
 -- local nmap, cmap, xmap, imap, vmap, omap, tmap, smap
@@ -156,13 +149,6 @@ imap('<C-e>', '<End>')
 map('n', '<esc>', function()
   U.deluxe_clear_ui()
 end, { noremap = false, silent = true, desc = 'EscDeluxe + Clear/Reset UI' })
-
---  See `:help wincmd` for a list of all window commands
--- @see: smart-splits.nvim
--- map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
--- map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
--- map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
--- map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 map('n', '<leader>w', function(_args)
   vim.api.nvim_command('silent! write')
@@ -363,7 +349,6 @@ map('x', '<leader>h', '"hy:%s/<C-r>h/<C-r>h/gc<left><left><left>', {
 })
 
 -- [[ spelling ]] --------------------------------------------------------------
--- map("n", "<leader>s", "z=e") -- Correct current word
 map('n', '<localleader>sj', ']s', { desc = '[spell] move to next misspelling' })
 map('n', '<localleader>sk', '[s', { desc = '[spell] move to previous misspelling' })
 map('n', '<localleader>sf', function()
