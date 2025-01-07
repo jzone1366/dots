@@ -31,20 +31,11 @@ require('lazy').setup(plugin_spec, {
   -- rocks = true,
   -- debug = false,
   -- defaults = { lazy = true },
-  -- checker = { enabled = false },
-  -- diff = {
-  --   cmd = "terminal_git",
-  -- },
-  -- install = {
-  --   missing = true,
-  --   colorscheme = { vim.g.colorscheme, "default", "habamax" },
-  -- },
-  dev = {
-    -- directory where you store your local plugin projects
-    path = '~/workspace/personal/',
-    ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-    patterns = { 'swift' },
-    fallback = true, -- Fallback to git when local plugin doesn't exist
+  checker = { enabled = true },
+  concurrency = 5,
+  install = {
+    missing = true,
+    colorscheme = { vim.g.colorscheme, 'habamax' },
   },
   performance = {
     cache = {
@@ -73,34 +64,6 @@ require('lazy').setup(plugin_spec, {
         'spellfile',
         'tohtml',
       },
-    },
-  },
-
-  -- dev = {
-  --   -- directory where you store your local plugin projects
-  --   path = "~/code",
-  --   ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-  --   patterns = { "megalithic" },
-  --   fallback = true, -- Fallback to git when local plugin doesn't exist
-  -- },
-  --
-  ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
     },
   },
 })

@@ -69,123 +69,6 @@ function M.augroup(name, commands)
 end
 
 function M.apply()
-  --M.augroup("Startup", {
-  --  {
-  --    event = { "VimEnter" },
-  --    pattern = { "*" },
-  --    enabled = true,
-  --    once = true,
-  --    desc = "Crazy behaviours for opening vim with arguments (or not)",
-  --    command = function(evt)
-  --      local args = vim.api.nvim_eval("argv()")
-  --      local arg_count = #args
-
-  --      if
-  --        not vim.g.started_by_firenvim
-  --        and (not vim.env.TMUX_POPUP and vim.env.TMUX_POPUP ~= 1)
-  --        and not vim.tbl_contains({ "NeogitStatus" }, vim.bo[evt.buf].filetype)
-  --      then
-  --        if arg_count == 0 then
-  --          if swift.picker ~= nil and swift.picker["startup"] ~= nil then swift.picker.startup(evt.buf) end
-  --        elseif arg_count == 1 then
-  --          local arg = args[1]
-  --          if vim.fn.isdirectory(arg) == 1 then
-  --            require("oil").open(arg)
-  --          else
-  --            -- handle single argment like `filename.lua:300`
-  --            local bufname = vim.api.nvim_buf_get_name(evt.buf)
-  --            local root, line = bufname:match("^(.*):(%d+)$")
-  --            if vim.fn.filereadable(bufname) == 0 and root and line and vim.fn.filereadable(root) == 1 then
-  --              vim.schedule(function()
-  --                vim.cmd.edit({ args = { root } })
-  --                pcall(vim.api.nvim_win_set_cursor, 0, { tonumber(line), 0 })
-  --                vim.api.nvim_buf_delete(evt.buf, { force = true })
-  --              end)
-  --            end
-  --          end
-  --        elseif arg_count == 2 then
-  --          local line = string.match(args[2], "^:(%d+)$")
-  --          local root = vim.api.nvim_buf_get_name(evt.buf)
-  --          -- handle argments like `filename.lua :300`
-  --          if string.find(args[2], "^:%d*") ~= nil then
-  --            if root and vim.fn.filereadable(root) == 1 and line then
-  --              vim.cmd.edit({ args = { root } })
-  --              pcall(vim.api.nvim_win_set_cursor, 0, { tonumber(line), 0 })
-  --              vim.api.nvim_buf_delete(evt.buf + 1, { force = true })
-  --            end
-  --          else
-  --            vim.schedule(function()
-  --              swift.resize_windows(evt.buf)
-  --              require("virt-column").update()
-  --            end)
-  --          end
-  --        else
-  --          vim.schedule(function()
-  --            swift.resize_windows(evt.buf)
-  --            require("virt-column").update()
-  --          end)
-  --        end
-  --      end
-  --    end,
-  --  },
-  --})
-
-  M.augroup('AutoSave', {
-    {
-      event = { 'BufWinLeave', 'BufLeave', 'FocusLost' },
-      desc = 'Automatically update and write modified buffer on certain events',
-      command = function(ctx)
-        local saveInstantly = ctx.event == 'FocusLost' or ctx.event == 'BufLeave'
-        local bufnr = ctx.buf
-        local bo = vim.bo[bufnr]
-        local b = vim.b[bufnr]
-        if bo.buftype ~= '' or bo.ft == 'gitcommit' or bo.readonly then
-          return
-        end
-        if b.saveQueued and not saveInstantly then
-          return
-        end
-
-        b.saveQueued = true
-        vim.defer_fn(function()
-          if not vim.api.nvim_buf_is_valid(bufnr) then
-            return
-          end
-          -- `noautocmd` prevents weird cursor movement
-          vim.api.nvim_buf_call(bufnr, function()
-            vim.cmd('silent! noautocmd lockmarks update!')
-          end)
-          b.saveQueued = false
-        end, saveInstantly and 0 or 2000)
-        -- local bufnr = ctx.buf
-        -- local bo = vim.bo[bufnr]
-        -- local b = vim.b[bufnr]
-        -- if bo.buftype ~= "" or bo.ft == "gitcommit" or bo.readonly then return end
-        -- if b.saveQueued and ctx.event ~= "FocusLost" then return end
-
-        -- if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
-        --   local debounce = ctx.event == "FocusLost" and 0 or 1000 -- save at once on focus loss
-        --   b.saveQueued = true
-        --   vim.defer_fn(function()
-        --     if not vim.api.nvim_buf_is_valid(bufnr) then return end
-        --     -- `noautocmd` prevents weird cursor movement
-        --     vim.api.nvim_buf_call(bufnr, function()
-        --       vim.cmd("silent! noautocmd lockmarks update!")
-        --       vim.cmd("silent! write")
-        --       vim.g.is_saving = true
-        --     end)
-        --     b.saveQueued = false
-
-        --     vim.defer_fn(function()
-        --       vim.g.is_saving = false
-        --       pcall(vim.cmd.redrawstatus)
-        --     end, 500)
-        --   end, debounce)
-        -- end
-      end,
-    },
-  })
-
   M.augroup('HighlightYank', {
     {
       desc = 'Highlight when yanking (copying) text',
@@ -316,9 +199,7 @@ function M.apply()
           end
         end, 1)
         vim.wo.cursorline = true
-        if not vim.g.started_by_firenvim then
-          require('nvim-highlight-colors').turnOn()
-        end
+        require('nvim-highlight-colors').turnOn()
       end,
     },
     {
@@ -332,16 +213,13 @@ function M.apply()
           end
         end, 1)
         vim.wo.cursorline = false
-        if not vim.g.started_by_firenvim then
-          require('nvim-highlight-colors').turnOff()
-        end
+        require('nvim-highlight-colors').turnOff()
       end,
     },
   })
 
   M.augroup('InsertBehaviours', {
     {
-      enabled = not vim.g.started_by_firenvim,
       desc = 'OnInsertEnter',
       event = { 'InsertEnter' },
       command = function(_evt)
@@ -349,7 +227,6 @@ function M.apply()
       end,
     },
     {
-      enabled = not vim.g.started_by_firenvim,
       desc = 'OnInsertLeave',
       event = { 'InsertLeave' },
       command = function(_evt)
@@ -357,56 +234,6 @@ function M.apply()
       end,
     },
   })
-
-  -- -----------------------------------------------------------------------------
-  -- # IncSearch behaviours
-  -- HT: akinsho
-  -- -----------------------------------------------------------------------------
-  -- vim.keymap.set({ "n", "v", "o", "i", "c", "t" }, "<Plug>(StopHL)", "execute(\"nohlsearch\")[-1]", { expr = true })
-  -- local function stop_hl()
-  --   if vim.v.hlsearch == 0 or vim.api.nvim_get_mode().mode ~= "n" then return end
-  --   vim.api.nvim_feedkeys(vim.keycode("<Plug>(StopHL)"), "m", false)
-  -- end
-  -- local function hl_search()
-  --   local col = vim.api.nvim_win_get_cursor(0)[2]
-  --   local curr_line = vim.api.nvim_get_current_line()
-  --   local ok, match = pcall(vim.fn.matchstrpos, curr_line, vim.fn.getreg("/"), 0)
-  --   if not ok then return end
-  --   local _, p_start, p_end = unpack(match)
-  --   -- if the cursor is in a search result, leave highlighting on
-  --   if col < p_start or col > p_end then stop_hl() end
-  -- end
-  -- M.augroup("IncSearchHighlight", {
-  --   {
-  --     event = { "CursorMoved" },
-  --     command = function() hl_search() end,
-  --   },
-  --   {
-  --     event = { "InsertEnter" },
-  --     command = function(evt)
-  --       if vim.bo[evt.buf].filetype == "swiftterm" then return end
-  --       stop_hl()
-  --     end,
-  --   },
-  --   {
-  --     event = { "OptionSet" },
-  --     pattern = { "hlsearch" },
-  --     command = function()
-  --       vim.schedule(function() vim.cmd.redrawstatus() end)
-  --     end,
-  --   },
-  --   {
-  --     event = { "RecordingEnter" },
-  --     command = function() vim.o.hlsearch = false end,
-  --   },
-  --   {
-  --     event = { "RecordingLeave" },
-  --     command = function() vim.o.hlsearch = true end,
-  --   },
-  -- })
-
-  --- @trial: determining if this implementation of the above IncSearchHighlight autocmd is more reliable
-  -- REF: https://github.com/ibhagwan/nvim-lua/blob/main/lua/autocmd.lua#L111-L144
 
   function swift.searchCountIndicator(mode)
     local signColumnPlusScrollbarWidth = 2 + 3 -- CONFIG
@@ -458,58 +285,6 @@ function M.apply()
       vim.defer_fn(swift.searchCountIndicator, 1)
     end
   end, vim.api.nvim_create_namespace('autoNohlAndSearchCount'))
-
-  -- M.augroup("ToggleSearchHL", {
-  --   {
-  --     event = { "CursorMoved" },
-  --     command = function()
-  --       if vim.snippet.active() then
-  --         vim.cmd.nohlsearch()
-  --         return
-  --       end
-
-  --       vim.defer_fn(function()
-  --         -- No bloat lua adpatation of: https://github.com/romainl/vim-cool
-  --         local view, rpos = vim.fn.winsaveview(), vim.fn.getpos(".")
-  --         -- Move the cursor to a position where (whereas in active search) pressing `n`
-  --         -- brings us to the original cursor position, in a forward search / that means
-  --         -- one column before the match, in a backward search ? we move one col forward
-  --         vim.cmd(string.format("silent! keepjumps go%s", (vim.fn.line2byte(view.lnum) + view.col + 1 - (vim.v.searchforward == 1 and 2 or 0))))
-  --         -- Attempt to goto next match, if we're in an active search cursor position
-  --         -- should be equal to original cursor position
-  --         local ok, _ = pcall(vim.cmd, "silent! keepjumps norm! n")
-  --         local in_search = ok
-  --           and (function()
-  --             local npos = vim.fn.getpos(".")
-  --             return npos[2] == rpos[2] and npos[3] == rpos[3]
-  --           end)()
-  --         -- restore original view and position
-  --         vim.fn.winrestview(view)
-  --         if not in_search then
-  --           vim.schedule(function()
-  --             vim.cmd.nohlsearch()
-  --             swift.searchCountIndicator("clear")
-  --           end)
-  --         else
-  --           vim.schedule(function() swift.searchCountIndicator() end)
-  --         end
-  --       end, 250)
-  --     end,
-  --   },
-  --   {
-  --     event = { "InsertEnter" },
-  --     command = function(evt)
-  --       if vim.snippet.active() then
-  --         vim.cmd.nohlsearch()
-  --         return
-  --       end
-  --       vim.schedule(function()
-  --         vim.cmd.nohlsearch()
-  --         vim.schedule(function() swift.searchCountIndicator("clear") end)
-  --       end)
-  --     end,
-  --   },
-  -- })
 
   M.augroup('Utilities', {
     {
