@@ -1,7 +1,7 @@
 local M = {}
 
-local filter = require('utils.filter').filter
-local filterReactDTS = require('utils.filter').filterReactDTS
+local filter = require('swift.utils').filter
+local filterReactDTS = require('swift.utils').filterReactDTS
 
 local on_attach = function(client, bufnr)
   -- Modifying a server's capabilities is not recommended and is no longer

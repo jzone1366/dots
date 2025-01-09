@@ -1,8 +1,8 @@
 return {
   'dnlhc/glance.nvim',
   config = function()
-    local filter = require('utils.filter').filter
-    local filterReactDTS = require('utils.filter').filterReactDTS
+    local filter = require('swift.utils').filter
+    local filterReactDTS = require('swift.utils').filterReactDTS
 
     require('glance').setup({
       hooks = {

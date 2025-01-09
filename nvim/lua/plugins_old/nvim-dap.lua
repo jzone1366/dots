@@ -6,7 +6,7 @@ return {
       local present_dap, dap = pcall(require, 'dap')
       local present_virtual_text, dap_vt = pcall(require, 'nvim-dap-virtual-text')
       local present_dap_utils, dap_utils = pcall(require, 'dap.utils')
-      local map = require('utils').map
+      local map = require('swift.utils').map
 
       if not present_dapui or not present_dap or not present_virtual_text or not present_dap_utils then
         vim.notify('Missing dap dependencies')

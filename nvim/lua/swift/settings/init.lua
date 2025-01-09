@@ -142,13 +142,6 @@ M.apply = function()
       maplocalleader = ',',
       bullets_checkbox_markers = ' x',
       bullets_outline_levels = { 'ROM', 'ABC', 'rom', 'abc', 'std-' },
-      mkdp_echo_preview_url = 1,
-      mkdp_preview_options = {
-        maid = {
-          theme = 'dark',
-        },
-      },
-      mkdp_theme = 'dark',
       colorscheme = M.colorscheme,
       default_colorcolumn = M.default_colorcolumn,
       notifier_enabled = M.notifier_enabled,
@@ -168,12 +161,9 @@ M.apply = function()
       disable_autolint = M.disable_autolint,
       disable_autoformat = M.disable_autoformat,
       disable_autoresize = M.disable_autoresize,
-      -- This is breaking elixir/heex.vim syntax files; not sure why
-      -- markdown_fenced_languages = M.markdown_fenced_languages,
       have_nerd_font = true,
 
       open_command = is_macos and 'open' or 'xdg-open',
-      is_tmux_popup = vim.env.TMUX_POPUP ~= nil,
       code_path = fmt('%s/code', home_path),
       projects_path = fmt('%s/code', home_path),
       vim_path = fmt('%s/.config/nvim', home_path),

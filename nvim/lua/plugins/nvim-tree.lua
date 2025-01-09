@@ -1,4 +1,4 @@
-local map = require('utils').map
+local map = require('swift.utils').map
 
 return {
   'nvim-tree/nvim-tree.lua',

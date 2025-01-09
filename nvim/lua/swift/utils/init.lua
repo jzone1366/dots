@@ -1082,4 +1082,52 @@ function M.hl.plugin(name, hls)
   })
 end
 
+M.os_is_dark = function()
+  return (vim.call(
+    'system',
+    [[echo $(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo 'dark' || echo 'light')]]
+  )):find('dark') ~= nil
+end
+
+M.toggle_quicklist = function()
+  if fn.empty(fn.filter(fn.getwininfo(), 'v:val.quickfix')) == 1 then
+    vim.cmd('copen')
+  else
+    vim.cmd('cclose')
+  end
+end
+
+M.map = function(mode, lhs, rhs, opts)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.keymap.set(mode, lhs, rhs, options)
+end
+
+M.filter = function(arr, fn)
+  if type(arr) ~= 'table' then
+    return arr
+  end
+
+  local filtered = {}
+  for k, v in pairs(arr) do
+    if fn(v, k, arr) then
+      table.insert(filtered, v)
+    end
+  end
+
+  return filtered
+end
+
+M.filterReactDTS = function(value)
+  -- Depending on typescript version either uri or targetUri is returned
+  if value.uri then
+    return string.match(value.uri, '%.d.ts') == nil
+  elseif value.targetUri then
+    return string.match(value.targetUri, '%.d.ts') == nil
+  end
+end
+
 return M
+

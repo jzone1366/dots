@@ -4,6 +4,7 @@ local SETTINGS = require('swift.settings')
 return {
   {
     'yioneko/nvim-vtsls',
+    enabled = false,
     ft = {
       'javascript',
       'javascriptreact',
@@ -84,7 +85,7 @@ return {
     },
     config = function()
       local lsp_zero = require('lsp-zero')
-      local map = require('utils').map
+      local map = require('swift.utils').map
       local lspbuf = lsp.buf
 
       -- lsp_attach is where you enable features that only work
