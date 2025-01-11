@@ -17,3 +17,16 @@ map('n', '<LEADER>/u', '<cmd>Lazy update<CR>', { silent = true, desc = 'update p
 map('n', '<LEADER>/i', '<cmd>Lazy<CR>', { silent = true, desc = 'manage plugins' })
 map('n', '<LEADER>//', '<cmd>Alpha<CR>', { silent = true, desc = 'open dashboard' })
 map('n', '<LEADER>c', 'e $MYVIMRC', { silent = true, desc = 'open config' })
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('swift-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+-- vim: ts=2 sts=2 sw=2 et

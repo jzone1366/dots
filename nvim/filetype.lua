@@ -1,15 +1,15 @@
 local extension = {
-    log = "log",
-    tmpl = "html",
+  log = 'log',
+  tmpl = 'html',
 }
 
 local filename = {
-    [".env"] = "config",
-    [".envrc"] = "config",
-    [".yamlfmt"] = "yaml",
+  ['.env'] = 'config',
+  ['.envrc'] = 'config',
+  ['.yamlfmt'] = 'yaml',
 }
 
 vim.filetype.add({
-    extension = extension,
-    filename = filename,
+  extension = extension,
+  filename = filename,
 })

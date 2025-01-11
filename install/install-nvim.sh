@@ -15,9 +15,17 @@ mkdir -p "$VIMCONFIG/after"
 rm -rf "$VIMCONFIG/lua"
 ln -sf "$DOTFILES/nvim/lua" "$VIMCONFIG"
 
-# after
+# after/ftplugin
 rm -rf "$VIMCONFIG/after/ftplugin"
 ln -sf "$DOTFILES/nvim/after/ftplugin" "$VIMCONFIG/after"
+
+# after/plugin
+rm -rf "$VIMCONFIG/after/plugin"
+ln -sf "$DOTFILES/nvim/after/plugin" "$VIMCONFIG/after"
+
+# after/queries
+rm -rf "$VIMCONFIG/after/queries"
+ln -sf "$DOTFILES/nvim/after/queries" "$VIMCONFIG/after"
 
 ## UNCOMMENT BELOW WHEN YOU ADD THESE FILES
 ## macros

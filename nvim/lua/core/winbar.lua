@@ -1,4 +1,4 @@
-local icons = require('theme.icons')
+local icons = require('theme').icons
 
 local M = {}
 
@@ -68,7 +68,7 @@ M.gps = function()
   else
     if not isempty(navic_location) then
       local hl_group = 'LineNr'
-      return retval .. ' ' .. '%#' .. hl_group .. '#' .. icons.caretRight .. '%*' .. ' ' .. navic_location
+      return retval .. ' ' .. '%#' .. hl_group .. '#' .. icons.misc.caret_right .. '%*' .. ' ' .. navic_location
     else
       return retval
     end
@@ -103,37 +103,37 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
 
     if vim.bo.filetype == 'dapui_watches' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.watch .. 'Watches' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.misc.clock .. 'Watches' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dapui_stacks' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.git .. 'Stacks' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.git.symbol .. 'Stacks' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dapui_breakpoints' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.bigCircle .. 'Breakpoints' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.misc.circle .. 'Breakpoints' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dapui_scopes' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.telescope .. 'Scopes' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.misc.telescope .. 'Scopes' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dap-repl' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.consoleDebug .. 'Debug Console' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.misc.console_debug .. 'Debug Console' .. '%*'
       return
     end
 
     if vim.bo.filetype == 'dapui_console' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.console .. 'Console' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.misc.mode_term .. 'Console' .. '%*'
       return
     end
 
@@ -144,11 +144,11 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
 
     if vim.bo.filetype == 'GitBlame' then
       local hl_group = 'CursorLineNR'
-      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.git .. 'Blame' .. '%*'
+      vim.opt_local.winbar = ' ' .. '%#' .. hl_group .. '#' .. icons.git.symbol .. 'Blame' .. '%*'
       return
     end
 
-    local winbar_present, winbar = pcall(require, 'core.winbar')
+    local winbar_present, winbar = pcall(require, 'swift.winbar')
     if not winbar_present or type(winbar) == 'boolean' then
       vim.opt_local.winbar = nil
       return

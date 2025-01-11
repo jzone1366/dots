@@ -207,7 +207,9 @@ alias lg="lazygit"
 
 
 alias vpn='sudo route -n add -net 10.0.0.0/8 -interface ppp0'
-alias s="ssh -i ~/.ssh/ql2keydb.pem"
-alias s2="ssh -i ~/.ssh/ql2-2024-key.pem"
 
+alias s="ssh -i ~/.ssh/devops.pem"
+alias s2="ssh -i ~/.ssh/devops_old_server.pem"
 
+alias s3="ssh -i ~/.ssh/ql2keydb.pem"
+alias s4="ssh -i ~/.ssh/ql2-2024-key.pem"
