@@ -1,4 +1,5 @@
 local ui = require('theme')
+local utils = require('utils')
 
 return {
   {
@@ -59,10 +60,10 @@ return {
     keys = {
       { '<leader>ff', '<cmd>Pick files<CR>', desc = ' [F]ind [F]iles ' },
       { '<leader>fo', '<cmd>Pick oldfiles<CR>', desc = ' [F]ind [O]ldfiles ' },
-      { '<leader>fgf','<cmd>Pick git_files<CR>', desc = ' [F]ind [G]it [F]iles ' },
+      { '<leader>fgf', '<cmd>Pick git_files<CR>', desc = ' [F]ind [G]it [F]iles ' },
       { '<leader>fw', '<cmd>Pick grep pattern="<cword>"<CR>', desc = ' [F]ind current [W]ord ' },
       { '<leader>fW', '<cmd>Pick grep pattern="<cWORD>"<CR>', desc = ' [F]ind current [W]ord ' },
-      { '<leader>fgg','<cmd>Pick grep_live<CR>', desc = ' [F]ind by [G]rep ' },
+      { '<leader>fgg', '<cmd>Pick grep_live<CR>', desc = ' [F]ind by [G]rep ' },
       { '<leader>fr', '<cmd>Pick resume<CR>', desc = ' [F]ind [R]esume ' },
       { '<leader>fk', '<cmd>Pick keymaps<CR>', desc = ' [F]ind [K]eymaps ' },
       { '<leader>fc', '<cmd>Pick commands<CR>', desc = ' [F]ind [C]ommands ' },
@@ -74,7 +75,6 @@ return {
   },
   {
     'echasnovski/mini.comment',
-    cond = false,
     version = false,
     opts = {
       -- Options which control module behavior
@@ -132,9 +132,8 @@ return {
   },
   {
     'echasnovski/mini.indentscope',
-    cond = false,
     config = function()
-      swift.req('mini.indentscope').setup({
+      require('mini.indentscope').setup({
         symbol = ui.indent_scope_char,
         -- mappings = {
         --   goto_top = "<leader>k",
@@ -149,7 +148,7 @@ return {
         options = { try_as_border = true, border = 'both', indent_at_cursor = true },
       })
 
-      swift.req('swift.autocmds').augroup('mini.indentscope', {
+      utils.augroup('mini.indentscope', {
         {
           event = 'FileType',
           pattern = {
@@ -279,7 +278,6 @@ return {
     end,
   },
   {
-    enabled = false,
     'echasnovski/mini.pairs',
     opts = {},
   },
