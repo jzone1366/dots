@@ -7,31 +7,8 @@ vim.noti = vim.notify
 _G.L = vim.log.levels
 _G.I = vim.inspect
 _G.swift = {
-  ui = {},
-  lsp = {
-    on_attach = function(on_attach, name)
-      -- `swift.lsp.on_attach` usage:
-      --
-      -- swift.lsp.on_attach(function(client, buffer)
-      --   if client.name == "some_ls" then
-      --     -- do a thing
-      --   end
-      -- end)
-      return vim.api.nvim_create_autocmd('LspAttach', {
-        callback = function(args)
-          local buffer = args.buf ---@type number
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if client and (not name or client.name == name) then
-            return on_attach(client, buffer)
-          end
-        end,
-      })
-    end,
-  },
-  req = require('swift.req'),
   resize_windows = function() end, -- stubbed
   term = nil,
-  notify = vim.noti,
 }
 
 -- inspect the contents of an object very quickly
@@ -128,9 +105,5 @@ function _G.prequire(name)
   end
 end
 
-require('swift.settings').apply()
-require('swift.lazy')
-require('swift.commands')
-require('swift.autocmds').apply()
-require('swift.mappings')
-require('swift.winbar')
+
+require('core')

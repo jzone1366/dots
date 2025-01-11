@@ -1,25 +1,7 @@
+local utils = require('utils')
+
 if not swift then
   return
-end
-
-local GOLDEN_RATIO = 1.618
-
-local golden_ratio_width = function()
-  local maxwidth = vim.o.columns
-  return math.floor(maxwidth / GOLDEN_RATIO)
-end
-
-local golden_ratio_minwidth = function()
-  return math.floor(golden_ratio_width() / (3 * GOLDEN_RATIO))
-end
-
-local golden_ratio_height = function()
-  local maxheight = vim.o.lines
-  return math.floor(maxheight / GOLDEN_RATIO)
-end
-
-local golden_ratio_minheight = function()
-  return math.floor(golden_ratio_height() / (3 * GOLDEN_RATIO))
 end
 
 local ft_ignores = {
@@ -221,7 +203,7 @@ vim.api.nvim_create_user_command('ToggleAutoResize', function()
   end
 end, {})
 
-require('swift.autocmds').augroup('WindowsGoldenResizer', {
+utils.augroup('WindowsGoldenResizer', {
   {
     event = { 'WinEnter', 'VimResized' },
     command = function(args)
