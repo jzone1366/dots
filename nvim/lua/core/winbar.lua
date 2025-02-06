@@ -84,6 +84,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
       'packer',
       'neogitstatus',
       'NvimTree',
+      'neo-tree',
       'Trouble',
       'alpha',
       'lir',
@@ -148,7 +149,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'BufWinEnter', 'BufFilePost' }, {
       return
     end
 
-    local winbar_present, winbar = pcall(require, 'swift.winbar')
+    local winbar_present, winbar = pcall(require, 'core.winbar')
     if not winbar_present or type(winbar) == 'boolean' then
       vim.opt_local.winbar = nil
       return

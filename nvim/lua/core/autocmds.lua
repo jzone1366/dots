@@ -1,6 +1,6 @@
-local M = {}
+local utils = require('utils')
 
-M.augroup('Utilities', {
+utils.augroup('Utilities', {
   {
     event = { 'VimResized' },
     --     desc = "Automatically resize windows in all tabpages when resizing Vim",

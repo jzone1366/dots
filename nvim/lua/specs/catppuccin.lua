@@ -52,9 +52,9 @@ return {
     require('catppuccin').setup(config)
 
     if utils.os_is_dark() then
-      vim.cmd('color catppuccin-mocha')
+      vim.cmd('colorscheme catppuccin-mocha')
     else
-      vim.cmd('color catppuccin-latte')
+      vim.cmd('colorscheme catppuccin-latte')
     end
   end,
 }

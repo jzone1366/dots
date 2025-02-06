@@ -380,4 +380,5 @@ return {
       end,
     },
   },
+  { 'echasnovski/mini.files', version = '*', opts = true },
 }

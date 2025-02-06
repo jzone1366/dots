@@ -11,10 +11,27 @@ return {
       library = {
         -- Load luvit types when the `vim.uv` word is found
         { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+        { path = 'mini.icons', words = { 'MiniIcons' } },
+        { path = 'mini.pick', words = { 'MiniPick' } },
       },
     },
   },
+
+  {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'LspAttach',
+    priority = 1000,
+    config = function()
+      require('tiny-inline-diagnostic').setup({
+        preset = 'modern',
+        multilines = true,
+      })
+      vim.diagnostic.config({ virtual_text = false })
+    end,
+  },
+
   { 'Bilal2453/luvit-meta', lazy = true },
+
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -32,7 +49,7 @@ return {
       { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
-      'hrsh7th/cmp-nvim-lsp',
+      --'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
       --  This function gets run when an LSP attaches to a particular buffer.
@@ -94,25 +111,25 @@ return {
           --    See `:help CursorHold` for information about when this is executed
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          local client = lsp.get_client_by_id(event.data.client_id)
+          if client and client.supports_method(lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('swift-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
               group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
+              callback = lsp.buf.document_highlight,
             })
 
             vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
               buffer = event.buf,
               group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
+              callback = lsp.buf.clear_references,
             })
 
             vim.api.nvim_create_autocmd('LspDetach', {
               group = vim.api.nvim_create_augroup('swift-lsp-detach', { clear = true }),
               callback = function(event2)
-                vim.lsp.buf.clear_references()
+                lsp.buf.clear_references()
                 vim.api.nvim_clear_autocmds({ group = 'swift-lsp-highlight', buffer = event2.buf })
               end,
             })
@@ -122,13 +139,13 @@ return {
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client.supports_method(lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+              lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, '[T]oggle Inlay [H]ints')
           end
 
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentSymbol) then
+          if client and client.supports_method(lsp.protocol.Methods.textDocument_documentSymbol) then
             require('nvim-navic').attach(client, event.buf)
             require('nvim-navbuddy').attach(client, event.buf)
           end
@@ -149,8 +166,9 @@ return {
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local capabilities = lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      --capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -297,9 +315,7 @@ return {
           settings = require('specs.lsp.servers.eslint').settings,
         },
 
-        jsonls = {
-          settings = require('specs.lsp.servers.jsonls').settings,
-        },
+        jsonls = require('specs.lsp.servers.jsonls').settings,
 
         pyright = {
           single_file_support = false,
