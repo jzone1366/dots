@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local tab = require("tab")
 local catppuccin = require("palettes.catppuccin")
 --local evergarden = require("palettes.evergarden")
 
@@ -7,8 +8,12 @@ local M = {}
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
 		return "Catppuccin Mocha" -- dark
+		--return "Gruvbox dark, hard (base16)"
+		--return "GruvboxDarkHard"
 	else
 		return "Catppuccin Latte" -- light
+		--return "Gruvbox light, hard (base16)"
+		--return "GruvboxLight"
 	end
 end
 
@@ -39,7 +44,9 @@ end
 function M.apply_to_config(config)
 	local appearance = wezterm.gui.get_appearance()
 	config.color_scheme = scheme_for_appearance(appearance)
-	config.window_frame = window_frame_for_appearance(appearance)
+	local colors = wezterm.color.get_builtin_schemes()[config.color_scheme]
+	config.window_frame = window_frame_for_appearance(appearance, colors)
+
 	config.colors = colors_for_appearance(appearance)
 
 	-- Uncomment this block to use the Evergarden theme

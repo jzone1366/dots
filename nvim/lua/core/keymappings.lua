@@ -16,7 +16,7 @@ map('n', 'H', '^', { silent = true, desc = 'Move to the first non-blank characte
 map('n', '<LEADER>/u', '<cmd>Lazy update<CR>', { silent = true, desc = 'update plugins' })
 map('n', '<LEADER>/i', '<cmd>Lazy<CR>', { silent = true, desc = 'manage plugins' })
 map('n', '<LEADER>//', '<cmd>Alpha<CR>', { silent = true, desc = 'open dashboard' })
-map('n', '<LEADER>c', 'e $MYVIMRC', { silent = true, desc = 'open config' })
+map('n', '<LEADER>/c', 'e $MYVIMRC', { silent = true, desc = 'open config' })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode

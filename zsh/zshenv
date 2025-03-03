@@ -74,14 +74,8 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
 
-# JAVA
-export JBOSS_HOME="$HOME/tools/jboss"
-export TOMCAT_HOME="$HOME/tools/tomcat"
-export ACTIVEMQ_HOME="$HOME/tools/activemq"
-export JAVA_HOME="/usr/bin/java"
-
 # git
-#export GIT_REVIEW_BASE=master # See gitconfig
+export GIT_REVIEW_BASE=main # See gitconfig
 
 export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
 
@@ -105,8 +99,5 @@ export PATH="$COMPOSER_HOME/vendor/bin:$PATH"                       # COMPOSER
 export PATH="$GOBIN:$PATH"                                          # GOBIN
 export PATH="$NPM_BIN:$PATH"                                        # NPM
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"	    # GNUBIN
-export PATH="$JBOSS_HOME/bin:$PATH"                                 # JBOSS
-export PATH="$TOMCAT_HOM/bin:$PATH"                                 # TOMCAT
-export PATH="$ACTIVEMQ_HOME/bin:$PATH"                              # ACTIVEMQ
 export PATH="$PATH:/Users/jzone/.local/bin"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

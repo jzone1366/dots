@@ -12,6 +12,8 @@ return {
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
     'roobert/tailwindcss-colorizer-cmp.nvim',
+    'allaman/emoji.nvim',
+
     {
       'zbirenbaum/copilot-cmp',
       config = function()
@@ -58,6 +60,7 @@ return {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
+        { name = 'emoji' },
       }),
       formatting = {
         format = function(entry, vim_item)

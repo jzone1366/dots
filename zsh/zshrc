@@ -190,3 +190,5 @@ source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # +------------------+
 source $DOTFILES/zsh/plugins/functions.zsh
 source $DOTFILES/zsh/plugins/update.zsh
+
+. "$HOME/.config/local/share/../bin/env"

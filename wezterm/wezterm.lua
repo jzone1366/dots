@@ -14,7 +14,8 @@ config.keys = keys.keys
 
 -- Now I can use an unpatched font and have a fallback for the symbols.
 config.font = wezterm.font_with_fallback({
-	"Monaspace Xenon",
+	--"Monaspace Xenon",
+	"CommitMono Nerd Font",
 	"Symbols Nerd Font",
 })
 
@@ -42,7 +43,7 @@ config.default_cursor_style = "SteadyBar"
 config.window_decorations = "RESIZE"
 config.max_fps = 240
 
-tab.apply_to_config(config)
 appearance.apply_to_config(config)
+tab.apply_to_config(config)
 
 return config

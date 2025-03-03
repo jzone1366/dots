@@ -102,7 +102,7 @@ return {
       filesystem = {
         hijack_netrw_behavior = 'disabled', -- "open_current",
         use_libuv_file_watcher = true,
-        group_empty_dirs = true,
+        group_empty_dirs = false,
         follow_current_file = {
           enabled = false,
           leave_dirs_open = true,

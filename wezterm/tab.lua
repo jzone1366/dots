@@ -110,6 +110,8 @@ local function get_current_working_folder_name(tab)
 end
 
 function Tab.apply_to_config(config)
+	--	local colorPalette = wezterm.color.get_builtin_schemes()[config.color_scheme]
+
 	-- TAB Bar
 	config.use_fancy_tab_bar = true
 	config.tab_max_width = 50
@@ -158,12 +160,12 @@ function Tab.apply_to_config(config)
 			catppuccin.mocha.green,
 		}
 
-		--local text_fg = evergarden.colors.crust
+		--local text_fg = colorPalette.background
 		--local colors = {
-		--	evergarden.colors.mantle,
-		--	evergarden.colors.blue,
-		--	evergarden.colors.aqua,
-		--	evergarden.colors.green,
+		--	colorPalette.background,
+		--	colorPalette.brights[3],
+		--	colorPalette.brights[6],
+		--	colorPalette.brights[2],
 		--}
 
 		local elements = {}
