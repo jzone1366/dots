@@ -31,17 +31,27 @@ opt.wildignore:append({
   '*/.svn/*',
   '*/.git/*',
 })
+opt.diffopt:append({
+  'indent-heuristic',
+  'algorithm:patience',
+  'context:999999',
+})
 opt.wildmode = 'list:longest'
 opt.wildmenu = true
 opt.textwidth = 0
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
-opt.expandtab = true
-opt.scrolloff = 15
+
+opt.expandtab = false -- not sure if I like this or not
+
+opt.shiftround = true
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.softtabstop = 2
 opt.smarttab = true
+opt.autoindent = true
 opt.smartindent = true
+
+opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
+opt.scrolloff = 15
 opt.showmode = false
 opt.fileformats = 'unix,dos'
 opt.autowrite = true -- automatically save before commands like :next and :make
@@ -65,3 +75,4 @@ opt.undodir = '/tmp/nvim/undo'
 -- Globals
 g.mapleader = ' '
 g.maplocalleader = ';'
+g.elite_mode = true -- going to try this out.

@@ -42,6 +42,7 @@ return {
         lua = { 'stylua' },
         markdown = { 'prettierd', 'prettier', stop_after_first = true },
         python = { 'isort', 'black' },
+        ruby = { 'rubocop', 'rubyfmt', stop_after_first = true },
         rust = { 'rustfmt' },
         sql = { 'sql-formatter' },
         svelte = { 'prettierd', 'prettier', stop_after_first = true },

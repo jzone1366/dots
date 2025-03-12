@@ -6,6 +6,11 @@ if command -v fnm &>/dev/null; then
     eval "$(fnm env --use-on-cd)"
 fi
 
+# Mise for Ruby
+if [ -x "$HOME/.local/bin/mise" ]; then
+    eval "$("$HOME/.local/bin/mise" activate)"
+fi
+
 # PYENV
 # Disabling for now as I'm testing out uv - https://docs.astral.sh/uv/#learn-more
 #if command -v pyenv &>/dev/null; then

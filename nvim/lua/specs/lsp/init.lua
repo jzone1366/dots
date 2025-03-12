@@ -185,6 +185,7 @@ return {
           settings = require('specs.lsp.servers.gopls').settings,
           on_attach = require('specs.lsp.servers.gopls').on_attach,
         },
+        solargraph = {},
         yamlls = {
           settings = {
             yaml = {
@@ -371,6 +372,50 @@ return {
           end,
         },
       })
+    end,
+  },
+  {
+    'wochap/lsp-lens.nvim',
+    event = { 'LazyFile', 'VeryLazy' },
+    opts = {
+      enable = true,
+      include_declaration = false,
+      sections = {
+        definition = false,
+        references = function(count)
+          return '  ' .. count .. ' '
+        end,
+        implements = false,
+        git_authors = false,
+      },
+    },
+    config = function(_, opts)
+      require('lsp-lens').setup(opts)
+
+      -- override lsp_lens augroup, update its event list
+      local lens = require('lsp-lens.lens-util')
+      local augroup = vim.api.nvim_create_augroup('lsp_lens', { clear = true })
+      vim.api.nvim_create_autocmd({ 'LspAttach', 'InsertLeave', 'CursorHold', 'BufEnter' }, {
+        group = augroup,
+        callback = function(...)
+          local mode = vim.api.nvim_get_mode().mode
+          -- Only run if not in insert mode
+          if mode ~= 'i' then
+            lens.procedure(...)
+          end
+        end,
+      })
+    end,
+  },
+  {
+    'aznhe21/actions-preview.nvim',
+    opts = {},
+    config = function(_, opts)
+      local hl = require('actions-preview.highlight')
+      opts.highlight_command = {
+        hl.delta('delta --dark --paging=never'),
+      }
+      require('actions-preview').setup(opts)
     end,
   },
 }
