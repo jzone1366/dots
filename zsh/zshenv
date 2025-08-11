@@ -101,3 +101,4 @@ export PATH="$NPM_BIN:$PATH"                                        # NPM
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"	    # GNUBIN
 export PATH="$PATH:/Users/jzone/.local/bin"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/Users/zonejm/.cargo/bin:$PATH"

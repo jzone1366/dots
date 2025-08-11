@@ -57,7 +57,6 @@ return {
         'markdown',
         'markdown_inline',
         'nix',
-        'org',
         'perl',
         'printf',
         'psv',

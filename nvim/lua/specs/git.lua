@@ -96,5 +96,128 @@ return {
       }
     end,
   },
+
+  {
+    'sindrets/diffview.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewFileHistory' },
+    keys = {
+      {
+        '<leader>gd',
+        function()
+          vim.cmd('DiffviewOpen')
+        end,
+        desc = 'diffview: open',
+        mode = 'n',
+      },
+      { 'gh', [[:'<'>DiffviewFileHistory<CR>]], desc = 'diffview: file history', mode = 'v' },
+      {
+        '<localleader>gh',
+        '<Cmd>DiffviewFileHistory<CR>',
+        desc = 'diffview: file history',
+        mode = 'n',
+      },
+    },
+    opts = {
+      default_args = { DiffviewFileHistory = { '%' } },
+      enhanced_diff_hl = true,
+      view = {
+        default = {
+          -- Config for changed files, and staged files in diff views.
+          layout = 'diff2_horizontal',
+          disable_diagnostics = false, -- Temporarily disable diagnostics for diff buffers while in the view.
+          winbar_info = false, -- See |diffview-config-view.x.winbar_info|
+        },
+        merge_tool = {
+          -- Config for conflicted files in diff views during a merge or rebase.
+          layout = 'diff3_mixed',
+          disable_diagnostics = true, -- Temporarily disable diagnostics for diff buffers while in the view.
+          winbar_info = true, -- See |diffview-config-view.x.winbar_info|
+        },
+      },
+      hooks = {
+        diff_buf_read = function()
+          local opt = vim.opt_local
+          opt.wrap = false
+          opt.list = false
+          opt.relativenumber = false
+          opt.colorcolumn = ''
+        end,
+      },
+      file_panel = {
+        listing_style = 'tree',
+        tree_options = {
+          flatten_dirs = true,
+          folder_statuses = 'only_folded',
+        },
+        win_config = function()
+          local editor_width = vim.o.columns
+          return {
+            -- position = "left",
+            -- width = editor_width >= 247 and 45 or 35,
+            -- width = 100,
+            -- width = editor_width >= 247 and 45 or 35,
+            type = 'split',
+            position = 'right',
+            width = 50,
+          }
+        end,
+      },
+      file_history_panel = {
+        log_options = {
+          git = {
+            single_file = {
+              diff_merges = 'first-parent',
+              follow = true,
+            },
+            multi_file = {
+              diff_merges = 'first-parent',
+            },
+          },
+        },
+        win_config = {
+          position = 'bottom',
+          height = 16,
+        },
+      },
+      keymaps = {
+        -- view = { q = "<Cmd>DiffviewClose<CR>" },
+        -- disable_defaults = false, -- Disable the default keymaps
+        view = {
+          -- The `view` bindings are active in the diff buffers, only when the current
+          -- tabpage is a Diffview.
+          { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'close diffview' } },
+          -- { "n", "<tab>", require("diffview.actions").select_next_entry, { desc = "Open the diff for the next file" } },
+          -- { "n", "<s-tab>", require("diffview.actions").select_prev_entry, { desc = "Open the diff for the previous file" } },
+          -- { "n", "[F", require("diffview.actions").select_first_entry, { desc = "Open the diff for the first file" } },
+          -- { "n", "]F", require("diffview.actions").select_last_entry, { desc = "Open the diff for the last file" } },
+          -- { "n", "gf", require("diffview.actions").goto_file_edit, { desc = "Open the file in the previous tabpage" } },
+          -- { "n", "<C-w><C-f>", require("diffview.actions").goto_file_split, { desc = "Open the file in a new split" } },
+          -- { "n", "<C-w>gf", require("diffview.actions").goto_file_tab, { desc = "Open the file in a new tabpage" } },
+          -- { "n", "<leader>e", require("diffview.actions").focus_files, { desc = "Bring focus to the file panel" } },
+          -- { "n", "<leader>b", require("diffview.actions").toggle_files, { desc = "Toggle the file panel." } },
+          -- { "n", "g<C-x>", require("diffview.actions").cycle_layout, { desc = "Cycle through available layouts." } },
+          -- { "n", "[x", require("diffview.actions").prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
+          -- { "n", "]x", require("diffview.actions").next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
+          -- { "n", "<leader>co", require("diffview.actions").conflict_choose("ours"), { desc = "Choose the OURS version of a conflict" } },
+          -- { "n", "<leader>ct", require("diffview.actions").conflict_choose("theirs"), { desc = "Choose the THEIRS version of a conflict" } },
+          -- { "n", "<leader>cb", require("diffview.actions").conflict_choose("base"), { desc = "Choose the BASE version of a conflict" } },
+          -- { "n", "<leader>ca", require("diffview.actions").conflict_choose("all"), { desc = "Choose all the versions of a conflict" } },
+          -- { "n", "dx", require("diffview.actions").conflict_choose("none"), { desc = "Delete the conflict region" } },
+          -- { "n", "<leader>cO", require("diffview.actions").conflict_choose_all("ours"), { desc = "Choose the OURS version of a conflict for the whole file" } },
+          -- {
+          --   "n",
+          --   "<leader>cT",
+          --   require("diffview.actions").conflict_choose_all("theirs"),
+          --   { desc = "Choose the THEIRS version of a conflict for the whole file" },
+          -- },
+          -- { "n", "<leader>cB", require("diffview.actions").conflict_choose_all("base"), { desc = "Choose the BASE version of a conflict for the whole file" } },
+          -- { "n", "<leader>cA", require("diffview.actions").conflict_choose_all("all"), { desc = "Choose all the versions of a conflict for the whole file" } },
+          -- { "n", "dX", require("diffview.actions").conflict_choose_all("none"), { desc = "Delete the conflict region for the whole file" } },
+        },
+        file_panel = { q = '<Cmd>DiffviewClose<CR>' },
+        file_history_panel = { q = '<Cmd>DiffviewClose<CR>' },
+      },
+    },
+  },
 }
 -- vim: ts=2 sts=2 sw=2 et

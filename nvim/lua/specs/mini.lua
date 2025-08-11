@@ -118,6 +118,7 @@ return {
       },
     },
   },
+
   {
     'echasnovski/mini.notify',
     event = 'VeryLazy',
@@ -130,6 +131,7 @@ return {
       require('mini.notify').setup({ window = { config = win_config } })
     end,
   },
+
   {
     'echasnovski/mini.indentscope',
     config = function()
@@ -210,6 +212,7 @@ return {
       vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]])
     end,
   },
+
   {
     'echasnovski/mini.hipatterns',
     opts = {
@@ -230,6 +233,7 @@ return {
       -- vim.b.minihipatterns_disable = not context.in_treesitter_capture("comment") or not context.in_syntax_group("Comment")
     },
   },
+
   {
     'echasnovski/mini.ai',
     keys = {
@@ -277,10 +281,12 @@ return {
       })
     end,
   },
+
   {
     'echasnovski/mini.pairs',
     opts = {},
   },
+
   {
     'echasnovski/mini.clue',
     lazy = false,
