@@ -1,6 +1,11 @@
 local utils = require('utils')
 
 local config = {
+  flavour = 'auto', -- latte, frappe, macchiato, mocha
+  background = { -- :h background
+    light = 'latte',
+    dark = 'mocha',
+  },
   integrations = {
     alpha = true,
     blink_cmp = true,
@@ -50,11 +55,14 @@ return {
   compile_path = vim.fn.stdpath('cache') .. '/catppuccin',
   config = function()
     require('catppuccin').setup(config)
+    vim.cmd('colorscheme catppuccin')
 
     if utils.os_is_dark() then
-      vim.cmd('colorscheme catppuccin-mocha')
+      vim.cmd('set background=dark')
+      -- vim.cmd('colorscheme catppuccin-mocha')
     else
-      vim.cmd('colorscheme catppuccin-latte')
+      vim.cmd('set background=light')
+      --vim.cmd('colorscheme catppuccin-latte')
     end
   end,
 }

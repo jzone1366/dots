@@ -12,6 +12,19 @@ return {
       MiniIcons.mock_nvim_web_devicons()
     end,
   },
+
+  {
+    'echasnovski/mini.align',
+    enabled = true,
+    version = false,
+    opts = {
+      mappings = {
+        start = '<leader>a',
+        start_with_preview = '<leader>A',
+      },
+    },
+  },
+
   {
     'echasnovski/mini.extra',
     lazy = false,
@@ -20,6 +33,7 @@ return {
       require('mini.extra').setup()
     end,
   },
+
   {
     'echasnovski/mini.pick',
     version = false,
@@ -36,6 +50,13 @@ return {
           config = {
             border = ui.border_style,
           },
+        },
+        delay = {
+          -- Delay between forcing asynchronous behavior
+          async = 10,
+
+          -- Delay between computation start and visual feedback about it
+          busy = 50,
         },
         mappings = {
           to_quickfix = {
@@ -73,6 +94,7 @@ return {
       { '<leader>f/', '<cmd>Pick buf_lines<CR>', desc = ' [F]ind [/] in current buffer ' },
     },
   },
+
   {
     'echasnovski/mini.comment',
     version = false,
@@ -214,27 +236,6 @@ return {
   },
 
   {
-    'echasnovski/mini.hipatterns',
-    opts = {
-      -- Highlight standalone "FIXME", "ERROR", "HACK", "TODO", "NOTE", "WARN", "REF"
-      highlighters = {
-        fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-        error = { pattern = '%f[%w]()ERROR()%f[%W]', group = 'MiniHipatternsFixme' },
-        hack = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-        warn = { pattern = '%f[%w]()WARN()%f[%W]', group = 'MiniHipatternsHack' },
-        todo = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-        note = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
-        ref = { pattern = '%f[%w]()REF()%f[%W]', group = 'MiniHipatternsNote' },
-        refs = { pattern = '%f[%w]()REFS()%f[%W]', group = 'MiniHipatternsNote' },
-
-        -- Highlight hex color strings (`#rrggbb`) using that color
-        --hex_color = hipatterns.gen_highlighter.hex_color(),
-      },
-      -- vim.b.minihipatterns_disable = not context.in_treesitter_capture("comment") or not context.in_syntax_group("Comment")
-    },
-  },
-
-  {
     'echasnovski/mini.ai',
     keys = {
       { 'a', mode = { 'o', 'x' } },
@@ -284,6 +285,7 @@ return {
 
   {
     'echasnovski/mini.pairs',
+    enabled = false,
     opts = {},
   },
 

@@ -1,5 +1,6 @@
 return {
   'folke/flash.nvim',
+  enabled = false,
   event = 'VeryLazy',
   opts = {
     jump = { nohlsearch = true, autojump = false },
@@ -30,7 +31,7 @@ return {
         enabled = false,
       },
       char = {
-        keys = { 'f', 'F', 't', 'T' }, -- NOTE: using "," here breaks which-key
+        keys = { 'f', 'F', 't', 'T' },
       },
     },
   },
@@ -49,7 +50,6 @@ return {
         require('flash').treesitter()
       end,
     },
-    -- { "vn", mode = { "n", "o", "x" }, function() require("flash").treesitter() end },
     {
       'r',
       function()

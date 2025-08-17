@@ -2,13 +2,9 @@ local icons = require('theme').icons
 local width = 50
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  --branch = 'v3.0',
   keys = {
     {
       '<C-e>',
-      --function()
-      --  vim.cmd.Neotree('reveal', 'toggle=true')
-      --end,
       '<cmd>Neotree toggle reveal position=left<cr>',
       desc = 'Toggle Neo-Tree',
     },
@@ -16,6 +12,7 @@ return {
   cmd = { 'Neotree' },
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'rachartier/tiny-devicons-auto-colors.nvim',
     'MunifTanjim/nui.nvim',
     'adelarsq/image_preview.nvim',
     {
@@ -52,8 +49,8 @@ return {
         'git_status',
       },
       source_selector = {
-        winbar = true,
-        -- statusbar = true,
+        --winbar = true,
+        statusbar = true,
         separator_active = ' ',
       },
       close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
