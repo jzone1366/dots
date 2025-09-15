@@ -3,7 +3,7 @@ local utils = require('utils')
 
 return {
   {
-    'echasnovski/mini.icons',
+    'nvim-mini/mini.icons',
     enabled = true,
     version = false,
     config = function()
@@ -14,7 +14,7 @@ return {
   },
 
   {
-    'echasnovski/mini.align',
+    'nvim-mini/mini.align',
     enabled = true,
     version = false,
     opts = {
@@ -26,7 +26,7 @@ return {
   },
 
   {
-    'echasnovski/mini.extra',
+    'nvim-mini/mini.extra',
     lazy = false,
     version = false,
     config = function()
@@ -35,7 +35,7 @@ return {
   },
 
   {
-    'echasnovski/mini.pick',
+    'nvim-mini/mini.pick',
     version = false,
     lazy = false,
     config = function()
@@ -96,7 +96,7 @@ return {
   },
 
   {
-    'echasnovski/mini.comment',
+    'nvim-mini/mini.comment',
     version = false,
     opts = {
       -- Options which control module behavior
@@ -142,7 +142,7 @@ return {
   },
 
   {
-    'echasnovski/mini.notify',
+    'nvim-mini/mini.notify',
     event = 'VeryLazy',
     config = function()
       local win_config = function()
@@ -155,7 +155,7 @@ return {
   },
 
   {
-    'echasnovski/mini.indentscope',
+    'nvim-mini/mini.indentscope',
     config = function()
       require('mini.indentscope').setup({
         symbol = ui.indent_scope_char,
@@ -211,7 +211,7 @@ return {
   },
 
   {
-    'echasnovski/mini.surround',
+    'nvim-mini/mini.surround',
     keys = {
       { 'S', mode = { 'x' } },
       'ys',
@@ -236,7 +236,7 @@ return {
   },
 
   {
-    'echasnovski/mini.ai',
+    'nvim-mini/mini.ai',
     keys = {
       { 'a', mode = { 'o', 'x' } },
       { 'i', mode = { 'o', 'x' } },
@@ -284,13 +284,13 @@ return {
   },
 
   {
-    'echasnovski/mini.pairs',
+    'nvim-mini/mini.pairs',
     enabled = false,
     opts = {},
   },
 
   {
-    'echasnovski/mini.clue',
+    'nvim-mini/mini.clue',
     lazy = false,
     version = '*',
     config = function()
@@ -353,7 +353,7 @@ return {
 
   {
     {
-      'echasnovski/mini.statusline',
+      'nvim-mini/mini.statusline',
       version = false,
       lazy = false,
       config = function()
@@ -388,5 +388,5 @@ return {
       end,
     },
   },
-  { 'echasnovski/mini.files', version = '*', opts = true },
+  { 'nvim-mini/mini.files', version = '*', opts = true },
 }

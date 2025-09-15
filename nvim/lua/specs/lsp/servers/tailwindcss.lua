@@ -1,7 +1,7 @@
 local M = {}
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
---local capabilities = require('blink.cmp').get_lsp_capabilities()
+--local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.colorProvider = { dynamicRegistration = false }
 capabilities.textDocument.foldingRange = {
@@ -10,7 +10,6 @@ capabilities.textDocument.foldingRange = {
 }
 
 -- Settings
-
 local on_attach = function(client, bufnr)
   if client.server_capabilities.colorProvider then
     require('utils.lsp').buf_attach(bufnr)

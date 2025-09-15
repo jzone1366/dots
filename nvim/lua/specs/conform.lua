@@ -1,5 +1,6 @@
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 return {
-  { -- Autoformat
+  {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
