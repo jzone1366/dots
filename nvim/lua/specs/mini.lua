@@ -84,7 +84,7 @@ return {
       { '<leader>fgf', '<cmd>Pick git_files<CR>', desc = ' [F]ind [G]it [F]iles ' },
       { '<leader>fw', '<cmd>Pick grep pattern="<cword>"<CR>', desc = ' [F]ind current [W]ord ' },
       { '<leader>fW', '<cmd>Pick grep pattern="<cWORD>"<CR>', desc = ' [F]ind current [W]ord ' },
-      { '<leader>fgg', '<cmd>Pick grep_live<CR>', desc = ' [F]ind by [G]rep ' },
+      { '<leader>fgg', '<cmd>Pick grep_live tool="rg"<CR>', desc = ' [F]ind by [G]rep ' },
       { '<leader>fr', '<cmd>Pick resume<CR>', desc = ' [F]ind [R]esume ' },
       { '<leader>fk', '<cmd>Pick keymaps<CR>', desc = ' [F]ind [K]eymaps ' },
       { '<leader>fc', '<cmd>Pick commands<CR>', desc = ' [F]ind [C]ommands ' },
