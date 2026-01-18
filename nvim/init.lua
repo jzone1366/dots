@@ -2,8 +2,22 @@ if vim.fn.has('nvim-0.9') == 0 then
   error('Need NVIM 0.9 in order to run.')
 end
 
-vim.noti = vim.notify
+-- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = { 'git', 'clone', '--filter=blob:none', 'https://github.com/nvim-mini/mini.nvim', mini_path }
+  vim.fn.system(clone_cmd)
+  vim.cmd('packadd mini.nvim | helptags ALL')
+  vim.cmd('echo "Installed `mini.nvim`" | redraw')
+end
 
+-- Set up 'mini.deps' (customize to your liking)
+require('mini.deps').setup({ path = { package = path_package } })
+
+-- Global utility functions and variables
+vim.noti = vim.notify
 _G.L = vim.log.levels
 _G.I = vim.inspect
 _G.swift = {
@@ -12,49 +26,19 @@ _G.swift = {
 }
 
 -- inspect the contents of an object very quickly
--- in your code or from the command-line:
--- @see: https://www.reddit.com/r/neovim/comments/p84iu2/useful_functions_to_explore_lua_objects/
--- USAGE:
--- in lua: P({1, 2, 3})
--- in commandline: :lua P(vim.loop)
----@vararg any
 function _G.P(...)
   local printables = {}
   for i = 1, select('#', ...) do
     local v = select(i, ...)
     table.insert(printables, vim.inspect(v))
   end
-
-  if pcall(require, 'plenary') then
-    local log = require('plenary.log').new({
-      plugin = 'notify',
-      level = 'debug',
-      use_console = true,
-      use_quickfix = false,
-      use_file = false,
-    })
-    -- vim.schedule_wrap(log.info)(table.concat(printables, "\n"))
-    vim.schedule_wrap(log.info)(vim.inspect(#printables > 1 and printables or unpack(printables)))
-  else
-    vim.schedule_wrap(print)(table.concat(printables, '\n'))
-  end
+  vim.schedule_wrap(print)(table.concat(printables, '\n'))
   return ...
 end
 _G.dbg = _G.P
 
 function vim.dbg(msg, level, _opts)
-  if pcall(require, 'plenary') then
-    local log = require('plenary.log').new({
-      plugin = 'notify',
-      level = level or 'DEBUG',
-      use_console = true,
-      use_quickfix = false,
-      use_file = false,
-    })
-    vim.schedule_wrap(log.info)(msg)
-  else
-    vim.schedule_wrap(P)(msg)
-  end
+  vim.schedule_wrap(P)(msg)
 end
 
 function vim.pprint(...)
@@ -62,18 +46,7 @@ function vim.pprint(...)
   if not s then
     args = { ... }
   end
-  if pcall(require, 'plenary') then
-    local log = require('plenary.log').new({
-      plugin = 'notify',
-      level = 'debug',
-      use_console = true,
-      use_quickfix = false,
-      use_file = false,
-    })
-    vim.schedule_wrap(log.info)(vim.inspect(#args > 1 and args or unpack(args)))
-  else
-    vim.schedule_wrap(vim.notify)(vim.inspect(#args > 1 and args or unpack(args)))
-  end
+  vim.schedule_wrap(vim.notify)(vim.inspect(#args > 1 and args or unpack(args)))
 end
 
 function vim.wlog(...)
