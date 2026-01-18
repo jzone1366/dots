@@ -1,1 +1,4 @@
 lua/zone/compiled.lua
+# Mini.deps plugin manager data
+pack/
+

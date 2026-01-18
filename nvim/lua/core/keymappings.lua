@@ -13,9 +13,8 @@ map('n', '<C-l>', '<C-w>l', { silent = true, desc = 'Move to the window to the r
 map('n', 'H', '^', { silent = true, desc = 'Move to the first non-blank character of the line' })
 
 -- UTIL Mappings
-map('n', '<LEADER>/u', '<cmd>Lazy update<CR>', { silent = true, desc = 'update plugins' })
-map('n', '<LEADER>/i', '<cmd>Lazy<CR>', { silent = true, desc = 'manage plugins' })
-map('n', '<LEADER>//', '<cmd>Alpha<CR>', { silent = true, desc = 'open dashboard' })
+map('n', '<LEADER>/u', '<cmd>DepsUpdate<CR>', { silent = true, desc = 'update plugins' })
+map('n', '<LEADER>/i', '<cmd>DepsShowLog<CR>', { silent = true, desc = 'show plugin manager log' })
 map('n', '<LEADER>/c', 'e $MYVIMRC', { silent = true, desc = 'open config' })
 
 -- Highlight when yanking (copying) text
