@@ -101,6 +101,21 @@ later(function()
       },
     },
   })
+
+  -- Setup keymappings for mini.pick
+  vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<CR>', { desc = ' [F]ind [F]iles ' })
+  vim.keymap.set('n', '<leader>fo', '<cmd>Pick oldfiles<CR>', { desc = ' [F]ind [O]ldfiles ' })
+  vim.keymap.set('n', '<leader>fgf', '<cmd>Pick git_files<CR>', { desc = ' [F]ind [G]it [F]iles ' })
+  vim.keymap.set('n', '<leader>fw', '<cmd>Pick grep pattern="<cword>"<CR>', { desc = ' [F]ind current [W]ord ' })
+  vim.keymap.set('n', '<leader>fW', '<cmd>Pick grep pattern="<cWORD>"<CR>', { desc = ' [F]ind current [W]ord ' })
+  vim.keymap.set('n', '<leader>fgg', '<cmd>Pick grep_live tool="rg"<CR>', { desc = ' [F]ind by [G]rep ' })
+  vim.keymap.set('n', '<leader>fr', '<cmd>Pick resume<CR>', { desc = ' [F]ind [R]esume ' })
+  vim.keymap.set('n', '<leader>fk', '<cmd>Pick keymaps<CR>', { desc = ' [F]ind [K]eymaps ' })
+  vim.keymap.set('n', '<leader>fc', '<cmd>Pick commands<CR>', { desc = ' [F]ind [C]ommands ' })
+  vim.keymap.set('n', '<leader>fd', '<cmd>Pick diagnostic<CR>', { desc = ' [F]ind [D]iagnostics ' })
+  vim.keymap.set('n', '<leader>fb', '<cmd>Pick buffers<CR>', { desc = ' [F]ind [B]uffers ' })
+  vim.keymap.set('n', '<leader>fh', '<cmd>Pick help<CR>', { desc = ' [F]ind [H]elp ' })
+  vim.keymap.set('n', '<leader>f/', '<cmd>Pick buf_lines<CR>', { desc = ' [F]ind [/] in current buffer ' })
 end)
 
 later(function()
@@ -521,6 +536,13 @@ later(function()
     zindex = 20,
     mode = 'cursor',
   })
+
+  vim.keymap.set('n', '[[', function()
+    require('treesitter-context').go_to_context(-vim.v.count1)
+  end, { desc = 'Jump to previous context' })
+  vim.keymap.set('n', ']]', function()
+    require('treesitter-context').go_to_context(vim.v.count1)
+  end, { desc = 'Jump to next context' })
 end)
 
 later(function()
@@ -540,6 +562,11 @@ end)
 
 later(function()
   add('David-Kunz/treesitter-unit')
+  
+  vim.keymap.set('x', 'iu', ':lua require"treesitter-unit".select()<CR>', { desc = 'Select inner treesitter unit' })
+  vim.keymap.set('o', 'iu', ':<c-u>lua require"treesitter-unit".select()<CR>', { desc = 'Select inner treesitter unit' })
+  vim.keymap.set('x', 'au', ':lua require"treesitter-unit".select(true)<CR>', { desc = 'Select around treesitter unit' })
+  vim.keymap.set('o', 'au', ':<c-u>lua require"treesitter-unit".select(true)<CR>', { desc = 'Select around treesitter unit' })
 end)
 
 later(function()
@@ -644,6 +671,13 @@ end)
 
 later(function()
   add('sindrets/diffview.nvim')
+  
+  -- Diffview keymappings
+  vim.keymap.set('n', '<leader>gd', function()
+    vim.cmd('DiffviewOpen')
+  end, { desc = 'diffview: open' })
+  vim.keymap.set('v', 'gh', [[:'<'>DiffviewFileHistory<CR>]], { desc = 'diffview: file history' })
+  vim.keymap.set('n', '<localleader>gh', '<Cmd>DiffviewFileHistory<CR>', { desc = 'diffview: file history' })
 end)
 
 -- LSP
@@ -707,9 +741,11 @@ now(function()
       hl.delta('delta --dark --paging=never'),
     },
   })
+end)
 
-  -- Main LSP configuration will be loaded via require
-  -- The actual server setup is in specs/lsp/init.lua and will be loaded later
+-- Load LSP server configurations later
+later(function()
+  require('config.lsp')()
 end)
 
 -- Completion
@@ -724,35 +760,26 @@ later(function()
       'xzbdmw/colorful-menu.nvim',
     },
   })
-  
-  -- Blink completion configuration will be loaded separately
-  -- The configuration is in specs/blink.lua
+
+  require('config.blink')()
 end)
 
 -- Formatting
 later(function()
   add('stevearc/conform.nvim')
-  
-  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  
-  -- Conform configuration will be loaded separately
-  -- The configuration is in specs/conform.lua
+  require('config.conform')()
 end)
 
 -- Linting
 later(function()
   add('mfussenegger/nvim-lint')
-  
-  -- Lint configuration will be loaded separately
-  -- The configuration is in specs/lint.lua
+  require('config.lint')()
 end)
 
 -- AI (copilot)
 later(function()
   add('zbirenbaum/copilot.lua')
-  
-  -- Copilot configuration will be loaded separately if needed
-  -- The configuration is in specs/ai.lua
+  require('config.copilot')()
 end)
 
 -- File explorer
@@ -764,9 +791,31 @@ later(function()
       'MunifTanjim/nui.nvim',
     },
   })
+
+  -- Neo-tree keymapping
+  vim.keymap.set('n', '<C-e>', '<cmd>Neotree toggle reveal position=left<cr>', { desc = 'Toggle Neo-Tree' })
   
-  -- Neo-tree configuration will be loaded separately
-  -- The configuration is in specs/neo-tree.lua
+  -- Basic neo-tree setup - full config from specs/neo-tree.lua can be added if needed
+  require('neo-tree').setup({
+    sources = {
+      'filesystem',
+      'git_status',
+    },
+    close_if_last_window = true,
+    popup_border_style = 'rounded',
+    enable_git_status = true,
+    enable_diagnostics = true,
+    default_component_configs = {
+      indent = {
+        indent_size = 2,
+        padding = 1,
+      },
+    },
+    window = {
+      position = 'left',
+      width = 50,
+    },
+  })
 end)
 
 -- Todo comments
