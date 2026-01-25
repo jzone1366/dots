@@ -38,9 +38,12 @@ function M.setup()
 end
 
 function M.update_status(window, pane)
+	-- Refresh colors with current window context
+	colors.refresh(window)
+
 	local active_key_table = window:active_key_table()
 	local workspace = window:active_workspace()
-	local workspace_color = colors.yellow()
+	local workspace_color = colors.white()
 
 	-- Determine status and color
 	if active_key_table then
@@ -107,7 +110,10 @@ function M.format_tab_title(tab)
 	if tab.is_active then
 		return {
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.cursor() } },
+			{ Foreground = { Color = colors.cyan() } },
+			{ Text = nerdfonts.ple_left_half_circle_thick },
+			{ Background = { Color = colors.cyan() } },
+			{ Foreground = { Color = colors.bg() } },
 			{ Text = title .. " " },
 			{ Background = { Color = colors.cursor() } },
 			{ Foreground = { Color = colors.bg() } },
@@ -119,16 +125,16 @@ function M.format_tab_title(tab)
 	else
 		return {
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.red() } },
+			{ Foreground = { Color = colors.cursor() } },
 			{ Text = nerdfonts.ple_left_half_circle_thick },
-			{ Background = { Color = colors.red() } },
-			{ Foreground = { Color = colors.fg() } },
+			{ Background = { Color = colors.cursor() } },
+			{ Foreground = { Color = colors.bg() } },
 			{ Text = title .. " " },
-			{ Background = { Color = colors.magenta() } },
+			{ Background = { Color = colors.bright_black() } },
 			{ Foreground = { Color = colors.bg() } },
 			{ Text = " " .. tab_number },
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.magenta() } },
+			{ Foreground = { Color = colors.bright_black() } },
 			{ Text = nerdfonts.ple_right_half_circle_thick .. " " },
 		}
 	end

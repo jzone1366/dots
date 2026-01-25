@@ -14,6 +14,11 @@ require("core.launch").apply(config)
 require("core.keybindings").apply(config)
 require("core.events").setup()
 
+--local themes = {
+--	dark = "Catppuccin Mocha",
+--	light = "Catppuccin Latte",
+--}
+
 --config.window_padding = {
 --	left = 5,
 --	right = 5,
