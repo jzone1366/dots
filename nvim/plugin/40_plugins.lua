@@ -187,34 +187,56 @@ now_if_args(function()
 
   require('CopilotChat').setup({})
 
-  -- CodeCompanion
-  add({
-    source = 'olimorris/codecompanion.nvim',
-    depends = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-    },
-  })
+  -- CodeCompanion - Only add if not in a git commit buffer
+  local is_git_commit = vim.fn.expand('%:t'):match('^COMMIT_EDITMSG$')
+    or vim.fn.expand('%:t'):match('^git%-rebase%-todo$')
+    or vim.bo.filetype == 'gitcommit'
+    or vim.bo.filetype == 'gitrebase'
 
-  require('codecompanion').setup({
-    strategies = {
-      chat = { adapter = 'copilot' },
-      inline = { adapter = 'copilot' },
-      agent = { adapter = 'copilot' },
-    },
-    adapters = {
-      copilot = function()
-        return require('codecompanion.adapters').extend('copilot', {
-          schema = {
-            model = {
-              -- default = 'gpt-4o', -- or 'claude-3.5-sonnet'
-              default = 'claude-opus-4.5',
-            },
-          },
-        })
-      end,
-    },
-  })
+  if not is_git_commit then
+    add({
+      source = 'olimorris/codecompanion.nvim',
+      depends = {
+        'nvim-lua/plenary.nvim',
+        'nvim-treesitter/nvim-treesitter',
+      },
+    })
+
+    -- Setup codecompanion immediately after adding
+    vim.schedule(function()
+      local prompts = require('codecompanion.prompts')
+
+      local prompt_library = {}
+      for name, prompt in pairs(prompts) do
+        local display_name = prompt.display_name
+          or name:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
+            return first:upper() .. rest:lower()
+          end)
+
+        prompt_library[display_name] = prompt.config
+      end
+
+      require('codecompanion').setup({
+        strategies = {
+          chat = { adapter = 'copilot' },
+          inline = { adapter = 'copilot' },
+          agent = { adapter = 'copilot' },
+        },
+        adapters = {
+          copilot = function()
+            return require('codecompanion.adapters').extend('copilot', {
+              schema = {
+                model = {
+                  default = 'claude-opus-4.5',
+                },
+              },
+            })
+          end,
+        },
+        prompt_library = prompt_library,
+      })
+    end)
+  end
 
   -- LSP Config
   local blink_caps = require('blink.cmp').get_lsp_capabilities()
