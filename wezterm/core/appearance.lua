@@ -26,9 +26,8 @@ function M.apply(config)
 
 	-- Font configuration
 	config.font = wezterm.font_with_fallback({
-		--"CommitMono",
 		"Monaspace Xenon",
-		"SF Mono",
+		"CommitMono",
 		"Symbols Nerd Font",
 		"Apple Color Emoji",
 	})
