@@ -39,11 +39,12 @@ local function create_section(icon, text, bg_color, fg_color)
 		{ Background = { Color = bg_color } },
 		{ Foreground = { Color = fg_color } },
 		{ Text = icon .. " " },
-		{ Background = { Color = colors.red() } },
-		{ Foreground = { Color = colors.fg() } },
+		{ Attribute = { Intensity = "Bold" } },
+		{ Background = { Color = bg_color } },
+		{ Foreground = { Color = colors.bg() } },
 		{ Text = " " .. text },
 		{ Background = { Color = colors.bg() } },
-		{ Foreground = { Color = colors.red() } },
+		{ Foreground = { Color = bg_color } },
 		{ Text = nerdfonts.ple_right_half_circle_thick },
 	}
 end
@@ -56,13 +57,13 @@ function M.create_left_status(stat, workspace_color)
 		{ Foreground = { Color = workspace_color } },
 		{ Text = nerdfonts.ple_left_half_circle_thick },
 		{ Background = { Color = workspace_color } },
-		{ Foreground = { Color = colors.red() } },
+		{ Foreground = { Color = colors.white() } },
 		{ Text = nerdfonts.cod_terminal_tmux .. " " },
-		{ Background = { Color = colors.red() } },
+		{ Background = { Color = colors.white() } },
 		{ Foreground = { Color = workspace_color } },
 		{ Text = " " .. stat .. " " },
 		{ Background = { Color = colors.bg() } },
-		{ Foreground = { Color = colors.red() } },
+		{ Foreground = { Color = colors.white() } },
 		{ Text = nerdfonts.ple_right_half_circle_thick .. " " },
 	})
 end
@@ -71,8 +72,8 @@ function M.create_right_status(cwd, username, hostname, time)
 	local sections = {
 		{ icon = nerdfonts.md_folder, text = cwd, color = colors.blue() },
 		{ icon = nerdfonts.fa_user, text = username, color = colors.cyan() },
-		{ icon = nerdfonts.dev_apple, text = hostname, color = colors.white() },
-		{ icon = nerdfonts.md_calendar_clock, text = time, color = colors.bright_black() },
+		{ icon = nerdfonts.dev_apple, text = hostname, color = colors.yellow() },
+		{ icon = nerdfonts.md_calendar_clock, text = time, color = colors.red() },
 	}
 
 	local formatted = {}

@@ -38,9 +38,12 @@ function M.setup()
 end
 
 function M.update_status(window, pane)
+	-- Refresh colors with current window context
+	colors.refresh(window)
+
 	local active_key_table = window:active_key_table()
 	local workspace = window:active_workspace()
-	local workspace_color = colors.yellow()
+	local workspace_color = colors.bright_black()
 
 	-- Determine status and color
 	if active_key_table then
@@ -107,28 +110,31 @@ function M.format_tab_title(tab)
 	if tab.is_active then
 		return {
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.cursor() } },
+			{ Foreground = { Color = colors.yellow() } },
+			{ Text = nerdfonts.ple_left_half_circle_thick },
+			{ Background = { Color = colors.yellow() } },
+			{ Foreground = { Color = colors.bg() } },
 			{ Text = title .. " " },
-			{ Background = { Color = colors.cursor() } },
+			{ Background = { Color = colors.yellow() } },
 			{ Foreground = { Color = colors.bg() } },
 			{ Text = " " .. tab_number },
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.cursor() } },
+			{ Foreground = { Color = colors.yellow() } },
 			{ Text = nerdfonts.ple_right_half_circle_thick .. " " },
 		}
 	else
 		return {
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.red() } },
+			{ Foreground = { Color = colors.bright_black() } },
 			{ Text = nerdfonts.ple_left_half_circle_thick },
-			{ Background = { Color = colors.red() } },
+			{ Background = { Color = colors.bright_black() } },
 			{ Foreground = { Color = colors.fg() } },
 			{ Text = title .. " " },
-			{ Background = { Color = colors.magenta() } },
-			{ Foreground = { Color = colors.bg() } },
+			{ Background = { Color = colors.bright_black() } },
+			{ Foreground = { Color = colors.fg() } },
 			{ Text = " " .. tab_number },
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.magenta() } },
+			{ Foreground = { Color = colors.bright_black() } },
 			{ Text = nerdfonts.ple_right_half_circle_thick .. " " },
 		}
 	end

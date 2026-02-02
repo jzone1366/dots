@@ -1,65 +1,20 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-mkdir -p "$VIMCONFIG"
+# Expected:
+#   DOTFILES=~/dots
+#   VIMCONFIG=~/.config/nvim
 
-ln -sf "$DOTFILES/nvim/init.lua" "$VIMCONFIG"
-ln -sf "$DOTFILES/nvim/filetype.lua" "$VIMCONFIG"
+mkdir -p "$(dirname "$VIMCONFIG")"
 
-# Install all mandatory folders if they don't exist already
-mkdir -p "$VIMCONFIG/backup"
-mkdir -p "$VIMCONFIG/undo"
-mkdir -p "$VIMCONFIG/swap"
-mkdir -p "$VIMCONFIG/after"
+# Backup existing config if present
+if [ -e "$VIMCONFIG" ] || [ -L "$VIMCONFIG" ]; then
+  ts="$(date +%Y%m%d-%H%M%S)"
+  mv "$VIMCONFIG" "${VIMCONFIG}.bak.${ts}"
+fi
 
-# lua
-rm -rf "$VIMCONFIG/lua"
-ln -sf "$DOTFILES/nvim/lua" "$VIMCONFIG"
+# Symlink the entire Neovim config directory
+ln -s "$DOTFILES/nvim" "$VIMCONFIG"
 
-# after/ftplugin
-rm -rf "$VIMCONFIG/after/ftplugin"
-ln -sf "$DOTFILES/nvim/after/ftplugin" "$VIMCONFIG/after"
-
-# after/plugin
-rm -rf "$VIMCONFIG/after/plugin"
-ln -sf "$DOTFILES/nvim/after/plugin" "$VIMCONFIG/after"
-
-# after/queries
-rm -rf "$VIMCONFIG/after/queries"
-ln -sf "$DOTFILES/nvim/after/queries" "$VIMCONFIG/after"
-
-## UNCOMMENT BELOW WHEN YOU ADD THESE FILES
-## macros
-#rm -rf "$VIMCONFIG/macros"
-#ln -sf "$DOTFILES/nvim/macros" "$VIMCONFIG/macros"
-#
-## compiler
-#rm -rf "$VIMCONFIG/compiler"
-#ln -sf "$DOTFILES/nvim/compiler" "$VIMCONFIG/compiler"
-#
-## indentation
-#rm -rf "$VIMCONFIG/after/indent"
-#ln -sf "$DOTFILES/nvim/after/indent" "$VIMCONFIG/after"
-#
-## snippets
-#rm -rf "$VIMCONFIG/UltiSnips"
-#ln -sf "$DOTFILES/nvim/UltiSnips" "$VIMCONFIG"
-#
-## :help ftplugin
-#ln -sf "$DOTFILES/nvim/ftplugin" "$VIMCONFIG"
-#
-## :help ftdetect
-#ln -sf "$DOTFILES/nvim/ftdetect" "$VIMCONFIG"
-#
-## :help autoload
-#ln -sf "$DOTFILES/nvim/autoload" "$VIMCONFIG"
-#
-## thesaurus
-#rm -rf "$VIMCONFIG/thesaurus"
-#ln -sf "$DOTFILES/nvim/thesaurus" "$VIMCONFIG"
-#
-## spell files
-#ln -sf "$DOTFILES/nvim/spell" "$VIMCONFIG"
-
-## queries
-#rm -rf "$VIMCONFIG/queries"
-#ln -sf "$DOTFILES/nvim/queries" "$VIMCONFIG/queries"
+echo "✔ Neovim config linked:"
+echo "  $VIMCONFIG → $DOTFILES/nvim"

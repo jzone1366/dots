@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local action = wezterm.action
-local colors = require("utils.colors")
 
 local M = {}
 
