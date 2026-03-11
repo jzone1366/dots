@@ -477,9 +477,9 @@ later(function()
 end)
 
 now(function()
-  add({ source = 'kepano/flexoki-neovim', as = 'flexoki' })
+  add({ source = 'rebelot/kanagawa.nvim' })
 
-  vim.cmd('colorscheme flexoki-dark')
+  vim.cmd('colorscheme kanagawa-dragon')
   vim.cmd('set background=dark')
 end)
 

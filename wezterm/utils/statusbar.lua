@@ -57,13 +57,13 @@ function M.create_left_status(stat, workspace_color)
 		{ Foreground = { Color = workspace_color } },
 		{ Text = nerdfonts.ple_left_half_circle_thick },
 		{ Background = { Color = workspace_color } },
-		{ Foreground = { Color = colors.white() } },
+		{ Foreground = { Color = colors.selection_bg() } },
 		{ Text = nerdfonts.cod_terminal_tmux .. " " },
-		{ Background = { Color = colors.white() } },
+		{ Background = { Color = colors.selection_bg() } },
 		{ Foreground = { Color = workspace_color } },
 		{ Text = " " .. stat .. " " },
 		{ Background = { Color = colors.bg() } },
-		{ Foreground = { Color = colors.white() } },
+		{ Foreground = { Color = colors.selection_bg() } },
 		{ Text = nerdfonts.ple_right_half_circle_thick .. " " },
 	})
 end

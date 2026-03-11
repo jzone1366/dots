@@ -2,9 +2,14 @@ local wezterm = require("wezterm")
 
 local M = {}
 
+--local themes = {
+--	dark = "Flexoki Dark",
+--	light = "Flexoki Light",
+--}
+
 local themes = {
-	dark = "Flexoki Dark",
-	light = "Flexoki Light",
+	dark = "Kanagawa Dragon",
+	light = "Kanagawa Lotus",
 }
 
 -- Color cache
@@ -135,6 +140,10 @@ function M.cursor()
 	return M.get("cursor_bg", "#c6d0f5")
 end
 
+function M.selection_bg()
+	return M.get("selection_bg", "#c6d0f5")
+end
+
 function M.red()
 	return M.get(1, "#D14D41")
 end
@@ -165,6 +174,38 @@ end
 
 function M.bright_black()
 	return M.get(8, "#a5adce")
+end
+
+function M.bright_red()
+	return M.get(9, "#f38ba8")
+end
+
+function M.bright_green()
+	return M.get(10, "#94e2d5")
+end
+
+function M.bright_yellow()
+	return M.get(11, "#f9e2af")
+end
+
+function M.bright_blue()
+	return M.get(12, "#89b4fa")
+end
+
+function M.bright_magenta()
+	return M.get(13, "#f5c2e7")
+end
+
+function M.bright_cyan()
+	return M.get(14, "#a6e3a1")
+end
+
+function M.bright_white()
+	return M.get(15, "#c6d0f5")
+end
+
+function M.bright_color(index)
+	return M.get(index + 8, "#ffffff")
 end
 
 return M

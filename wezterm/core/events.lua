@@ -110,16 +110,16 @@ function M.format_tab_title(tab)
 	if tab.is_active then
 		return {
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.yellow() } },
+			{ Foreground = { Color = colors.green() } },
 			{ Text = nerdfonts.ple_left_half_circle_thick },
-			{ Background = { Color = colors.yellow() } },
+			{ Background = { Color = colors.green() } },
 			{ Foreground = { Color = colors.bg() } },
 			{ Text = title .. " " },
-			{ Background = { Color = colors.yellow() } },
+			{ Background = { Color = colors.green() } },
 			{ Foreground = { Color = colors.bg() } },
 			{ Text = " " .. tab_number },
 			{ Background = { Color = colors.bg() } },
-			{ Foreground = { Color = colors.yellow() } },
+			{ Foreground = { Color = colors.green() } },
 			{ Text = nerdfonts.ple_right_half_circle_thick .. " " },
 		}
 	else
@@ -128,10 +128,10 @@ function M.format_tab_title(tab)
 			{ Foreground = { Color = colors.bright_black() } },
 			{ Text = nerdfonts.ple_left_half_circle_thick },
 			{ Background = { Color = colors.bright_black() } },
-			{ Foreground = { Color = colors.fg() } },
+			{ Foreground = { Color = colors.selection_bg() } },
 			{ Text = title .. " " },
 			{ Background = { Color = colors.bright_black() } },
-			{ Foreground = { Color = colors.fg() } },
+			{ Foreground = { Color = colors.selection_bg() } },
 			{ Text = " " .. tab_number },
 			{ Background = { Color = colors.bg() } },
 			{ Foreground = { Color = colors.bright_black() } },
