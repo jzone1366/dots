@@ -607,7 +607,6 @@ require('treewalker').setup({
   highlight_duration = 250,
   highlight_group = 'CursorLine',
 })
-
 MiniDeps.add({ source = 'rhysd/committia.vim' })
 
 -- See: https://github.com/rhysd/committia.vim#variables
