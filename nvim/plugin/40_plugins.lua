@@ -187,56 +187,13 @@ now_if_args(function()
 
   require('CopilotChat').setup({})
 
-  -- CodeCompanion - Only add if not in a git commit buffer
-  local is_git_commit = vim.fn.expand('%:t'):match('^COMMIT_EDITMSG$')
-    or vim.fn.expand('%:t'):match('^git%-rebase%-todo$')
-    or vim.bo.filetype == 'gitcommit'
-    or vim.bo.filetype == 'gitrebase'
+  add({ source = 'carlos-algms/agentic.nvim' })
 
-  if not is_git_commit then
-    add({
-      source = 'olimorris/codecompanion.nvim',
-      depends = {
-        'nvim-lua/plenary.nvim',
-        'nvim-treesitter/nvim-treesitter',
-      },
-    })
-
-    -- Setup codecompanion immediately after adding
-    vim.schedule(function()
-      local prompts = require('codecompanion.prompts')
-
-      local prompt_library = {}
-      for name, prompt in pairs(prompts) do
-        local display_name = prompt.display_name
-          or name:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
-            return first:upper() .. rest:lower()
-          end)
-
-        prompt_library[display_name] = prompt.config
-      end
-
-      require('codecompanion').setup({
-        strategies = {
-          chat = { adapter = 'copilot' },
-          inline = { adapter = 'copilot' },
-          agent = { adapter = 'copilot' },
-        },
-        adapters = {
-          copilot = function()
-            return require('codecompanion.adapters').extend('copilot', {
-              schema = {
-                model = {
-                  default = 'claude-opus-4.5',
-                },
-              },
-            })
-          end,
-        },
-        prompt_library = prompt_library,
-      })
-    end)
-  end
+  require('agentic').setup({
+    -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp"
+    -- "cursor-acp" |"copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp"
+    provider = 'opencode-acp',
+  })
 
   -- LSP Config
   local blink_caps = require('blink.cmp').get_lsp_capabilities()
