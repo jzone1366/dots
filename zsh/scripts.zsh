@@ -55,9 +55,6 @@ vidvolup() {
     fi
 }
 
-updatesys() {
-    sh $DOTFILES/update.sh
-}
 
 extract() {
     local file
@@ -238,8 +235,8 @@ blimg() {
         #basedir current article
         local BASEDIRC="${BASEDIRY}/${2}"
 
-        if [ ! -d $BASEDIRP ]; then
-            mkdir $BASEDIRP
+        if [ ! -d $BASEDIRC ]; then
+            mkdir $BASEDIRC
         fi
 
         local IMGRESIZED=imgresize "${1} 780"
@@ -341,29 +338,6 @@ pgdump() {
     pg_dump -U postgres -h localhost x_loc_0bdf08de > pulsecheck_service_test.sql
 }
 
-githeat() {
-    $DOTFILES/bash/scripts/heatmap.sh
-}
-
-colorblocks() {
-    $DOTFILES/bash/scripts/colorblocks.sh
-}
-
-colorcards() {
-    $DOTFILES/bash/scripts/colorcards.sh
-}
-
-colors() {
-    $DOTFILES/bash/scripts/colors.sh
-}
-
-pipes() {
-    $DOTFILES/bash/scripts/pipes.sh
-}
-
-smedia() {
-    $DOTFILES/bash/scripts/smedia.sh $@
-}
 
 mkcd() {
     mkdir -p "$@" && cd "$_"
@@ -550,21 +524,6 @@ serve() {
     python3 -m http.server "$PORT"
 }
 
-backup() {
-    "$DOTFILES/bash/scripts/backup/backup.sh" "$@" "$CLOUD/dotfiles/dir.csv"
-}
-
-kubecfg() {
-    . "$CLOUD/development/dotfiles_projects/amboss/kubecfg.sh"
-}
-
-scratchpad() {
-    "$DOTFILES/bash/scripts/scratchpad.sh" "$@"
-}
-
-git-jump() {
-    "$DOTFILES/bash/scripts/git-jump.sh" "$@"
-}
 
 pom() {
     local -r HOURS=${1:?}

@@ -62,8 +62,5 @@ webp
 curl
 wget
 
-# Media
-webp                 # provides cwebp
-
 # Clipboard (for copy/paste aliases)
 xclip
