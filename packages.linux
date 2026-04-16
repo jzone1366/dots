@@ -1,0 +1,69 @@
+# Linux package list (Debian/Ubuntu)
+# Install with: xargs sudo apt-get install -y < packages.linux
+#
+# For other distros, package names may vary slightly.
+# Arch: use pacman -S or yay for AUR packages
+# Fedora: use dnf install
+
+# Shell
+zsh
+fzf
+ripgrep
+bat
+tree
+bc
+
+# Git
+git
+# git-delta: install from https://github.com/dandavison/delta/releases
+
+# Editors
+neovim
+
+# Tmux
+tmux
+
+# Languages
+golang
+nodejs
+npm
+python3
+python3-pip
+python3-venv
+php
+composer
+# rustup: install from https://rustup.rs
+
+# LSP / Formatters / Linters
+shellcheck
+pylint
+yamllint
+luarocks
+# stylua: cargo install stylua
+# prettierd: npm install -g @fsouza/prettierd
+# black, isort: pip install black isort
+# luacheck: luarocks install luacheck
+# eslint_d: npm install -g eslint_d
+# sql-formatter: npm install -g sql-formatter
+# vale: https://github.com/errata-ai/vale/releases
+
+# Database
+libpq-dev
+postgresql-client
+libssl-dev
+
+# Media
+yt-dlp
+ffmpeg
+imagemagick
+webp
+
+# Network
+curl
+wget
+
+# Media
+webp                 # provides cwebp
+
+# Clipboard (for copy/paste aliases)
+xclip

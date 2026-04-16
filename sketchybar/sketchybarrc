@@ -49,11 +49,11 @@ sketchybar --bar height=32 \
 # Left
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
-source "$ITEM_DIR/front_app.sh"
+# source "$ITEM_DIR/front_app.sh"   # TODO: not yet implemented
 
 # Right
 source "$ITEM_DIR/github.sh"
-source "$ITEM_DIR/mail.sh"
+# source "$ITEM_DIR/mail.sh"        # TODO: not yet implemented
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/cpu.sh"
 

@@ -137,10 +137,8 @@ bindkey -M vicmd '^a' incarg
 # +------------+
 
 source $DOTFILES/zsh/completion.zsh
-#autoload -Uz $DOTFILES/zsh/plugins/kubectl-completion/zsh-kubectl-completion
 
 source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source $DOTFILES/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # +-----+
 # | Git |
@@ -154,9 +152,15 @@ source $DOTFILES/zsh/plugins/gitit.zsh
 # +-----+
 source <(fzf --zsh)
 
-#if [ $(command -v "fzf") ]; then
-#    source $DOTFILES/zsh/fzf.zsh
-#fi
+# Customize fzf's completion preview for cd
+_fzf_comprun() {
+    local command=$1
+    shift
+    case "$command" in
+        cd) find . -type d | fzf --height 50% --border sharp --margin 5% --preview 'tree -C {} | head -n 10' ;;
+        *)  fzf "$@" ;;
+    esac
+}
 
 # +---------+
 # | BINDING |
@@ -190,3 +194,10 @@ source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # +------------------+
 source $DOTFILES/zsh/plugins/functions.zsh
 source $DOTFILES/zsh/plugins/update.zsh
+source $DOTFILES/notifyosd.zsh
+
+# +---------------+
+# | Local Overrides|
+# +---------------+
+# Machine-specific config not tracked in the repo (e.g. $CLOUD, $JRNL, work aliases)
+[[ -f "$HOME/.zshrc_local" ]] && source "$HOME/.zshrc_local"

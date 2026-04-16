@@ -1,7 +1,13 @@
 #!/usr/bin/env zsh
 
+# +----------------------+
+# | Linux-only functions |
+# +----------------------+
+
+if $IS_LINUX; then
+
 screenres() {
-    [ ! -z $1 ] && xrandr --current | grep '*' | awk '{print $1}' | sed -n "$1p"
+    [ -n "$1" ] && xrandr --current | grep '*' | awk '{print $1}' | sed -n "${1}p"
 }
 
 screencast() {
@@ -19,33 +25,33 @@ screencast() {
     local screen=2
     local offset=""
     local heights=(`screenres 1 | awk -Fx '{print $2}'` `screenres 2 | awk -Fx '{print $2}'`)
-    local bigger_height=$(echo $heights | sed "s/ /\n/" | sort -rg | line 1)
+    local bigger_height=$(echo $heights | tr ' ' '\n' | sort -rg | head -n 1)
 
-        [ $screen -eq 1 ] && offset="+0,$(( $bigger_height -  $(screenres 1 | awk -Fx '{print $2}')))"
-        ffmpeg -f x11grab -framerate 60 -s $(screenres $screen) -i :0.0$offset \
-            -f v4l2 -framerate 30 -video_size 640x480 -i /dev/video2 \
-            -f pulse -sample_rate 44100 -i default \
-            -filter_complex "overlay=main_w-overlay_w-2:main_h-overlay_h-2" \
-            -c:v libx264 -preset ultrafast -crf 18 -c:a aac -b:a 320k $T
+    [ $screen -eq 1 ] && offset="+0,$(( $bigger_height - $(screenres 1 | awk -Fx '{print $2}') ))"
+    ffmpeg -f x11grab -framerate 60 -s $(screenres $screen) -i :0.0$offset \
+        -f v4l2 -framerate 30 -video_size 640x480 -i /dev/video2 \
+        -f pulse -sample_rate 44100 -i default \
+        -filter_complex "overlay=main_w-overlay_w-2:main_h-overlay_h-2" \
+        -c:v libx264 -preset ultrafast -crf 18 -c:a aac -b:a 320k $T
 }
 
 oscreencast() {
-    if [ ! -z $1 ]; then
+    if [ -n "$1" ]; then
         ffmpeg -f x11grab -s $(xdpyinfo | grep dimensions | awk '{print $2}') -i :0.0 $1
     else
         echo "You need to precise an output file as first argument - eg 'example.mkv'"
     fi
 }
 
+fi # IS_LINUX
+
 vidvolup() {
-    output=output.mkv
-    if [ ! -z $3 ]; then
-        output=$3
-    fi
-    if [ ! -z $1 ] && [ ! -z $2 ]; then
-        ffmpeg -i $1 -vol $(echo "256 + ((256 * $2) / 100)" | bc) -vcodec copy $output
+    local output="${3:-output.mkv}"
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        local factor=$(echo "scale=4; 1 + $2/100" | bc)
+        ffmpeg -i "$1" -filter:a "volume=$factor" -vcodec copy "$output"
     else
-        echo "You need to precise an output file as first argument and percentage of vol up as secong - eg 'example.mkv 100' to double the volume"
+        echo "Usage: vidvolup <input> <percent_increase> [output] - eg 'vidvolup video.mkv 100' to double the volume"
     fi
 }
 
@@ -54,49 +60,45 @@ updatesys() {
 }
 
 extract() {
-    for file in "$@"
-    do
-        if [ -f $file ]; then
-            ex $file
-        else
+    local file
+    for file in "$@"; do
+        if [[ ! -f "$file" ]]; then
             echo "'$file' is not a valid file"
+            continue
         fi
+        case "$file" in
+            *.tar.bz2) tar xjf "$file"   ;;
+            *.tar.gz)  tar xzf "$file"   ;;
+            *.bz2)     bunzip2 "$file"   ;;
+            *.gz)      gunzip "$file"    ;;
+            *.tar)     tar xf "$file"    ;;
+            *.tbz2)    tar xjf "$file"   ;;
+            *.tgz)     tar xzf "$file"   ;;
+            *.zip)     unzip "$file"     ;;
+            *.7z)      7z x "$file"      ;;
+            *.rar)     7z x "$file"      ;;
+            *.iso)     7z x "$file"      ;;
+            *.Z)       uncompress "$file" ;;
+            *)         echo "'$file' cannot be extracted" ;;
+        esac
     done
 }
 
 mkextract() {
-    for file in "$@"
-    do
-        if [ -f $file ]; then
-            local filename=${file%\.*}
-            mkdir -p $filename
-            cp $file $filename
-            cd $filename
-            ex $file
-            rm -f $file
-            cd -
-        else
-            echo "'$1' is not a valid file"
+    local file
+    for file in "$@"; do
+        if [[ ! -f "$file" ]]; then
+            echo "'$file' is not a valid file"
+            continue
         fi
+        local filename=${file%\.*}
+        mkdir -p "$filename"
+        cp "$file" "$filename"
+        cd "$filename"
+        extract "$file"
+        rm -f "$file"
+        cd -
     done
-}
-
-ex() {
-    case $1 in
-        *.tar.bz2)  tar xjf $1      ;;
-        *.tar.gz)   tar xzf $1      ;;
-        *.bz2)      bunzip2 $1      ;;
-        *.gz)       gunzip $1       ;;
-        *.tar)      tar xf $1       ;;
-        *.tbz2)     tar xjf $1      ;;
-        *.tgz)      tar xzf $1      ;;
-        *.zip)      unzip $1        ;;
-        *.7z)       7z x $1         ;; # require p7zip
-        *.rar)      7z x $1         ;; # require p7zip
-        *.iso)      7z x $1         ;; # require p7zip
-        *.Z)        uncompress $1   ;;
-        *)          echo "'$1' cannot be extracted" ;;
-    esac
 }
 
 compress() {
@@ -104,107 +106,87 @@ compress() {
     tar cvzf "$DATE.tar.gz" "$@"
 }
 
-screenshot () {
-    local DIR="$SCREENSHOT"
-    local DATE="$(date +%Y%m%d-%H%M%S)"
-    local NAME="${DIR}/screenshot-${DATE}.png"
+screenshot() {
+    local DIR="${SCREENSHOT:-$HOME/Pictures/Screenshots}"
+    local NAME="${DIR}/screenshot-$(date +%Y%m%d-%H%M%S).png"
+    mkdir -p "$DIR"
 
-    # Check if the dir to store the screenshots exists, else create it:
-    if [ ! -d "${DIR}" ]; then mkdir -p "${DIR}"; fi
-
-    # Screenshot a selected window
-    if [ "$1" = "win" ]; then import -format png -quality 100 "${NAME}"; fi
-
-    # Screenshot the entire screen
-    if [ "$1" = "scr" ]; then import -format png -quality 100 -window root "${NAME}"; fi
-
-    # Screenshot a selected area
-    if [ "$1" = "area" ]; then import -format png -quality 100 "${NAME}"; fi
-
-    if [[ $1 =~ "^[0-9].*x[0-9].*$" ]]; then import -format png -quality 100 -resize $1 "${NAME}"; fi
-
-    if [[ $1 =~ "^[0-9]+$" ]]; then import -format png -quality 100 -resize $1 "${NAME}" ; fi
-
-    if [[ $# = 0 ]]; then
-        # Display a warning if no area defined
-        echo "No screenshot area has been specified. Please choose between: win, scr, area. Screenshot not taken."
+    if $IS_MAC; then
+        case "$1" in
+            win)  screencapture -W "$NAME" ;;
+            scr)  screencapture "$NAME" ;;
+            area) screencapture -i "$NAME" ;;
+            *)    echo "Usage: screenshot [win|scr|area]" ;;
+        esac
+    elif $IS_LINUX; then
+        if [ $# = 0 ]; then
+            echo "No screenshot area has been specified. Please choose between: win, scr, area."
+            return 1
+        fi
+        [ "$1" = "win" ]  && import -format png -quality 100 "${NAME}"
+        [ "$1" = "scr" ]  && import -format png -quality 100 -window root "${NAME}"
+        [ "$1" = "area" ] && import -format png -quality 100 "${NAME}"
+        [[ $1 =~ "^[0-9].*x[0-9].*$" ]] && import -format png -quality 100 -resize $1 "${NAME}"
+        [[ $1 =~ "^[0-9]+$" ]]           && import -format png -quality 100 -resize $1 "${NAME}"
     fi
 }
 
 imgsize() {
-    local width=$(identify -format "%w" "$1")> /dev/null
-    local height=$(identify -format "%h" "$1")> /dev/null
-
-    echo -e "Size of $1: $width*$height"
+    local width=$(identify -format "%w" "$1")
+    local height=$(identify -format "%h" "$1")
+    echo "Size of $1: ${width}x${height}"
 }
 
+# Resize an image. Pass --inplace as $3 to overwrite the original.
 imgresize() {
-    local filename=${1%\.*}
+    local filename="${1%\.*}"
     local extension="${1##*.}"
-    local separator="_"
-    if [ ! -z $3 ]; then
-        local finalName="$filename.$extension"
-    else
-        local finalName="$filename$separator$2.$extension"
-    fi
-    convert $1 -quality 100 -resize $2 $finalName
+    local finalName="${filename}_${2}.${extension}"
+    [[ "$3" == "--inplace" ]] && finalName="$filename.$extension"
+    convert "$1" -quality 100 -resize "$2" "$finalName"
     echo "$finalName resized to $2"
 }
 
+# Resize all images of a given extension in the current directory.
 imgresizeall() {
-    for f in *.${1}; do
-        if [ ! -z $3 ]; then
-            imgresize "$f" ${2} t
-        else
-            imgresize "$f" ${2}
-        fi
+    local ext="$1" size="$2"
+    for f in *."$ext"; do
+        imgresize "$f" "$size"
     done
 }
 
+# Optimize an image. Pass --inplace as $2 to overwrite the original.
 imgoptimize() {
-    local filename=${1%\.*}
+    local filename="${1%\.*}"
     local extension="${1##*.}"
-    local separator="_"
-    local suffix="optimized"
-    local finalName="$filename$separator$suffix.$extension"
-    convert $1 -strip -interlace Plane -quality 85% $finalName
+    local finalName="${filename}_optimized.${extension}"
+    [[ "$2" == "--inplace" ]] && finalName="$1"
+    convert "$1" -strip -interlace Plane -quality 85% "$finalName"
     echo "$finalName created"
 }
 
-Imgoptimize() {
-    local filename=${1%\.*}
-    local extension="${1##*.}"
-    local separator="_"
-    local suffix="optimized"
-    convert $1 -strip -interlace Plane -quality 85% $1
-    echo "$1 created"
-}
-
+# Optimize all images of a given extension in the current directory.
 imgoptimizeall() {
-    for f in *.${1}; do
-        imgoptimize "$f"
-    done
-}
-
-Imgoptimizeall() {
-    for f in *.${1}; do
-        Imgoptimize "$f"
+    local ext="$1"
+    local inplace="${2:-}"
+    for f in *."$ext"; do
+        imgoptimize "$f" "$inplace"
     done
 }
 
 imgtojpg() {
-    for file in "$@"
-    do
-        local filename=${file%\.*}
-        convert -quality 100 $file "${filename}.jpg"
+    local file
+    for file in "$@"; do
+        local filename="${file%\.*}"
+        convert -quality 100 "$file" "${filename}.jpg"
     done
 }
 
 imgtowebp() {
-    for file in "$@"
-    do
-        local filename=${file%\.*}
-        cwebp -q 100 $file -o $(basename ${filename}).webp
+    local file
+    for file in "$@"; do
+        local filename="${file%\.*}"
+        cwebp -q 100 "$file" -o "$(basename "$filename").webp"
     done
 }
 
@@ -417,51 +399,45 @@ ports() {
     sudo netstat -tulpn | grep LISTEN | fzf;
 }
 
-mnt() {
-    local FILE="/mnt/external"
-    if [ ! -z $2 ]; then
-        FILE=$2
-    fi
+if $IS_LINUX; then
 
-    if [ ! -z $1 ]; then
+mnt() {
+    local FILE="${2:-/mnt/external}"
+    if [ -n "$1" ]; then
         sudo mount "$1" "$FILE" -o rw
         echo "Device in read/write mounted in $FILE"
-    fi
-
-    if [ $# = 0 ]; then
+    else
         echo "You need to provide the device (/dev/sd*) - use lsblk"
     fi
 }
 
 umnt() {
-    local DIRECTORY="/mnt"
-    if [ ! -z $1 ]; then
-        DIRECTORY=$1
-    fi
-    MOUNTED=$(grep $DIRECTORY /proc/mounts | cut -f2 -d" " | sort -r)
+    local DIRECTORY="${1:-/mnt}"
+    local MOUNTED=$(grep "$DIRECTORY" /proc/mounts | cut -f2 -d" " | sort -r)
     cd "/mnt"
     sudo umount $MOUNTED
     echo "$MOUNTED unmounted"
 }
 
 mntmtp() {
-    local DIRECTORY="$HOME/mnt"
-    if [ ! -z $2 ]; then
-        local DIRECTORY=$2
-    fi
-    if [ ! -d $DIRECTORY ]; then
-        mkdir $DIRECTORY
-    fi
-
-    if [ ! -z $1 ]; then
+    local DIRECTORY="${2:-$HOME/mnt}"
+    mkdir -p "$DIRECTORY"
+    if [ -n "$1" ]; then
         simple-mtpfs --device "$1" "$DIRECTORY"
         echo "MTPFS device in read/write mounted in $DIRECTORY"
-    fi
-
-    if [ $# = 0 ]; then
+    else
         echo "You need to provide the device number - use simple-mtpfs -l"
     fi
 }
+
+umntmtp() {
+    local DIRECTORY="${1:-$HOME/mnt}"
+    cd "$HOME"
+    umount "$DIRECTORY"
+    echo "$DIRECTORY with mtp filesystem unmounted"
+}
+
+fi # IS_LINUX
 
 # Silly little script to understand zstyle
 names() {
@@ -475,28 +451,18 @@ names() {
     echo "You're $user_name $user_surname $user_nickname and you're computer is called $computer_name"
 }
 
-umntmtp() {
-    local DIRECTORY="$HOME/mnt"
-    if [ ! -z $1 ]; then
-        DIRECTORY=$1
-    fi
-    cd $HOME
-    umount $DIRECTORY
-    echo "$DIRECTORY with mtp filesystem unmounted"
-}
-
 # --restrict-filenames replace special characters like spaces in filenames.
 ydlp() {
-    if [ ! -z $1 ]; then
-        youtube-dl --restrict-filenames -f 22 -o "%(autonumber)s-%(title)s.%(ext)s" "$1"
+    if [ -n "$1" ]; then
+        yt-dlp --restrict-filenames -f 22 -o "%(autonumber)s-%(title)s.%(ext)s" "$1"
     else
         echo "You need to specify a playlist url as argument"
     fi
 }
 
 ydl() {
-    if [ ! -z $1 ]; then
-        youtube-dl --restrict-filenames -f 22 -o "%(title)s.%(ext)s" "$1"
+    if [ -n "$1" ]; then
+        yt-dlp --restrict-filenames -f 22 -o "%(title)s.%(ext)s" "$1"
     else
         echo "You need to specify a video url as argument"
     fi
@@ -535,26 +501,6 @@ rmwav2flac() {
     done
 }
 
-freetouch() {
-    touch $1.mm
-    cat <<EOF > $1.mm
-<map version="1.0.1">
-<!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
-<node TEXT="Title"/>
-</map>
-EOF
-}
-
-duckduckgo() {
-    lynx -vikeys -accept_all_cookies "https://lite.duckduckgo.com/lite/?q=$@"
-}
-
-wikipedia() {
-    lynx -vikeys -accept_all_cookies "https://en.wikipedia.org/wiki?search=$@"
-}
-
-
-
 # Count number
 blogwc() {
     DATE=$(date +"%Y")
@@ -568,28 +514,20 @@ cheat() {
     curl cheat.sh/$1
 }
 
-touchproject(){
-    if [ -z $1 ];then
-        echo "You need to pass a project name" && exit 1
+duckduckgo() {
+    if $IS_MAC; then
+        open "https://duckduckgo.com/?q=$*"
+    else
+        xdg-open "https://duckduckgo.com/?q=$*"
     fi
-    local project=$1
-    cd "$CLOUD/project_management/"
-    taskell $project
-    cd -
 }
 
-vimgolf() {
-    local ID=$1
-    local key=$2
-    if [ -z $2 ]; then
-        key=$VIM_GOLF_KEY
+wikipedia() {
+    if $IS_MAC; then
+        open "https://en.wikipedia.org/wiki?search=$*"
+    else
+        xdg-open "https://en.wikipedia.org/wiki?search=$*"
     fi
-    docker run --rm  --net=host -it -e "key=[$VIM_GOLF_KEY]" kramos/vimgolf "$ID"
-}
-
-fm() {
-    local -r file=$1
-    freemind $file &> /dev/null &
 }
 
 back() {
@@ -600,10 +538,6 @@ back() {
 
 calcul() {
     bc -l <<< "$@"
-}
-
-jrnl() {
-    cd "$JRNL" && vim +Jrnl
 }
 
 tiny() {
