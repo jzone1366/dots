@@ -63,7 +63,7 @@ nmap('<C-S-l>', '<Cmd>Treewalker SwapRight<CR>', 'Treewalker Swap Right')
 -- Create a global table with information about Leader groups in certain modes.
 -- This is used to provide 'mini.clue' with extra clues.
 -- Add an entry if you create a new group.
-_G.Config.leader_group_clues = {
+Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>a', desc = '+AI' },
   { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
   { mode = 'n', keys = '<Leader>e', desc = '+Explore/Edit' },
@@ -109,19 +109,21 @@ nmap_leader('af', '<Cmd>CopilotChatFix<CR>',      'Copilot Fix')
 nmap_leader('at', '<Cmd>CopilotChatTests<CR>',    'Copilot Tests')
 nmap_leader('ar', '<Cmd>CopilotChatReview<CR>',   'Copilot Review')
 
-xmap_leader('ac', ': CopilotChatToggle<CR>',       'Copilot Chat')
+xmap_leader('ac', ':CopilotChatToggle<CR>',       'Copilot Chat')
 xmap_leader('ae', ':CopilotChatExplain<CR>',      'Copilot Explain')
 xmap_leader('af', ':CopilotChatFix<CR>',          'Copilot Fix')
 
--- CodeCompanion (uppercase)
-nmap_leader('aC', '<Cmd>CodeCompanionChat Toggle<CR>', 'Companion Chat')
-nmap_leader('aE', '<Cmd>CodeCompanion Explain<CR>',    'Companion Explain')
-nmap_leader('aA', '<Cmd>CodeCompanionActions<CR>',     'Companion Actions')
-nmap_leader('aI', '<Cmd>CodeCompanion<CR>',            'Companion Inline')
+-- Agentic.nvim (uppercase)
+nmap_leader('aC', '<Cmd>lua require("agentic").toggle()<CR>',                          'Agentic Chat')
+nmap_leader('aF', '<Cmd>lua require("agentic").add_selection_or_file_to_context()<CR>','Agentic Add File/Selection')
+nmap_leader('aN', '<Cmd>lua require("agentic").new_session()<CR>',                     'Agentic New Session')
+nmap_leader('aR', '<Cmd>lua require("agentic").restore_session()<CR>',                 'Agentic Restore Session')
+nmap_leader('aD', '<Cmd>lua require("agentic").add_current_line_diagnostics()<CR>',    'Agentic Line Diagnostics')
+nmap_leader('aB', '<Cmd>lua require("agentic").add_buffer_diagnostics()<CR>',          'Agentic Buffer Diagnostics')
+nmap_leader('aS', '<Cmd>lua require("agentic").stop_generation()<CR>',                 'Agentic Stop Generation')
 
-xmap_leader('aC', ':CodeCompanionChat Toggle<CR>',     'Companion Chat')
-xmap_leader('aE', ':CodeCompanion Explain<CR>',        'Companion Explain')
-xmap_leader('aA', ':CodeCompanionActions<CR>',         'Companion Actions')
+xmap_leader('aC', '<Esc><Cmd>lua require("agentic").toggle()<CR>',                          'Agentic Chat')
+xmap_leader('aF', '<Esc><Cmd>lua require("agentic").add_selection_or_file_to_context()<CR>','Agentic Add Selection')
 
 nmap_leader('ba', '<Cmd>b#<CR>',                                 'Alternate')
 nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>',         'Delete')

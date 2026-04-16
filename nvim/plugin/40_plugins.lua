@@ -9,8 +9,8 @@
 -- Use this file to install and configure other such plugins.
 
 -- Make concise helpers for installing/adding plugins in two stages
-local now, add, later = MiniDeps.now, MiniDeps.add, MiniDeps.later
-local now_if_args = _G.Config.now_if_args
+local add = vim.pack.add
+local now, now_if_args, later = Config.now, Config.now_if_args, Config.later
 
 local has_words_before = function()
   if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == 'prompt' then
@@ -46,32 +46,15 @@ end
 --   with `:TSInstall <language>`. Be sure to have necessary system dependencies
 --   (see MiniMax README section for software requirements).
 now_if_args(function()
-  add({
-    source = 'nvim-treesitter/nvim-treesitter',
-    -- Update tree-sitter parser after plugin is updated
-    hooks = {
-      post_checkout = function()
-        vim.cmd('TSUpdate')
-      end,
-    },
-  })
-  add({
-    source = 'nvim-treesitter/nvim-treesitter-textobjects',
-    -- Use `main` branch since `master` branch is frozen, yet still default
-    -- It is needed for compatibility with 'nvim-treesitter' `main` branch
-    checkout = 'main',
-  })
+  -- Define hook to update tree-sitter parsers after plugin is updated
+  local ts_update = function()
+    vim.cmd('TSUpdate')
+  end
+  Config.on_packchanged('nvim-treesitter', { 'update' }, ts_update, ':TSUpdate')
 
-  require('nvim-treesitter').setup({
-    modules = {},
-    sync_install = false,
-    auto_install = true,
-    highlight = {
-      enable = true,
-    },
-    indent = {
-      enable = true,
-    },
+  add({
+    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
   })
 
   -- Define languages which will have parsers installed and auto enabled
@@ -139,7 +122,7 @@ now_if_args(function()
   local ts_start = function(ev)
     vim.treesitter.start(ev.buf)
   end
-  _G.Config.new_autocmd('FileType', filetypes, ts_start, 'Start tree-sitter')
+  Config.new_autocmd('FileType', filetypes, ts_start, 'Start tree-sitter')
 end)
 
 -- Language servers ===========================================================
@@ -159,27 +142,18 @@ end)
 -- Add it now if file (and not 'mini.starter') is shown after startup.
 now_if_args(function()
   add({
-    source = 'neovim/nvim-lspconfig',
-    depends = {
-      'saghen/blink.cmp',
-      'saghen/blink.compat',
-      'nvim-lua/plenary.nvim',
-    },
+    'https://github.com/neovim/nvim-lspconfig',
+    'https://github.com/saghen/blink.cmp',
+    'https://github.com/saghen/blink.compat',
+    'https://github.com/nvim-lua/plenary.nvim',
+    'https://github.com/xzbdmw/colorful-menu.nvim',
   })
 
+  add({ 'https://github.com/zbirenbaum/copilot.lua' })
   add({
-    source = 'saghen/blink.cmp',
-    checkout = 'v1.8.0',
-    depends = {
-      'xzbdmw/colorful-menu.nvim',
-    },
+    'https://github.com/CopilotC-Nvim/CopilotChat.nvim',
   })
-  add('zbirenbaum/copilot.lua')
-  add({
-    source = 'CopilotC-Nvim/CopilotChat.nvim',
-    depends = { 'zbirenbaum/copilot.lua' },
-  })
-  add('giuxtaposition/blink-cmp-copilot')
+  add({ 'https://github.com/giuxtaposition/blink-cmp-copilot' })
   require('copilot').setup({
     suggestion = { enabled = false },
     panel = { enabled = false },
@@ -187,56 +161,14 @@ now_if_args(function()
 
   require('CopilotChat').setup({})
 
-  -- CodeCompanion - Only add if not in a git commit buffer
-  local is_git_commit = vim.fn.expand('%:t'):match('^COMMIT_EDITMSG$')
-    or vim.fn.expand('%:t'):match('^git%-rebase%-todo$')
-    or vim.bo.filetype == 'gitcommit'
-    or vim.bo.filetype == 'gitrebase'
+  add({ 'https://github.com/carlos-algms/agentic.nvim' })
 
-  if not is_git_commit then
-    add({
-      source = 'olimorris/codecompanion.nvim',
-      depends = {
-        'nvim-lua/plenary.nvim',
-        'nvim-treesitter/nvim-treesitter',
-      },
-    })
-
-    -- Setup codecompanion immediately after adding
-    vim.schedule(function()
-      local prompts = require('codecompanion.prompts')
-
-      local prompt_library = {}
-      for name, prompt in pairs(prompts) do
-        local display_name = prompt.display_name
-          or name:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
-            return first:upper() .. rest:lower()
-          end)
-
-        prompt_library[display_name] = prompt.config
-      end
-
-      require('codecompanion').setup({
-        strategies = {
-          chat = { adapter = 'copilot' },
-          inline = { adapter = 'copilot' },
-          agent = { adapter = 'copilot' },
-        },
-        adapters = {
-          copilot = function()
-            return require('codecompanion.adapters').extend('copilot', {
-              schema = {
-                model = {
-                  default = 'claude-opus-4.5',
-                },
-              },
-            })
-          end,
-        },
-        prompt_library = prompt_library,
-      })
-    end)
-  end
+  require('agentic').setup({
+    -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp"
+    -- "cursor-acp" |"copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp"
+    -- provider = 'opencode-acp',
+    provider = 'claude-agent-acp',
+  })
 
   -- LSP Config
   local blink_caps = require('blink.cmp').get_lsp_capabilities()
@@ -259,7 +191,7 @@ now_if_args(function()
     'svelte',
     'tailwindcss',
     'terraformls',
-    'ts_ls', --temporarily disabled, because of tsgo
+    'ts_ls',
     --'tsgo', -- turn on later and use instead of ts_ls
     'vimls',
     'yamlls',
@@ -286,7 +218,7 @@ now_if_args(function()
   vim.lsp.config('lua_ls', {
     settings = {
       Lua = {
-        diagnostics = { globals = { 'vim', 'MiniDeps' } },
+        diagnostics = { globals = { 'vim' } },
         workspace = { library = vim.api.nvim_get_runtime_file('', true) },
       },
     },
@@ -426,7 +358,7 @@ end)
 -- The 'stevearc/conform.nvim' plugin is a good and maintained solution for easier
 -- formatting setup.
 later(function()
-  add('stevearc/conform.nvim')
+  add({ 'https://github.com/stevearc/conform.nvim' })
 
   -- See also:
   -- - `:h Conform`
@@ -473,11 +405,11 @@ end)
 -- 'mini.snippets' is designed to work with it as seamlessly as possible.
 -- See `:h MiniSnippets.gen_loader.from_lang()`.
 later(function()
-  add('rafamadriz/friendly-snippets')
+  add({ 'https://github.com/rafamadriz/friendly-snippets' })
 end)
 
 now(function()
-  add({ source = 'rebelot/kanagawa.nvim' })
+  add({ 'https://github.com/rebelot/kanagawa.nvim' })
 
   vim.cmd('colorscheme kanagawa-dragon')
   vim.cmd('set background=dark')
@@ -485,14 +417,14 @@ end)
 
 -- Other plugins ================================================================
 later(function()
-  add('rachartier/tiny-inline-diagnostic.nvim')
+  add({ 'https://github.com/rachartier/tiny-inline-diagnostic.nvim' })
   require('tiny-inline-diagnostic').setup({
     preset = 'modern',
     multilines = true,
   })
   vim.diagnostic.config({ virtual_text = false })
 
-  add('sindrets/diffview.nvim')
+  add({ 'https://github.com/sindrets/diffview.nvim' })
 
   require('diffview').setup({
     default_args = { DiffviewFileHistory = { '%' } },
@@ -559,9 +491,19 @@ later(function()
     },
   })
 
-  add('mfussenegger/nvim-lint')
+  add({ 'https://github.com/mfussenegger/nvim-lint' })
 
   local lint = require('lint')
+
+  lint.linters.luacheck.args = {
+    '--config',
+    vim.fn.expand('~/dots/nvim/.luacheckrc'),
+    '--no-color',
+    '--formatter',
+    'plain',
+    '--ranges',
+  }
+
   lint.linters_by_ft = {
     javascript = {
       'eslint_d',
@@ -601,13 +543,13 @@ later(function()
   })
 end)
 
-add('aaronik/treewalker.nvim')
+add({ 'https://github.com/aaronik/treewalker.nvim' })
 require('treewalker').setup({
   highlight = true,
   highlight_duration = 250,
   highlight_group = 'CursorLine',
 })
-MiniDeps.add({ source = 'rhysd/committia.vim' })
+add({ 'https://github.com/rhysd/committia.vim' })
 
 -- See: https://github.com/rhysd/committia.vim#variables
 vim.g.committia_min_window_width = 30
