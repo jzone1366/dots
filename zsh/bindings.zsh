@@ -175,17 +175,21 @@ typeset -gA keys=(
   )
 
 bindkey -- "${keys[Home]}"            .beginning-of-line
-bindkey -- "${keys[End]}"             .end-of-line
+bindkey -- "${keys[End]}"             end-of-line
 bindkey -- "${keys[Insert]}"          .overwrite-mode
 bindkey -- "${keys[Backspace]}"       .backward-delete-char
 bindkey -- "${keys[Delete]}"          .delete-char
-bindkey -- "${keys[Up]}"              .up-line-or-history
-bindkey -- "${keys[Down]}"            .down-line-or-history
+bindkey -- "${keys[Up]}"              history-beginning-search-backward
+bindkey -- "${keys[Down]}"            history-beginning-search-forward
 bindkey -- "${keys[Left]}"            .backward-char
-bindkey -- "${keys[Right]}"           .forward-char
+bindkey -- "${keys[Right]}"           forward-char
 bindkey -- "${keys[PageUp]}"          .beginning-of-buffer-or-history
 bindkey -- "${keys[PageDown]}"        .end-of-buffer-or-history
 bindkey -- "${keys[Shift+Tab]}"       .reverse-menu-complete
 bindkey -- "${keys[Ctrl+Left]}"       .backward-word
 bindkey -- "${keys[Ctrl+Right]}"      .forward-word
+
+# History prefix search in vi command mode too
+bindkey -M vicmd -- "${keys[Up]}"   history-beginning-search-backward
+bindkey -M vicmd -- "${keys[Down]}" history-beginning-search-forward
 

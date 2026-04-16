@@ -40,8 +40,7 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 setopt ALWAYS_TO_END        # When completing move to end of word
 setopt COMPLETE_IN_WORD     # Allow completion from within word or phrase
 #setopt AUTO_NAME_DIRS       # Any Parameter that is set to the absolute name of a dir immediately becomes a name for that dir
-setopt AUTO_MENU            # Show completion menu on successive tab presses. needs unsetopt MENU_COMPLETE to work.
-unsetopt MENU_COMPLETE      # Do not select the first menu option
+setopt AUTO_MENU            # Show completion menu on successive tab presses.
 
 # +--------+
 # | COLORS |
@@ -90,7 +89,8 @@ source $DOTFILES/zsh/prompt/prompt_purification_setup
 # | PROFILING |
 # +-----------+
 
-zmodload zsh/zprof
+# Uncomment to enable startup profiling, then run: zprof
+# zmodload zsh/zprof
 
 # +-----------+
 # | VI KEYMAP |

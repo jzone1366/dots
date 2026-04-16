@@ -176,7 +176,7 @@ Imgoptimize() {
     local extension="${1##*.}"
     local separator="_"
     local suffix="optimized"
-    local convert $1 -strip -interlace Plane -quality 85% $1
+    convert $1 -strip -interlace Plane -quality 85% $1
     echo "$1 created"
 }
 
@@ -384,8 +384,7 @@ smedia() {
 }
 
 mkcd() {
-    local dir="$*";
-    local mkdir -p "$dir" && cd "$dir";
+    mkdir -p "$@" && cd "$_"
 }
 
 mkcp() {
@@ -478,7 +477,7 @@ names() {
 
 umntmtp() {
     local DIRECTORY="$HOME/mnt"
-    if ; then
+    if [ ! -z $1 ]; then
         DIRECTORY=$1
     fi
     cd $HOME
@@ -488,7 +487,7 @@ umntmtp() {
 
 # --restrict-filenames replace special characters like spaces in filenames.
 ydlp() {
-    if ; then
+    if [ ! -z $1 ]; then
         youtube-dl --restrict-filenames -f 22 -o "%(autonumber)s-%(title)s.%(ext)s" "$1"
     else
         echo "You need to specify a playlist url as argument"
@@ -614,7 +613,7 @@ tiny() {
 
 serve() {
     local -r PORT=${1:-8888}
-    python2 -m SimpleHTTPServer "$PORT"
+    python3 -m http.server "$PORT"
 }
 
 backup() {
