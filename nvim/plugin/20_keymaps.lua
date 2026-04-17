@@ -63,7 +63,7 @@ nmap('<C-S-l>', '<Cmd>Treewalker SwapRight<CR>', 'Treewalker Swap Right')
 -- Create a global table with information about Leader groups in certain modes.
 -- This is used to provide 'mini.clue' with extra clues.
 -- Add an entry if you create a new group.
-Config.leader_group_clues = {
+_G.Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>a', desc = '+AI' },
   { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
   { mode = 'n', keys = '<Leader>e', desc = '+Explore/Edit' },
@@ -255,12 +255,13 @@ nmap_leader('oz', '<Cmd>lua MiniMisc.zoom()<CR>',          'Zoom toggle')
 -- s is for 'Session'. Common usage:
 -- - `<Leader>sn` - start new session
 -- - `<Leader>sr` - read previously started session
--- - `<Leader>sd` - delete previously started session
-local session_new = 'MiniSessions.write(vim.fn.input("Session name: "))'
+-- - `<Leader>sR` - restart Neovim preserving current session
+local session_new = 'vim.ui.input({ prompt = "Session name: " }, MiniSessions.write)'
 
 nmap_leader('sd', '<Cmd>lua MiniSessions.select("delete")<CR>', 'Delete')
 nmap_leader('sn', '<Cmd>lua ' .. session_new .. '<CR>',         'New')
 nmap_leader('sr', '<Cmd>lua MiniSessions.select("read")<CR>',   'Read')
+nmap_leader('sR', '<Cmd>lua MiniSessions.restart()<CR>',        'Restart')
 nmap_leader('sw', '<Cmd>lua MiniSessions.write()<CR>',          'Write current')
 
 -- t is for 'Terminal'
@@ -286,7 +287,6 @@ nmap_leader('vV', '<Cmd>lua MiniVisits.remove_label("core")<CR>', 'Remove "core"
 nmap_leader('vl', '<Cmd>lua MiniVisits.add_label()<CR>',          'Add label')
 nmap_leader('vL', '<Cmd>lua MiniVisits.remove_label()<CR>',       'Remove label')
 
-nmap_leader('/u', '<Cmd>DepsUpdate<CR>', 'Update Dependencies')
-nmap_leader('/i', '<Cmd>DepsShowLog<CR>', 'Show Deps Log')
+nmap_leader('/u', '<Cmd>lua vim.pack.update()<CR>', 'Update Dependencies')
 
 -- stylua: ignore end
