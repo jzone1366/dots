@@ -15,18 +15,23 @@ path() {
 # myIP address
 # -------------------------------------------------------------------
 function myip() {
-  ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
-  ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-  ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  if $IS_MAC; then
+    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+    ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  else
+    ip -4 addr show scope global | awk '/inet/ {print $NF ": " $2}'
+    ip -6 addr show scope global | awk '/inet6/ {print $NF " (IPv6): " $2}'
+  fi
 }
 
 # -------------------------------------------------------------------
 # (s)ave or (i)nsert a directory.
 # -------------------------------------------------------------------
-#s() { pwd > ~/.save_dir ; }
-i() { cd "$(cat ~/.save_dir)" ; }
+s() { pwd > "$HOME/.save_dir" ; }
+i() { cd "$(cat "$HOME/.save_dir")" ; }
 
 # -------------------------------------------------------------------
 # shell function to define words

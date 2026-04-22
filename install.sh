@@ -46,42 +46,27 @@ fi
 # INSTALL #
 ###########
 
-# Install
+# Detect OS
+case "$(uname -s)" in
+    Darwin) OS="mac" ;;
+    Linux)  OS="linux" ;;
+    *)      OS="unknown" ;;
+esac
+
+# Zsh — always
 . "$DOTFILES/install/install-zsh.sh"
-#. "$DOTFILES/install/install-fonts.sh"
 
-dot_is_installed bat && dot_install bat
-dot_is_installed nvim && dot_install nvim
-dot_is_installed tmux && dot_install tmux
+# Cross-platform tools
+dot_is_installed bat     && dot_install bat
+dot_is_installed nvim    && dot_install nvim
+dot_is_installed tmux    && dot_install tmux
 dot_is_installed wezterm && dot_install wezterm
-dot_is_installed git && dot_install git
-dot_is_installed php && dot_install php
-dot_is_installed zathura && dot_install zathura
-dot_is_installed figma $$ dot_install figma
+dot_is_installed git     && dot_install git
+dot_is_installed php     && dot_install php
 
-#dot_is_installed go && dot_install_func go install_go_binaries
-#dot_is_installed git && dot_install projects
-#dot_is_installed lxappearance && dot_install theme
-#dot_is_installed feh && dot_install feh
-#dot_is_installed mycli && dot_install mycli
-#dot_is_installed pgcli && dot_install pgcli
-#dot_is_installed npm && dot_install javascript
-#dot_is_installed compton && dot_install compton
-#dot_is_installed joplin && dot_install joplin
-#dot_is_installed vifm && dot_install vifm
-#dot_is_installed clojure && dot_install clojure
-#dot_is_installed freemind && dot_install freemind
-#dot_is_installed redshift && dot_install redshift
-#dot_is_installed mpd && dot_is_installed ncmpcpp && dot_install mpd
-#dot_is_installed gimp && dot_install gimp
-#dot_is_installed doublecmd && dot_install doublecmd
-#dot_is_installed deadbeef && dot_install deadbeef
-#dot_is_installed darktable && dot_install darktable
-#dot_is_installed digikam && dot_install digikam
-#dot_is_installed newsboat && dot_install newsboat
-#dot_is_installed taskell && dot_install taskell
-#dot_is_installed devdash && dot_install devdash
-#dot_is_installed sxiv && dot_install sxiv
-#
-#dot_install gtk
-#dot_install default-app
+# macOS-only tools
+if [ "$OS" = "mac" ]; then
+    dot_is_installed zathura    && dot_install zathura
+    dot_is_installed figma      && dot_install figma
+    dot_is_installed sketchybar && dot_install sketchybar
+fi

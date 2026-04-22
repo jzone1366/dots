@@ -6,9 +6,8 @@
 
 alias shutdown='sudo shutdown now'
 alias restart='sudo reboot'
-alias suspend='sudo pm-suspend'
 
-alias bigf= 'find / -xdev -type f -size +500M'  # display "big" files > 500M
+alias bigf='find / -xdev -type f -size +500M'  # display "big" files > 500M
 
 # +-----+
 # | Zsh |
@@ -30,7 +29,6 @@ alias ls='ls --color=auto'
 alias lsl='ls -l'
 alias ll='ls -lahF'
 alias lls='ls -lahFtr'
-alias la='ls -A'
 alias l='ls -al'
 alias ltd='ls *(m0)' # files & directories modified in last day
 alias lt='ls *(.m0)' # files (no directories) modified in last day
@@ -57,7 +55,7 @@ alias egrep='egrep --color=auto'
 # | xclip |
 # +-------+
 
-alias cb='xclip -sel clip'
+alias cb='pbcopy'
 
 # +------+
 # | ping |
@@ -106,11 +104,10 @@ alias port="netstat -tulpn | grep"
 alias v='nvim'
 alias vi='nvim'
 alias svim='sudoedit'
-alias dvim="vim -u /usr/share/nvim/archlinux.vim" # nvim with default config
+alias nvimd='nvim --noplugin -u NONE'             # launch nvim without any plugin or config (nvim debug)
 alias nvimc='rm -I $VIMCONFIG/swap/*'             # clean nvim swap file
 alias nvimcu='rm -I $VIMCONFIG/undo/*'            # clean the vim undo
 alias nviml='nvim -w $VIMCONFIG/vimlog "$@"'      # log the keystrokes
-alias nvimd='nvim --noplugin -u NONE'             # launch nvim without any plugin or config (nvim debug)
 
 # +-----+
 # | Git |
@@ -136,10 +133,9 @@ alias gpl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgre
 alias gr='git remote'
 alias grs='git remote show'
 alias glol='git log --graph --abbrev-commit --oneline --decorate'
-alias gclean="git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d" # Delete local branch merged with master
+alias gclean='git branch --merged | grep -v "\\*\|${GIT_REVIEW_BASE:-main}\|develop" | xargs -n 1 git branch -d' # Delete local branches merged into main
 alias gblog="git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(refname:short)%(color:reset) - %(color:yellow)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:blue)%(committerdate:relative)%(color:reset))'"                                                             # git log for each branches
 alias gsub="git submodule update --remote"                                                        # pull submodules
-alias gj="git-jump"                                                                               # Open in vim quickfix list files of interest (git diff, merged...)
 
 alias dif="git diff --no-index"                                                                   # Diff two files even if not in git repo! Can add -w (don't diff whitespaces)
 
@@ -157,21 +153,20 @@ alias tk='tmux kill-session -t'
 # | docker |
 # +--------+
 alias dockls="docker container ls | awk 'NR > 1 {print \$NF}'"                  # display names of running containers
-alias dockRr='docker rm $(docker ps -a -q)'                                     # delete every containers / images
 alias dockRr='docker rm $(docker ps -a -q) && docker rmi $(docker images -q)'   # delete every containers / images
 alias dockstats='docker stats $(docker ps -q)'                                  # stats on images
 alias dockimg='docker images'                                                   # list images installed
 alias dockprune='docker system prune -a'                                        # prune everything
-alias dockceu='docker-compose run --rm -u $(id -u):$(id -g)'                    # run as the host user
-alias dockce='docker-compose run --rm'
+alias dockceu='docker compose run --rm -u $(id -u):$(id -g)'                    # run as the host user
+alias dockce='docker compose run --rm'
 
 # +----------------+
-# | docker-compose |
+# | docker compose |
 # +----------------+
 
-alias docker-compose-dev='docker-compose -f docker-compose-dev.yml' # run a different config file than the default one
-alias dcup='docker-compose up'
-alias dcdown='docker-compose down'
+alias docker-compose-dev='docker compose -f docker-compose-dev.yml' # run a different config file than the default one
+alias dcup='docker compose up'
+alias dcdown='docker compose down'
 
 # +----------+
 # | Personal |
@@ -181,7 +176,7 @@ alias dcdown='docker-compose down'
 alias work="$HOME/workspace"
 alias doc="$HOME/Documents"
 alias dow="$HOME/Downloads"
-alias dot="$HOME/.dotfiles"
+alias dot="cd $DOTFILES"
 
 # Golang
 alias gosrc="$GOPATH/src/" # golang src
@@ -189,7 +184,6 @@ alias gobin="$GOPATH/bin/" # golang bin
 
 # Python
 alias py3='python3'
-alias py2='python2'
 
 # SSH
 alias ssh='TERM=xterm ssh'
@@ -204,8 +198,6 @@ alias nerdfetch='curl -fsSL https://raw.githubusercontent.com/ThatOneCalculator/
 alias reload='source $HOME/.zshenv && source ${ZDOTDIR}/.zshrc'
 alias lg="lazygit"
 
-
-
 alias vpn='sudo route -n add -net 10.0.0.0/8 -interface ppp0'
 
 alias s="ssh -i ~/.ssh/devops.pem"
@@ -213,3 +205,22 @@ alias s2="ssh -i ~/.ssh/devops_old_server.pem"
 
 alias s3="ssh -i ~/.ssh/ql2keydb.pem"
 alias s4="ssh -i ~/.ssh/ql2-2024-key.pem"
+
+# +--------------------+
+# | Platform-Specific  |
+# +--------------------+
+
+if $IS_MAC; then
+    alias suspend='pmset sleepnow'
+    alias copy='pbcopy'
+    alias paste='pbpaste'
+    alias open='open'
+    alias finder='open .'
+    alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+elif $IS_LINUX; then
+    alias suspend='sudo pm-suspend'
+    alias open='xdg-open'
+    # clipboard — requires xclip; fall back to xsel if needed
+    alias copy='xclip -selection clipboard'
+    alias paste='xclip -selection clipboard -o'
+fi

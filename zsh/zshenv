@@ -8,6 +8,13 @@ export TERM="xterm-256color"
 export DOTFILES="$HOME/.dotfiles"
 export WORKSPACE="$HOME/workspace"
 
+# OS detection — used throughout zshrc, scripts, aliases
+case "$(uname -s)" in
+    Darwin) export IS_MAC=true;  export IS_LINUX=false ;;
+    Linux)  export IS_MAC=false; export IS_LINUX=true  ;;
+    *)      export IS_MAC=false; export IS_LINUX=false ;;
+esac
+
 # XDG
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$XDG_CONFIG_HOME/local/share
@@ -27,8 +34,7 @@ export SAVEHIST=10000                   # Maximum events in history file
 export TMUXP_CONFIGDIR="$XDG_CONFIG_HOME/tmuxp"
 export COMPOSER_HOME="$XDG_CONFIG_HOME/composer"
 export VIMCONFIG="$XDG_CONFIG_HOME/nvim"
-export GIMP_VERSION="2.10"
-export SCREENSHOT="$HOME/Documents/images/screenshots"
+export SCREENSHOT="$HOME/Pictures/Screenshots"
 
 # Man pages
 export MANPAGER='nvim +Man!'
@@ -71,20 +77,19 @@ export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/node_modules"
 # Python
 export PYENV_ROOT=$HOME/.pyenv
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
 
 # git
 export GIT_REVIEW_BASE=main # See gitconfig
 
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
-
-# OPENSSL
-export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/homebrew/opt/openssl@3/include/
+# macOS / Homebrew paths
+if $IS_MAC; then
+    export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+    export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/opt/openssl@3/lib/
+    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/homebrew/opt/openssl@3/include/
+fi
 
 # pnpm
-export PNPM_HOME="/Users/jzone/.config/local/share/pnpm"
+export PNPM_HOME="$HOME/.config/local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -98,7 +103,10 @@ esac
 export PATH="$COMPOSER_HOME/vendor/bin:$PATH"                       # COMPOSER
 export PATH="$GOBIN:$PATH"                                          # GOBIN
 export PATH="$NPM_BIN:$PATH"                                        # NPM
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"	    # GNUBIN
-export PATH="$PATH:/Users/jzone/.local/bin"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export PATH="/Users/zonejm/.cargo/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+if $IS_MAC; then
+    export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"  # GNUBIN
+    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+fi

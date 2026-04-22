@@ -11,10 +11,10 @@
 
 # Load more completions
 fpath=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
-#fpath=($DOTFILES/zsh/plugins/fnm-completions/_fnm $fpath)
 
-if type brew &>/dev/null
-then
+if [[ -d /opt/homebrew/share/zsh/site-functions ]]; then
+  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+elif type brew &>/dev/null; then
   fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
 fi
 
@@ -39,9 +39,6 @@ bindkey -M menuselect '^xu' undo                           # Undo
 autoload -U compinit; compinit
 _comp_options+=(globdots) # With hidden files
 
-# Only work with the Zsh function vman
-# See $DOTFILES/zsh/scripts.zsh
-compdef vman="man"
 
 # +---------+
 # | Options |
@@ -108,5 +105,7 @@ zstyle ':completion:*' keep-prefix true
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
 ## For kubernetes
-source $DOTFILES/zsh/plugins/kubectl-completion/_kubectl
+if command -v kubectl &>/dev/null; then
+  source <(kubectl completion zsh)
+fi
 zstyle ':completion:*:*:kubectl:*' list-grouped false

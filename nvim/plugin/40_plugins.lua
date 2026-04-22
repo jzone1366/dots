@@ -497,7 +497,7 @@ later(function()
 
   lint.linters.luacheck.args = {
     '--config',
-    vim.fn.expand('~/dots/nvim/.luacheckrc'),
+    vim.fn.stdpath('config') .. '/.luacheckrc',
     '--no-color',
     '--formatter',
     'plain',
