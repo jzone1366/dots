@@ -30,8 +30,8 @@ function myip() {
 # -------------------------------------------------------------------
 # (s)ave or (i)nsert a directory.
 # -------------------------------------------------------------------
-s() { pwd > "$HOME/.save_dir" ; }
-i() { cd "$(cat "$HOME/.save_dir")" ; }
+function s { pwd > "$HOME/.save_dir" ; }
+function i { cd "$(cat "$HOME/.save_dir")" ; }
 
 # -------------------------------------------------------------------
 # shell function to define words
