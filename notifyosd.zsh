@@ -19,7 +19,7 @@ function notifyosd-precmd() {
 
     if (( cmd_secs > NOTIFY_THRESHOLD )); then
         local cmd_time=$(printf '%dh:%dm:%ds' $((cmd_secs/3600)) $((cmd_secs%3600/60)) $((cmd_secs%60)))
-        local status_word=$(( retval > 0 )) && echo "failed" || echo "completed"
+        local status_word=$(( retval > 0 ? "failed" : "completed" ))
         local title="$cmd_basename $status_word"
         local body="\"$cmd\" took $cmd_time"
         [[ -n $SSH_TTY ]] && title="$cmd_basename $status_word on $(hostname)"

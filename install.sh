@@ -60,6 +60,7 @@ esac
 dot_is_installed bat     && dot_install bat
 dot_is_installed nvim    && dot_install nvim
 dot_is_installed tmux    && dot_install tmux
+dot_is_installed zellij  && dot_install zellij
 dot_is_installed wezterm && dot_install wezterm
 dot_is_installed git     && dot_install git
 dot_is_installed php     && dot_install php

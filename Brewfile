@@ -28,10 +28,11 @@ brew "neovim"
 brew "tree-sitter-cli"   # required for nvim-treesitter to build parsers
 brew "opencode"
 
-# +---------+
-# | Tmux    |
-# +---------+
+# +--------------------+
+# | Multiplexers       |
+# +--------------------+
 brew "tmux"
+brew "zellij"
 
 # +----------+
 # | Languages |

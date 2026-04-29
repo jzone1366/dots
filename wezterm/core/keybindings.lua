@@ -11,6 +11,7 @@ local TIMEOUT = { key = 3000, leader = 1500 }
 function M.apply(config)
 	config.disable_default_key_bindings = true
 	config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = TIMEOUT.leader }
+	--config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = TIMEOUT.leader }
 	config.keys = M.get_keys()
 	config.key_tables = M.get_key_tables()
 end
@@ -89,6 +90,10 @@ function M.get_keys()
 				end),
 			}),
 		},
+
+		-- Pass Ctrl+a through to inner multiplexer (tmux/zellij over SSH)
+		-- Press LEADER then 'a' to send Ctrl+a to the remote session
+		{ key = "a", mods = "LEADER", action = action.SendKey({ key = "a", mods = "CTRL" }) },
 
 		-- Pane operations
 		{ key = "-", mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
