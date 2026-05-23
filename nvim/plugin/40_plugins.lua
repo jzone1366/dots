@@ -100,6 +100,7 @@ now_if_args(function()
     'tsv',
     'tsx',
     'typescript',
+    'latex',
     'vim',
     'vimdoc',
     'yaml',
@@ -191,6 +192,7 @@ now_if_args(function()
     'svelte',
     'tailwindcss',
     'terraformls',
+    'texlab',
     'ts_ls',
     --'tsgo', -- turn on later and use instead of ts_ls
     'vimls',
@@ -388,6 +390,7 @@ later(function()
       rust = { 'rustfmt' },
       sql = { 'sql-formatter' },
       svelte = { 'prettierd', 'prettier', stop_after_first = true },
+      tex = { 'latexindent' },
       typescript = { 'prettierd', 'prettier', stop_after_first = true },
       typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
       yaml = { 'prettierd', 'prettier', stop_after_first = true },
@@ -529,6 +532,9 @@ later(function()
     typescriptreact = {
       'eslint_d',
     },
+    tex = {
+      'chktex',
+    },
     yaml = {
       'yamllint',
     },
@@ -541,6 +547,23 @@ later(function()
       require('lint').try_lint()
     end,
   })
+end)
+
+-- LaTeX ========================================================================
+
+-- VimTeX provides build system integration, PDF viewer SyncTeX, section/env
+-- text objects, improved syntax, folding, and more for LaTeX editing.
+-- texlab (LSP) handles completion, hover, go-to-definition, and formatting.
+-- They complement each other: VimTeX builds/views, texlab does language smarts.
+later(function()
+  -- Set VimTeX globals before loading the plugin
+  vim.g.vimtex_view_method = 'skim'         -- macOS: Skim supports SyncTeX (forward/inverse search)
+  vim.g.vimtex_compiler_method = 'latexmk'
+  vim.g.vimtex_mappings_prefix = '<LocalLeader>' -- default is \ ; keep as-is or customize
+  -- Disable VimTeX's own completion (use texlab via blink.cmp instead)
+  vim.g.vimtex_complete_enabled = 0
+
+  add({ 'https://github.com/lervag/vimtex' })
 end)
 
 add({ 'https://github.com/aaronik/treewalker.nvim' })

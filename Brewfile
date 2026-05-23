@@ -40,6 +40,7 @@ brew "zellij"
 brew "go"
 brew "goimports"         # go formatter (used by conform.nvim)
 brew "node"
+cask "mactex-no-gui"     # LaTeX distribution: latexmk, latexindent, chktex, pdflatex, lualatex
 brew "typescript"        # required by typescript-language-server
 brew "pnpm"
 brew "fnm"
@@ -59,6 +60,7 @@ brew "tailwindcss-language-server"
 brew "yaml-language-server"
 brew "docker-language-server"
 brew "vscode-langservers-extracted"  # html, cssls, jsonls, eslint
+brew "texlab"                        # LaTeX LSP server
 
 # +------------------+
 # | Formatters       |
@@ -104,10 +106,12 @@ brew "docker-compose"    # standalone compose for Linux parity
 # +-------------------+
 # | macOS GUI Apps    |
 # +-------------------+
+tap "FelixKratz/formulae"
+brew "sketchybar"
+
 cask "wezterm"
 cask "docker-desktop"
 cask "rectangle"
-cask "sketchybar"
 
 # +-------+
 # | Fonts |
