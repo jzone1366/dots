@@ -105,6 +105,7 @@ export PATH="$GOBIN:$PATH"                                          # GOBIN
 export PATH="$NPM_BIN:$PATH"                                        # NPM
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$(brew --prefix rustup)/bin:$HOME/.cargo/bin:$PATH" # RUST (check if can handle this better)
 
 if $IS_MAC; then
     export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"  # GNUBIN

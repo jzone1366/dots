@@ -66,6 +66,7 @@ nmap('<C-S-l>', '<Cmd>Treewalker SwapRight<CR>', 'Treewalker Swap Right')
 _G.Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>a', desc = '+AI' },
   { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
+  { mode = 'n', keys = '<Leader>d', desc = '+Database' },
   { mode = 'n', keys = '<Leader>e', desc = '+Explore/Edit' },
   { mode = 'n', keys = '<Leader>f', desc = '+Find' },
   { mode = 'n', keys = '<Leader>g', desc = '+Git' },
@@ -131,6 +132,14 @@ nmap_leader('bD', '<Cmd>lua MiniBufremove.delete(0, true)<CR>',  'Delete!')
 nmap_leader('bs', new_scratch_buffer,                            'Scratch')
 nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>',        'Wipeout')
 nmap_leader('bW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', 'Wipeout!')
+
+-- d is for 'Database'. Common usage:
+-- - `<Leader>db` - open connection picker/workspace
+-- - `<Leader>dq` - open a query pad
+-- - `<Leader>ds` - launch the built-in demo database
+nmap_leader('db', '<Cmd>GripConnect<CR>', 'Database connections')
+nmap_leader('dq', '<Cmd>GripQuery<CR>',   'Query pad')
+nmap_leader('ds', '<Cmd>GripStart<CR>',   'Start demo database')
 
 -- e is for 'Explore' and 'Edit'. Common usage:
 -- - `<Leader>ed` - open explorer at current working directory

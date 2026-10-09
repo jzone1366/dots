@@ -418,6 +418,18 @@ now(function()
   vim.cmd('set background=dark')
 end)
 
+-- Database ====================================================================
+
+-- 'dadbod-grip.nvim' turns database tables into editable Vim buffers, with
+-- schema browsing, staged mutations, generated SQL, and FK navigation.
+-- Requires the CLI client for whichever database you connect to, e.g.
+-- `psql`, `mysql`, `sqlite3`, `duckdb`, or `sqlcmd`.
+later(function()
+  add({ 'https://github.com/joryeugene/dadbod-grip.nvim' })
+
+  require('dadbod-grip').setup({})
+end)
+
 -- Other plugins ================================================================
 later(function()
   add({ 'https://github.com/rachartier/tiny-inline-diagnostic.nvim' })
