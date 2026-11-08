@@ -14,6 +14,7 @@
     thm_orange="#d98d7b"        # DragonOrange2
     thm_hl_med="#1d1c19"        # DragonBlack2
 
+
 # ----------------------------=== Theme ===--------------------------
 
 # status
@@ -38,12 +39,18 @@
     setw -g window-status-style fg="$thm_fg",bg="$thm_bg",none
 
 # --------=== Statusline
-    set -g status-left ""
-    set -g status-right "#[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics]█#[fg=$thm_bg,bg=$thm_cyan,nobold,nounderscore,noitalics] #[fg=$thm_cyan,bg=$thm_bg_gutter,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_bg_gutter]#W #[fg=$thm_green,bg=$thm_bg_gutter]█#[fg=$thm_bg,bg=$thm_green] #[fg=$thm_green,bg=$thm_bg_gutter,nobold,nounderscore,noitalics]#[fg=$thm_fg,bg=$thm_bg_gutter] #S #[fg=$thm_orange,bg=$thm_bg_gutter]█#[fg=$thm_bg,bg=$thm_orange]󰭦 #[fg=$thm_orange,bg=$thm_bg_gutter,nobold,nounderscore,noitalics]#[fg=$thm_fg,bg=$thm_bg_gutter] %d.%m.%Y #{?client_prefix,#[fg=$thm_red],#[fg=$thm_yellow]}#[bg=$thm_bg_gutter]█#{?client_prefix,#[bg=$thm_red],#[bg=$thm_yellow]}#[fg=$thm_bg]󱑏 #{?client_prefix,#[fg=$thm_red],#[fg=$thm_yellow]}#[bg=$thm_bg_gutter]#[fg=$thm_fg,bg=$thm_bg_gutter] %H:%M:%S "
+#   # Left: the session name in bold
+    # set -g status-left ""
+    set -g status-left "#[bold] #S #[default] "
+    set -g status-left-length 30
+
+#   # Right: the session name in bold
+    set -g status-right " #[fg=$thm_magenta,bold] %d.%m.%Y | %H:%M "
+
 
 # current_dir
     setw -g window-status-format "#[fg=$thm_gray,bg=$thm_hl_med] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
-    setw -g window-status-current-format "#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_bg_gutter] #{b:pane_current_path} "
+    setw -g window-status-current-format "#[fg=$thm_bg,bg=$thm_magenta] #I #[fg=$thm_fg,bg=$thm_bg_gutter] #{b:pane_current_path} "
 
 # --------=== Modes
     setw -g clock-mode-colour "$thm_blue"

@@ -47,8 +47,9 @@ function M.apply(config)
 		border_top_color = colors.bg(),
 	}
 
-	config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
-	config.window_padding = { left = 5, right = 5, top = 5, bottom = 0 }
+	--config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+	config.window_decorations = "NONE"
+	config.window_padding = { left = 5, right = 5, top = 1, bottom = 0 }
 
 	-- Transparency and effects
 	config.text_background_opacity = 0.95
@@ -74,7 +75,8 @@ function M.apply(config)
 	config.hide_mouse_cursor_when_typing = true
 
 	-- Tab bar
-	config.enable_tab_bar = true
+	config.enable_tab_bar = false
+	--config.enable_tab_bar = true
 	config.hide_tab_bar_if_only_one_tab = false
 	config.show_new_tab_button_in_tab_bar = false
 	config.show_tab_index_in_tab_bar = true
