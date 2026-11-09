@@ -48,7 +48,8 @@ function M.apply(config)
 	}
 
 	--config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
-	config.window_decorations = "NONE"
+	-- RESIZE (not NONE) so macOS window managers like Rectangle can resize it
+	config.window_decorations = "RESIZE"
 	config.window_padding = { left = 5, right = 5, top = 1, bottom = 0 }
 
 	-- Transparency and effects
