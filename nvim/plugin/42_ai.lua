@@ -8,6 +8,7 @@ local add, now_if_args = vim.pack.add, Config.now_if_args
 now_if_args(function()
   add({ 'https://github.com/zbirenbaum/copilot.lua' })
   add({
+    'https://github.com/nvim-lua/plenary.nvim', -- CopilotChat dependency
     'https://github.com/CopilotC-Nvim/CopilotChat.nvim',
   })
   add({ 'https://github.com/giuxtaposition/blink-cmp-copilot' })
