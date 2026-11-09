@@ -26,6 +26,7 @@ function M.apply(config)
 
 	-- Font configuration
 	config.font = wezterm.font_with_fallback({
+		"Paper Mono",
 		"Lilex",
 		"Monaspace Xenon",
 		"CommitMono",
@@ -33,7 +34,7 @@ function M.apply(config)
 		"Apple Color Emoji",
 	})
 	config.font_size = 13.0
-	--config.line_height = 1.2
+	--config.line_height = 1.1
 
 	-- Window appearance
 	config.window_frame = {
