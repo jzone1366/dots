@@ -33,8 +33,8 @@ function M.apply(config)
 		"Symbols Nerd Font",
 		"Apple Color Emoji",
 	})
-	config.font_size = 13.0
-	--config.line_height = 1.1
+	config.font_size = 14.0
+	config.line_height = 1.05
 
 	-- Window appearance
 	config.window_frame = {
