@@ -676,6 +676,18 @@ end)
 --   one of `<Leader>f` mappings defined in 'plugin/20_keymaps.lua'
 later(function()
   require('mini.pick').setup()
+
+  -- 'mini.pick' overrides `vim.paste` to only show a hint while a picker is
+  -- active. Wrap it so terminal paste (e.g. <D-v>) appends to the query.
+  local paste_pick = vim.paste
+  vim.paste = function(lines, phase)
+    if not MiniPick.is_picker_active() then return paste_pick(lines, phase) end
+    local text = table.concat(lines, ' '):gsub('[\n\r\t]', ' ')
+    local query = MiniPick.get_picker_query() or {}
+    vim.list_extend(query, vim.fn.split(text, '\\zs'))
+    MiniPick.set_picker_query(query)
+    return true
+  end
 end)
 
 -- Manage and expand snippets (templates for a frequently used text).
