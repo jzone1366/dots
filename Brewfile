@@ -54,6 +54,8 @@ brew "composer"
 # | LSP Servers      |
 # +------------------+
 brew "lua-language-server"
+brew "gopls"
+brew "bash-language-server"
 brew "pyright"
 brew "typescript-language-server"
 brew "tailwindcss-language-server"
@@ -112,6 +114,7 @@ brew "sketchybar"
 cask "wezterm"
 cask "docker-desktop"
 cask "rectangle"
+cask "zen"
 
 # +-------+
 # | Fonts |
@@ -119,3 +122,4 @@ cask "rectangle"
 cask "font-lilex"        # primary wezterm font
 cask "font-monaspace"    # wezterm fallback + sketchybar (Monaspace Xenon)
 cask "font-commit-mono"  # wezterm fallback
+cask "font-paper-mono"

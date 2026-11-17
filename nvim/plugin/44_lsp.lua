@@ -27,7 +27,7 @@ now_if_args(function()
     'bashls',
     'cssls',
     'denols',
-    'dockerls',
+    'docker_language_server',
     'eslint',
     'gopls',
     'html',

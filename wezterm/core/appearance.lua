@@ -10,8 +10,6 @@ function M.apply(config)
 	-- Custom colors
 	config.colors = {
 		compose_cursor = colors.green(),
-		--cursor_bg = colors.cursor(),
-		--cursor_border = colors.cursor(),
 		split = colors.cursor(),
 		tab_bar = {
 			background = colors.bg(),
@@ -26,15 +24,15 @@ function M.apply(config)
 
 	-- Font configuration
 	config.font = wezterm.font_with_fallback({
-		"Paper Mono",
-		"Lilex",
-		"Monaspace Xenon",
+		--"Paper Mono",
+		--"Lilex",
+		--"Monaspace Xenon",
 		"CommitMono",
 		"Symbols Nerd Font",
 		"Apple Color Emoji",
 	})
 	config.font_size = 14.0
-	config.line_height = 1.05
+	config.line_height = 1
 
 	-- Window appearance
 	config.window_frame = {
