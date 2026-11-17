@@ -44,3 +44,28 @@ set -g pane-border-format "#{?pane_active,#[fg=#{@thm_bg}#,bg=#{@thm_cyan}#,bold
 # A colour option, not a style, so expand it now (-F) instead of at draw time
 setw -gF clock-mode-colour "#{@thm_blue}"
 setw -g mode-style "fg=#{@thm_fg},bg=#{@thm_bg_gutter},bold"
+
+# --------=== Built-in theme colours
+# tmux draws its own UI (the tree's +/- markers, menus, popups, copy-mode matches)
+# with themegreen, themeblue, etc. Point those at the palette so they match.
+# Set both the dark and light sets: whichever palette is loaded is the active one.
+set -s dark-theme-black      "#{@thm_bg}"
+set -s dark-theme-white      "#{@thm_fg}"
+set -s dark-theme-light-grey "#{@thm_gray}"
+set -s dark-theme-dark-grey  "#{@thm_bg_gutter}"
+set -s dark-theme-green      "#{@thm_green}"
+set -s dark-theme-yellow     "#{@thm_yellow}"
+set -s dark-theme-red        "#{@thm_red}"
+set -s dark-theme-blue       "#{@thm_blue}"
+set -s dark-theme-cyan       "#{@thm_cyan}"
+set -s dark-theme-magenta    "#{@thm_magenta}"
+set -s light-theme-black      "#{@thm_bg}"
+set -s light-theme-white      "#{@thm_fg}"
+set -s light-theme-light-grey "#{@thm_gray}"
+set -s light-theme-dark-grey  "#{@thm_bg_gutter}"
+set -s light-theme-green      "#{@thm_green}"
+set -s light-theme-yellow     "#{@thm_yellow}"
+set -s light-theme-red        "#{@thm_red}"
+set -s light-theme-blue       "#{@thm_blue}"
+set -s light-theme-cyan       "#{@thm_cyan}"
+set -s light-theme-magenta    "#{@thm_magenta}"
